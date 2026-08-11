@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+  <style>
+    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:1rem; }
+    .gallery-item { border-radius:10px; overflow:hidden; position:relative; border:1px solid var(--admin-border); background:white; }
+    .gallery-item img { width:100%; height:150px; object-fit:cover; display:block; }
+    .gallery-item-info { padding:0.75rem; }
+    .gallery-item-actions { display:flex; gap:0.4rem; margin-top:0.5rem; }
+    .upload-zone { border:2px dashed var(--admin-border); border-radius:12px; padding:3rem; text-align:center; cursor:pointer; transition:all 0.2s; }
+    .upload-zone:hover { border-color:var(--primary); background:#f9fafb; }
+    .upload-zone input { display:none; }
+  </style>
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+      Cabañas <span>Los Pinos</span>
+    </div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Mensajes</a>
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galería</a>
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios / Clientes</a>
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>FAQs</a>
+      <a href="/admin/contacto" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Contacto</a>
+      <a href="/admin/configuracion" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Configuración</a>
+      <div style="padding:1rem 1.25rem; margin-top:auto">
+        <a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,0.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Galería de Imágenes
+      </div>
+      <div style="display:flex; align-items:center; gap:0.75rem">
+        <span style="font-size:0.875rem; color:#6b7280">👤 <span id="admin-name">Admin</span></span>
+        <button class="btn-admin btn-admin-primary" id="btn-agregar-imagen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Agregar Imagen
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- Filtros -->
+      <div class="admin-card" style="padding:1.25rem">
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center">
+          <select class="admin-input" id="filtro-categoria" style="width:auto">
+            <option value="">Todas las categorías</option>
+            <option value="exterior">Exterior</option>
+            <option value="interior">Interior</option>
+            <option value="habitacion">Habitaciones</option>
+            <option value="piscina">Piscina</option>
+            <option value="naturaleza">Naturaleza</option>
+            <option value="fogata">Fogata</option>
+            <option value="actividades">Actividades</option>
+            <option value="restaurante">Restaurante</option>
+            <option value="cabana">Cabañas</option>
+          </select>
+          <select class="admin-input" id="filtro-cabana" style="width:auto">
+            <option value="">Todas las cabañas</option>
+          </select>
+          <span id="total-count" style="font-size:0.85rem; color:#6b7280; margin-left:auto"></span>
+        </div>
+      </div>
+
+      <!-- Grid de imágenes -->
+      <div class="admin-card">
+        <div id="gallery-grid" class="gallery-grid">
+          <div style="grid-column:1/-1; text-align:center; padding:3rem; color:#9ca3af">Cargando imágenes...</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Imagen -->
+<div class="admin-modal-overlay" id="modal-imagen">
+  <div class="admin-modal">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title" id="modal-title">Agregar Imagen</div>
+      <button id="btn-cerrar-modal-galeria" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:#6b7280">×</button>
+    </div>
+    <div class="admin-modal-body">
+      <input type="hidden" id="img-id">
+      <div class="admin-form-group">
+        <label>Imagen *</label>
+        <div style="display:flex;gap:.5rem;margin-bottom:.5rem">
+          <button type="button" id="tab-url-galeria" class="btn-admin btn-admin-primary btn-admin-sm">Desde URL</button>
+          <button type="button" id="tab-archivo-galeria" class="btn-admin btn-admin-outline btn-admin-sm">Subir archivo</button>
+        </div>
+        <div id="panel-url-galeria">
+          <input type="text" class="admin-input" id="img-url" placeholder="https://... o /images/...">
+        </div>
+        <div id="panel-archivo-galeria" style="display:none">
+          <input type="file" class="admin-input" id="img-archivo" accept="image/*" style="padding:.4rem">
+          <div id="upload-progress-galeria" style="display:none;margin-top:.4rem;font-size:.8rem;color:#6b7280">Subiendo...</div>
+        </div>
+      </div>
+      <div id="img-preview" style="margin-bottom:1rem; display:none">
+        <img id="preview-src" style="width:100%; max-height:200px; object-fit:cover; border-radius:8px; border:1px solid var(--admin-border)">
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Categoría</label>
+          <select class="admin-input" id="img-categoria">
+            <option value="exterior">Exterior</option>
+            <option value="habitacion">Habitaciones</option>
+            <option value="piscina">Piscina</option>
+            <option value="naturaleza">Naturaleza</option>
+            <option value="fogata">Fogata</option>
+            <option value="restaurante">Restaurante</option>
+            <option value="actividades">Actividades</option>
+            <option value="cabana">Cabaña específica</option>
+          </select>
+        </div>
+        <div class="admin-form-group">
+          <label>Cabaña (opcional)</label>
+          <select class="admin-input" id="img-cabana">
+            <option value="">General</option>
+          </select>
+        </div>
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Texto alternativo (alt)</label>
+          <input type="text" class="admin-input" id="img-alt" placeholder="Descripción de la imagen">
+        </div>
+        <div class="admin-form-group">
+          <label>Orden de aparición</label>
+          <input type="number" class="admin-input" id="img-orden" value="0" min="0">
+        </div>
+      </div>
+      <div class="admin-form-group">
+        <label>¿Visible en la galería pública?</label>
+        <select class="admin-input" id="img-activa">
+          <option value="1">Sí</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="btn-admin btn-admin-outline" id="btn-cancelar-galeria">Cancelar</button>
+      <button class="btn-admin btn-admin-primary" id="btn-guardar-galeria">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/></svg>
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast-container" id="toast-container"></div>
+
+<script src="/js/admin.js"></script>
+<script>
+  let editando = null;
+  let cabanasList = [];
+
+  adminReady(() => {
+    loadCabanas();
+
+    // Filtros
+    document.getElementById('filtro-categoria').addEventListener('change', loadGaleria);
+    document.getElementById('filtro-cabana').addEventListener('change', loadGaleria);
+
+    // Botones estáticos
+    document.getElementById('btn-agregar-imagen').addEventListener('click', () => abrirModal());
+    document.getElementById('btn-cerrar-modal-galeria').addEventListener('click', cerrarModal);
+    document.getElementById('btn-cancelar-galeria').addEventListener('click', cerrarModal);
+    document.getElementById('btn-guardar-galeria').addEventListener('click', guardarImagen);
+    document.getElementById('img-url').addEventListener('input', previewImg);
+    document.getElementById('modal-imagen').addEventListener('click', function(e) {
+      if (e.target === this) cerrarModal();
+    });
+
+    // Tabs URL / Archivo
+    document.getElementById('tab-url-galeria').addEventListener('click', () => switchTabGaleria('url'));
+    document.getElementById('tab-archivo-galeria').addEventListener('click', () => switchTabGaleria('archivo'));
+
+    // Preview al seleccionar archivo local
+    document.getElementById('img-archivo').addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById('preview-src').src = e.target.result;
+        document.getElementById('img-preview').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+
+  function switchTabGaleria(tab) {
+    const isUrl = tab === 'url';
+    document.getElementById('panel-url-galeria').style.display = isUrl ? '' : 'none';
+    document.getElementById('panel-archivo-galeria').style.display = isUrl ? 'none' : '';
+    document.getElementById('tab-url-galeria').className = 'btn-admin btn-admin-sm ' + (isUrl ? 'btn-admin-primary' : 'btn-admin-outline');
+    document.getElementById('tab-archivo-galeria').className = 'btn-admin btn-admin-sm ' + (isUrl ? 'btn-admin-outline' : 'btn-admin-primary');
+  }
+
+  async function loadCabanas() {
+    const res = await adminFetch('/api/admin/cabanas');
+    cabanasList = res.data || [];
+    const opts = cabanasList.map(c => `<option value="${c.id}">${c.nombre}</option>`).join('');
+    document.getElementById('filtro-cabana').innerHTML = '<option value="">Todas las cabañas</option>' + opts;
+    document.getElementById('img-cabana').innerHTML = '<option value="">General</option>' + opts;
+    loadGaleria();
+  }
+
+  async function loadGaleria() {
+    const cat = document.getElementById('filtro-categoria').value;
+    const cab = document.getElementById('filtro-cabana').value;
+    let url = '/api/admin/galeria?';
+    if (cat) url += `categoria=${cat}&`;
+    if (cab) url += `cabana_id=${cab}&`;
+
+    try {
+      const res = await adminFetch(url);
+      const imgs = res.data || [];
+      document.getElementById('total-count').textContent = `${imgs.length} imagen(es)`;
+      renderGaleria(imgs);
+    } catch(e) {
+      showToast('Error al cargar galería', 'error');
+    }
+  }
+
+  function renderGaleria(list) {
+    const grid = document.getElementById('gallery-grid');
+    if (!list.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:3rem; color:#9ca3af">No hay imágenes en esta categoría</div>';
+      return;
+    }
+    window._galeria = {};
+    list.forEach(img => { window._galeria[String(img.id)] = img; });
+    grid.innerHTML = list.map(img => `
+      <div class="gallery-item">
+        <img src="${img.url_imagen}" alt="${img.descripcion || img.alt_text || 'Imagen'}" loading="lazy"
+             onerror="this.src='https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&q=60'">
+        <div class="gallery-item-info">
+          <div style="font-size:0.75rem; font-weight:700; color:var(--primary); text-transform:capitalize">${img.categoria}</div>
+          <div style="font-size:0.7rem; color:#6b7280; margin-bottom:0.5rem">${img.descripcion || img.alt_text || 'Sin descripción'}</div>
+          <div style="display:flex; gap:0.25rem; align-items:center; justify-content:space-between">
+            <span class="badge-admin ${img.activa ? 'badge-green' : 'badge-gray'}" style="font-size:0.6rem">${img.activa ? 'Visible' : 'Oculta'}</span>
+            <span style="font-size:0.7rem; color:#9ca3af">Orden: ${img.orden || 0}</span>
+          </div>
+          <div class="gallery-item-actions" style="margin-top:0.5rem">
+            <button class="btn-admin btn-admin-outline btn-admin-sm" style="flex:1" data-action="editar" data-id="${img.id}">Editar</button>
+            <button class="btn-admin btn-admin-danger btn-admin-sm" data-action="eliminar" data-id="${img.id}">✕</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Delegación de eventos en el grid
+    grid.onclick = function(e) {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      if (btn.dataset.action === 'editar') editarImagen(window._galeria[btn.dataset.id]);
+      else if (btn.dataset.action === 'eliminar') eliminarImagen(btn.dataset.id);
+    };
+  }
+
+  function abrirModal(datos = null) {
+    editando = datos?.id || null;
+    document.getElementById('modal-title').textContent = datos ? 'Editar Imagen' : 'Agregar Imagen';
+    document.getElementById('img-id').value = datos?.id || '';
+    document.getElementById('img-url').value = datos?.url_imagen || datos?.url || '';
+    document.getElementById('img-archivo').value = '';
+    document.getElementById('img-categoria').value = datos?.categoria || 'exterior';
+    document.getElementById('img-cabana').value = datos?.cabana_id || '';
+    document.getElementById('img-alt').value = datos?.descripcion || datos?.alt_text || '';
+    document.getElementById('img-orden').value = datos?.orden || 0;
+    document.getElementById('img-activa').value = datos?.activa !== undefined ? (datos.activa ? '1' : '0') : '1';
+    switchTabGaleria('url');
+
+    const imgUrl = datos?.url_imagen || datos?.url || '';
+    if (imgUrl) {
+      document.getElementById('preview-src').src = imgUrl;
+      document.getElementById('img-preview').style.display = 'block';
+    } else {
+      document.getElementById('img-preview').style.display = 'none';
+    }
+    document.getElementById('modal-imagen').classList.add('show');
+  }
+
+  function cerrarModal() {
+    document.getElementById('modal-imagen').classList.remove('show');
+    editando = null;
+  }
+
+  function editarImagen(datos) { abrirModal(datos); }
+
+  function previewImg() {
+    const url = document.getElementById('img-url').value.trim();
+    if (url) {
+      document.getElementById('preview-src').src = url;
+      document.getElementById('img-preview').style.display = 'block';
+    } else {
+      document.getElementById('img-preview').style.display = 'none';
+    }
+  }
+
+  async function guardarImagen() {
+    const btnGuardar = document.getElementById('btn-guardar-galeria');
+    const panelArchivo = document.getElementById('panel-archivo-galeria');
+    let urlFinal = document.getElementById('img-url').value.trim();
+
+    // Si el panel activo es "archivo", subir primero
+    if (panelArchivo.style.display !== 'none') {
+      const file = document.getElementById('img-archivo').files[0];
+      if (!file) { showToast('Selecciona una imagen', 'error'); return; }
+      const progress = document.getElementById('upload-progress-galeria');
+      progress.style.display = 'block';
+      btnGuardar.disabled = true;
+      try {
+        const fd = new FormData();
+        fd.append('imagen', file);
+        const upRes = await fetch('/api/admin/upload-imagen', {
+          method: 'POST', credentials: 'include', body: fd,
+          headers: { 'Accept': 'application/json' }
+        });
+        const upData = await upRes.json();
+        if (!upData.success) { showToast(upData.message || 'Error al subir imagen', 'error'); return; }
+        urlFinal = upData.path;
+      } catch(e) {
+        showToast('Error al subir imagen: ' + e.message, 'error'); return;
+      } finally {
+        progress.style.display = 'none';
+        btnGuardar.disabled = false;
+      }
+    }
+
+    if (!urlFinal) { showToast('La URL es obligatoria', 'error'); return; }
+
+    const payload = {
+      url_imagen:  urlFinal,
+      categoria:   document.getElementById('img-categoria').value,
+      cabana_id:   document.getElementById('img-cabana').value || null,
+      descripcion: document.getElementById('img-alt').value.trim(),
+      alt_text:    document.getElementById('img-alt').value.trim(),
+      orden:       parseInt(document.getElementById('img-orden').value),
+      activa:      document.getElementById('img-activa').value === '1' ? 1 : 0,
+    };
+
+    btnGuardar.disabled = true;
+    try {
+      if (editando) {
+        await adminFetch(`/api/admin/galeria/${editando}`, 'PUT', payload);
+        showToast('Imagen actualizada', 'success');
+      } else {
+        await adminFetch('/api/admin/galeria', 'POST', payload);
+        showToast('Imagen agregada', 'success');
+      }
+      cerrarModal();
+      loadGaleria();
+    } catch(e) {
+      showToast(e.message || 'Error al guardar', 'error');
+    } finally {
+      btnGuardar.disabled = false;
+    }
+  }
+
+  async function eliminarImagen(id) {
+    if (!confirm('¿Eliminar esta imagen de la galería?')) return;
+    try {
+      await adminFetch(`/api/admin/galeria/${id}`, 'DELETE');
+      showToast('Imagen eliminada', 'success');
+      loadGaleria();
+    } catch(e) {
+      showToast('Error al eliminar', 'error');
+    }
+  }
+
+</script>
+</body>
+</html>

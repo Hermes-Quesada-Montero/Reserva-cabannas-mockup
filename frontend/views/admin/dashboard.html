@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+      Cabañas <span>Los Pinos</span>
+    </div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item" id="menu-mensajes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Mensajes</a>
+
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galería</a>
+
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Usuarios / Clientes</a>
+
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>FAQs</a>
+      <a href="/admin/contacto" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Contacto</a>
+      <a href="/admin/configuracion" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 015.07 4.93M4.93 19.07A10 10 0 0019.07 19.07"/></svg>Configuración</a>
+
+      <div style="padding:1rem 1.25rem; margin-top:auto">
+        <a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,0.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a>
+        <a href="/" target="_blank" class="admin-menu-item" style="color:rgba(255,255,255,0.4); font-size:0.8rem; margin-top:0.25rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ver sitio público</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </div>
+      <div style="display:flex; align-items:center; gap:1rem">
+        <div style="font-size:0.875rem; color:#6b7280">👤 <span id="admin-name">Admin</span></div>
+        <a href="/admin/configuracion" class="btn-admin btn-admin-outline btn-admin-sm">⚙️ Configuración</a>
+      </div>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- ── Filtro por fechas ──────────────────────────────────── -->
+      <div class="admin-card" style="margin-bottom:1.5rem; padding:1rem 1.25rem">
+        <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:1rem">
+          <div>
+            <label style="font-size:0.75rem; color:#6b7280; display:block; margin-bottom:0.25rem">Fecha inicio</label>
+            <input type="date" id="filtroFechaInicio" class="admin-input" style="padding:0.4rem 0.6rem; font-size:0.875rem; border:1px solid #e5e7eb; border-radius:6px">
+          </div>
+          <div>
+            <label style="font-size:0.75rem; color:#6b7280; display:block; margin-bottom:0.25rem">Fecha fin</label>
+            <input type="date" id="filtroFechaFin" class="admin-input" style="padding:0.4rem 0.6rem; font-size:0.875rem; border:1px solid #e5e7eb; border-radius:6px">
+          </div>
+          <button id="btn-filtrar" class="btn-admin btn-admin-primary btn-admin-sm">🔍 Filtrar</button>
+          <button id="btn-limpiar" class="btn-admin btn-admin-outline btn-admin-sm">✕ Limpiar</button>
+          <span id="filtro-activo-badge" style="display:none; font-size:0.78rem; background:#fef3c7; color:#92400e; padding:0.25rem 0.6rem; border-radius:99px; align-self:center">Filtro activo</span>
+        </div>
+      </div>
+
+      <!-- Stats fila 1 -->
+      <div class="stats-4" id="stats-grid">
+        <div class="stat-box" style="cursor:pointer" id="kpi-todas"><div class="stat-icon" style="background:#dcfce7"><svg fill="none" stroke="#15803d" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stat-val" id="s-total">—</div><div class="stat-lbl">Total Reservas</div></div></div>
+        <div class="stat-box" style="cursor:pointer" id="kpi-confirmadas"><div class="stat-icon" style="background:#dbeafe"><svg fill="none" stroke="#1d4ed8" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="stat-val" id="s-activas">—</div><div class="stat-lbl">Confirmadas</div></div></div>
+        <div class="stat-box" style="cursor:pointer" id="kpi-clientes"><div class="stat-icon" style="background:#fef3c7"><svg fill="none" stroke="#d97706" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stat-val" id="s-clientes">—</div><div class="stat-lbl">Clientes</div></div></div>
+        <div class="stat-box" style="cursor:pointer" id="kpi-ingresos"><div class="stat-icon" style="background:#dcfce7"><svg fill="none" stroke="#15803d" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="stat-val" id="s-ingresos">—</div><div class="stat-lbl">Ingresos Totales</div></div></div>
+      </div>
+
+      <!-- Fila 2 stats -->
+      <div class="stats-3" style="margin-bottom:2rem">
+        <div class="stat-box" style="cursor:pointer" id="kpi-canceladas"><div class="stat-icon" style="background:#fee2e2"><svg fill="none" stroke="#dc2626" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><div><div class="stat-val" id="s-canceladas">—</div><div class="stat-lbl">Canceladas</div></div></div>
+        <div class="stat-box"><div style="flex:1"><div style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem">Cabaña más reservada</div><div id="s-cabana-top" style="font-weight:700; font-size:1rem; color:var(--primary)">—</div></div></div>
+        <div class="stat-box"><div style="flex:1"><div style="font-size:0.75rem; color:#6b7280; margin-bottom:0.25rem">Método de pago top</div><div id="s-metodo-top" style="font-weight:700; font-size:1rem; color:var(--primary)">—</div><div id="s-mensajes-nuevos" style="font-size:0.8rem; color:var(--accent); margin-top:0.25rem"></div></div></div>
+      </div>
+
+      <!-- Tablas -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:1.5rem">
+        <!-- Reservas recientes -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div class="admin-card-title">📋 Reservas Recientes</div>
+            <a href="/admin/reservaciones" class="btn-admin btn-admin-outline btn-admin-sm">Ver todas</a>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table" id="tbl-recientes">
+              <thead><tr><th>Reserva</th><th>Cliente</th><th>Cabaña</th><th>Estado</th></tr></thead>
+              <tbody id="tbody-recientes"><tr><td colspan="4" style="text-align:center; color:#6b7280; padding:2rem">Cargando...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Próximas llegadas -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div class="admin-card-title">✈️ Próximas Llegadas</div>
+            <a href="/admin/reservaciones" class="btn-admin btn-admin-outline btn-admin-sm">Gestionar</a>
+          </div>
+          <div id="proximas-list">
+            <p style="text-align:center; color:#6b7280; padding:2rem; font-size:0.875rem">Cargando...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ── Modal Reporte Detallado ────────────────────────────────── -->
+<div class="admin-modal-overlay" id="modalReporte">
+  <div class="admin-modal" style="max-width:900px; width:95%">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title" id="tituloReporte">Reporte</div>
+      <button id="btn-cerrar-reporte" class="admin-modal-close">×</button>
+    </div>
+    <div class="admin-modal-body" style="padding:1rem">
+      <div id="reporte-loading" style="text-align:center; padding:2rem; color:#6b7280; display:none">Cargando...</div>
+      <div class="admin-table-wrapper" id="reporte-tabla-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Código</th><th>Cliente</th><th>Cabaña</th>
+              <th>Llegada</th><th>Salida</th><th>Monto</th><th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="tablaReporteBody">
+            <tr><td colspan="7" style="text-align:center; color:#6b7280; padding:2rem">Sin datos</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="admin-modal-footer" style="display:flex; justify-content:flex-end; gap:0.75rem; padding:0.75rem 1rem; border-top:1px solid #e5e7eb">
+      <button id="btn-cerrar-reporte2" class="btn-admin btn-admin-outline btn-admin-sm">Cerrar</button>
+      <button id="btn-imprimir-reporte" class="btn-admin btn-admin-primary btn-admin-sm">🖨️ Imprimir</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/admin.js"></script>
+<script>
+
+  // ── utilidades ───────────────────────────────────────────────
+  function getFechas() {
+    return {
+      fi: document.getElementById('filtroFechaInicio').value,
+      ff: document.getElementById('filtroFechaFin').value
+    };
+  }
+
+  const TITULOS_REPORTE = {
+    todas: 'Todas las Reservaciones', confirmadas: 'Reservaciones Confirmadas',
+    canceladas: 'Reservaciones Canceladas', ingresos: 'Reservaciones con Ingresos',
+    clientes: 'Todas las Reservaciones'
+  };
+
+  async function verReporte(tipo) {
+    const { fi, ff } = getFechas();
+    const params = new URLSearchParams({ tipo: tipo === 'clientes' ? 'todas' : tipo });
+    if (fi && ff) { params.set('fechaInicio', fi); params.set('fechaFin', ff); }
+
+    document.getElementById('tituloReporte').textContent = TITULOS_REPORTE[tipo] || 'Reporte';
+    const tbody   = document.getElementById('tablaReporteBody');
+    const loading = document.getElementById('reporte-loading');
+    const wrapper = document.getElementById('reporte-tabla-wrapper');
+    tbody.innerHTML = '';
+    loading.style.display = 'block';
+    wrapper.style.display = 'none';
+    AdminModal.open('modalReporte');
+
+    try {
+      const res  = await fetch('/api/admin/reporte-detallado?' + params, { credentials: 'include' });
+      const data = await res.json();
+      loading.style.display = 'none';
+      wrapper.style.display = '';
+      if (!data.success || !data.data.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#6b7280;padding:2rem">Sin resultados para el período seleccionado</td></tr>';
+        return;
+      }
+      tbody.innerHTML = data.data.map(r => `
+        <tr>
+          <td style="font-size:.8rem;font-weight:600">${r.numero_reserva || '—'}</td>
+          <td style="font-size:.8rem">${r.cliente_nombre} ${r.cliente_apellido}</td>
+          <td style="font-size:.8rem">${r.cabana_nombre}</td>
+          <td style="font-size:.8rem">${AdminFmt.date(r.fecha_entrada)}</td>
+          <td style="font-size:.8rem">${AdminFmt.date(r.fecha_salida)}</td>
+          <td style="font-size:.8rem;font-weight:600">${AdminFmt.currency(r.total)}</td>
+          <td>${AdminFmt.estado(r.estado)}</td>
+        </tr>`).join('');
+    } catch (err) {
+      loading.style.display = 'none';
+      wrapper.style.display = '';
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#dc2626;padding:2rem">Error al cargar el reporte</td></tr>';
+      console.error('verReporte error:', err);
+    }
+  }
+
+  // ── carga principal ──────────────────────────────────────────
+  async function loadDashboard() {
+    try {
+      const { fi, ff } = getFechas();
+      const qs  = (fi && ff) ? '?fechaInicio=' + encodeURIComponent(fi) + '&fechaFin=' + encodeURIComponent(ff) : '';
+      const res = await AdminAPI.get('/dashboard' + qs);
+      if (!res.success) return;
+      const d = res.data;
+      const s = d.stats;
+
+      document.getElementById('s-total').textContent      = s.totalReservas;
+      document.getElementById('s-activas').textContent    = s.reservasActivas;
+      document.getElementById('s-clientes').textContent   = s.totalClientes;
+      document.getElementById('s-ingresos').textContent   = AdminFmt.currency(s.ingresosTotales);
+      document.getElementById('s-canceladas').textContent = s.reservasCanceladas;
+      document.getElementById('s-cabana-top').textContent = s.cabanaTop ? `${s.cabanaTop.nombre} (${s.cabanaTop.total_reservas} reservas)` : 'Sin datos';
+      document.getElementById('s-metodo-top').textContent = s.metodoPagoTop ? s.metodoPagoTop.metodo_pago : 'Sin datos';
+      // Aviso de mensajes nuevos en la tarjeta del dashboard
+      // (el badge del sidebar lo gestiona initAdminSidebar en admin.js)
+      const msgAviso = document.getElementById('s-mensajes-nuevos');
+      if (s.mensajesNuevos > 0) {
+        msgAviso.textContent = `📬 ${s.mensajesNuevos} mensaje${s.mensajesNuevos>1?'s':''} nuevo${s.mensajesNuevos>1?'s':''}`;
+      } else {
+        msgAviso.textContent = '';
+      }
+
+      // Tabla reservas recientes
+      const tbody = document.getElementById('tbody-recientes');
+      if (!d.reservasRecientes.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#6b7280; padding:1rem">Sin reservaciones aún</td></tr>';
+      } else {
+        tbody.innerHTML = d.reservasRecientes.slice(0,8).map(r => `
+          <tr>
+            <td><a href="/admin/reservaciones" style="color:var(--primary); font-weight:600; font-size:0.8rem">${r.numero_reserva}</a></td>
+            <td style="font-size:0.8rem">${r.cliente_nombre} ${r.cliente_apellido}</td>
+            <td style="font-size:0.8rem">${r.cabana_nombre}</td>
+            <td>${AdminFmt.estado(r.estado)}</td>
+          </tr>
+        `).join('');
+      }
+
+      // Próximas llegadas
+      const proxContainer = document.getElementById('proximas-list');
+      if (!d.proximasReservas.length) {
+        proxContainer.innerHTML = '<p style="text-align:center; color:#6b7280; padding:2rem; font-size:0.875rem">No hay llegadas próximas</p>';
+      } else {
+        proxContainer.innerHTML = d.proximasReservas.map(r => `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem 0; border-bottom:1px solid #f3f4f6; font-size:0.85rem">
+            <div>
+              <div style="font-weight:600">${r.cliente_nombre} ${r.cliente_apellido}</div>
+              <div style="color:#6b7280; font-size:0.78rem">${r.cabana_nombre} · ${AdminFmt.date(r.fecha_entrada)}</div>
+            </div>
+            ${AdminFmt.estado(r.estado)}
+          </div>
+        `).join('');
+      }
+    } catch (err) { console.error('Error dashboard:', err); }
+  }
+
+  // ── listeners (sin onclick inline) ──────────────────────────
+  adminReady(function() {
+    loadDashboard();
+
+    // Filtro de fechas
+    document.getElementById('btn-filtrar').addEventListener('click', function() {
+      const { fi, ff } = getFechas();
+      if (!fi || !ff) { AdminToast.warning('Selecciona ambas fechas para filtrar.'); return; }
+      if (fi > ff)    { AdminToast.warning('La fecha de inicio debe ser anterior a la fecha fin.'); return; }
+      document.getElementById('filtro-activo-badge').style.display = 'inline-block';
+      loadDashboard();
+    });
+
+    document.getElementById('btn-limpiar').addEventListener('click', function() {
+      document.getElementById('filtroFechaInicio').value = '';
+      document.getElementById('filtroFechaFin').value    = '';
+      document.getElementById('filtro-activo-badge').style.display = 'none';
+      loadDashboard();
+    });
+
+    // KPIs
+    document.getElementById('kpi-todas').addEventListener('click',       function() { verReporte('todas'); });
+    document.getElementById('kpi-confirmadas').addEventListener('click', function() { verReporte('confirmadas'); });
+    document.getElementById('kpi-clientes').addEventListener('click',    function() { verReporte('clientes'); });
+    document.getElementById('kpi-ingresos').addEventListener('click',    function() { verReporte('ingresos'); });
+    document.getElementById('kpi-canceladas').addEventListener('click',  function() { verReporte('canceladas'); });
+
+    // Modal reporte
+    document.getElementById('btn-cerrar-reporte').addEventListener('click',  function() { AdminModal.close('modalReporte'); });
+    document.getElementById('btn-cerrar-reporte2').addEventListener('click', function() { AdminModal.close('modalReporte'); });
+    document.getElementById('btn-imprimir-reporte').addEventListener('click', function() { window.print(); });
+  });
+</script>
+</body>
+</html>

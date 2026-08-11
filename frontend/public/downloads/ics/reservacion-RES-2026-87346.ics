@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Cabañas Los Pinos//Reservación//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:RES-2026-87346@cabanaslospinos.com
+DTSTAMP:20260705T212857Z
+DTSTART;TZID=America/Costa_Rica:20260707T130000
+DTEND;TZID=America/Costa_Rica:20260710T120000
+SUMMARY:Reservación: Cabaña Villa Esmeralda
+DESCRIPTION:Reservación RES-2026-87346\nCabaña: Cabaña Villa Esmeralda\nHuéspedes: 1 adulto(s)\nTotal: $420\nCheck-in: 1:00 PM\nCheck-out: 12:00 PM
+LOCATION:Sector Los Pinos\, Monteverde\, Puntarenas\, Costa Rica
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-PT24H
+ACTION:DISPLAY
+DESCRIPTION:Recordatorio: Check-in mañana a la 1:00 PM
+END:VALARM
+END:VEVENT
+END:VCALENDAR

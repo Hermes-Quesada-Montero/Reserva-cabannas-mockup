@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservar | Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .reservar-page { padding-top: var(--nav-height); background: var(--bg); min-height: 100vh; }
+    .reservar-grid { display: grid; grid-template-columns: 1fr 380px; gap: 2.5rem; align-items: start; }
+    .resumen-card { background: white; border-radius: var(--radius-lg); padding: 2rem; border: 1px solid var(--border); box-shadow: var(--shadow-md); position: sticky; top: calc(var(--nav-height) + 1rem); }
+    .huesped-form { background: var(--bg); border-radius: var(--radius); padding: 1.25rem; border: 1px solid var(--border); margin-bottom: 1rem; }
+    .huesped-form h4 { margin-bottom: 1rem; font-size: 0.95rem; color: var(--primary); }
+    .precio-linea { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); }
+    .precio-total { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+    .step-panel { display: none; }
+    .step-panel.active { display: block; animation: fadeInUp 0.4s ease; }
+    @media(max-width:900px) { .reservar-grid { grid-template-columns: 1fr; } .resumen-card { position: static; } }
+  </style>
+</head>
+<body>
+  <div id="page-loader"><div class="loader-logo">🌲</div><div class="loader-spinner"></div></div>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg viewBox="0 0 40 40"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9" fill="currentColor"/><rect x="17" y="30" width="6" height="6" rx="1" fill="currentColor"/></svg>Cabañas <span>Los Pinos</span></a>
+      <div class="nav-links"><a href="/">Inicio</a><a href="/cabanas">Cabañas</a>
+        <div id="nav-guest"><a href="/login">Iniciar sesión</a></div>
+        <div id="nav-user" class="nav-user-menu hidden"><button class="nav-user-btn" id="nav-user-btn"><div class="avatar" id="nav-avatar">U</div><span id="nav-user-name">Usuario</span></button><div class="nav-dropdown" id="nav-dropdown"><a href="/mi-cuenta">Mi Cuenta</a><a href="/mi-cuenta/reservaciones">Mis Reservaciones</a><hr><a href="#" id="nav-logout">Cerrar Sesión</a></div></div>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav"><a href="/">Inicio</a><a href="/cabanas">Cabañas</a><a href="/login" id="mobile-login">Iniciar Sesión</a><a href="/mi-cuenta" id="mobile-cuenta" class="hidden">Mi Cuenta</a></div>
+
+  <div class="reservar-page">
+    <div class="container" style="padding-top:2rem; padding-bottom:4rem">
+      <div class="breadcrumb mb-3">
+        <a href="/">Inicio</a><span class="breadcrumb-sep">/</span>
+        <a href="/cabanas">Cabañas</a><span class="breadcrumb-sep">/</span>
+        <span>Reservar</span>
+      </div>
+
+      <!-- Wizard steps -->
+      <div class="wizard-steps" id="wizard-steps">
+        <div class="wizard-step active" data-step="1">
+          <div class="step-circle">1</div>
+          <div class="step-label">Detalles</div>
+        </div>
+        <div class="wizard-step" data-step="2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Huéspedes</div>
+        </div>
+        <div class="wizard-step" data-step="3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Confirmar</div>
+        </div>
+      </div>
+
+      <div class="reservar-grid">
+        <!-- Formulario principal -->
+        <div>
+          <!-- PASO 1: Detalles de la reservación -->
+          <div class="step-panel active" id="step-1">
+            <div style="background:white; border-radius:var(--radius-lg); padding:2rem; border:1px solid var(--border); box-shadow:var(--shadow-sm)">
+              <h2 style="margin-bottom:1.5rem; font-size:1.4rem">Detalles de la Reservación</h2>
+
+              <div class="form-group">
+                <label class="form-label">Cabaña <span class="required">*</span></label>
+                <select id="sel-cabana" class="form-control">
+                  <option value="">Seleccione una cabaña...</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Fecha de entrada <span class="required">*</span></label>
+                  <input type="date" id="fecha-entrada" class="form-control" min="">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Fecha de salida <span class="required">*</span></label>
+                  <input type="date" id="fecha-salida" class="form-control" min="">
+                </div>
+              </div>
+
+              <div id="disponibilidad-msg" class="hidden mt-2"></div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Adultos <span class="required">*</span></label>
+                  <select id="num-adultos" class="form-control">
+                    <option value="1">1 adulto</option>
+                    <option value="2">2 adultos</option>
+                    <option value="3">3 adultos</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">¿Viajan menores de 10 años?</label>
+                  <select id="tiene-menores" class="form-control">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="menores-group" class="hidden form-group">
+                <label class="form-label">Cantidad de menores</label>
+                <select id="num-menores" class="form-control">
+                  <option value="1">1 menor</option>
+                  <option value="2">2 menores</option>
+                  <option value="3">3 menores</option>
+                  <option value="4">4 menores</option>
+                </select>
+                <p class="form-hint" style="color:var(--warning); font-weight:600">
+                  ⚠️ Los menores de 10 años no generan costo adicional, pero deben registrarse por seguridad.
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Código de cupón (opcional)</label>
+                <div style="display:flex; gap:0.75rem">
+                  <input type="text" id="cupon-input" class="form-control" placeholder="BIENVENIDO10" style="text-transform:uppercase; flex:1">
+                  <button type="button" id="btn-cupon" class="btn btn-outline-primary">Aplicar</button>
+                </div>
+                <div id="cupon-msg" class="hidden mt-1"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Notas adicionales</label>
+                <textarea id="notas-cliente" class="form-control" rows="3" placeholder="Alergias, requerimientos especiales, hora de llegada estimada..."></textarea>
+              </div>
+
+              <button class="btn btn-primary btn-lg" id="btn-paso2" style="width:100%; justify-content:center">
+                Continuar al registro de huéspedes
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 2: Registro de huéspedes -->
+          <div class="step-panel" id="step-2">
+            <div style="background:white; border-radius:var(--radius-lg); padding:2rem; border:1px solid var(--border); box-shadow:var(--shadow-sm)">
+              <h2 style="margin-bottom:0.5rem; font-size:1.4rem">Registro de Huéspedes</h2>
+              <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem">Todos los huéspedes deben registrarse por motivos de seguridad.</p>
+
+              <div id="huespedes-container"></div>
+
+              <div style="display:flex; gap:1rem; margin-top:1.5rem">
+                <button class="btn btn-outline-primary" id="btn-volver1" style="flex:1; justify-content:center">← Volver</button>
+                <button class="btn btn-primary" id="btn-paso3" style="flex:2; justify-content:center">
+                  Revisar reservación
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: Confirmación -->
+          <div class="step-panel" id="step-3">
+            <div style="background:white; border-radius:var(--radius-lg); padding:2rem; border:1px solid var(--border); box-shadow:var(--shadow-sm)">
+              <h2 style="margin-bottom:1.5rem; font-size:1.4rem">Revisar y Confirmar</h2>
+
+              <div id="resumen-final" style="background:var(--bg); border-radius:var(--radius); padding:1.5rem; margin-bottom:1.5rem; border:1px solid var(--border)"></div>
+
+              <div style="display:flex; gap:1rem; margin-top:1rem">
+                <button class="btn btn-outline-primary" id="btn-volver2" style="flex:1; justify-content:center">← Volver</button>
+                <button class="btn btn-accent btn-lg" id="btn-confirmar" style="flex:2; justify-content:center">
+                  <span class="btn-text">🏕️ Confirmar Reservación</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumen sidebar -->
+        <div class="resumen-card" id="resumen-sidebar">
+          <h3 style="font-size:1.1rem; margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border)">📋 Resumen</h3>
+          <div id="sidebar-content">
+            <p style="color:var(--text-muted); font-size:0.9rem; font-style:italic">Selecciona una cabaña y fechas para ver el resumen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/calendario.js"></script>
+  <script>
+    // Estado de la reservación
+    const reserva = {
+      cabana_id: null, cabana_nombre: null,
+      fecha_entrada: null, fecha_salida: null, num_noches: 0,
+      num_adultos: 1, num_menores: 0,
+      precio_noche: 0, subtotal: 0, descuento: 0, total: 0,
+      cupon_codigo: null, notas_cliente: null,
+      huespedes: []
+    };
+    let currentStep = 1;
+    let cuponAplicado = null;
+
+    // ── Persistir reserva en sessionStorage ────────────────
+    function guardarEstadoReserva() {
+      try {
+        sessionStorage.setItem('reserva_pendiente', JSON.stringify({ reserva, step: currentStep, cuponAplicado }));
+      } catch(e) {}
+    }
+    function restaurarEstadoReserva() {
+      try {
+        const saved = sessionStorage.getItem('reserva_pendiente');
+        if (!saved) return false;
+        const { reserva: r, step, cuponAplicado: cup } = JSON.parse(saved);
+        Object.assign(reserva, r);
+        cuponAplicado = cup;
+        return step;
+      } catch(e) { return false; }
+    }
+    function limpiarEstadoReserva() {
+      sessionStorage.removeItem('reserva_pendiente');
+    }
+
+    // Leer parámetros de URL
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('cabana')) document.getElementById('sel-cabana').dataset.preselect = params.get('cabana');
+    if (params.get('entrada')) document.getElementById('fecha-entrada').value = params.get('entrada');
+    if (params.get('salida'))  document.getElementById('fecha-salida').value  = params.get('salida');
+
+    // Fecha mínima = mañana
+    const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
+    document.getElementById('fecha-entrada').min = tomorrow.toISOString().split('T')[0];
+    document.getElementById('fecha-salida').min  = tomorrow.toISOString().split('T')[0];
+
+    // ── Cargar cabañas ──────────────────────────────────────
+    async function loadCabanas() {
+      const res = await API.get('/api/cabanas');
+      if (!res.success) return;
+      const sel = document.getElementById('sel-cabana');
+      res.data.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = `${c.nombre} (máx. ${c.capacidad_max} personas)`;
+        sel.appendChild(opt);
+      });
+      if (sel.dataset.preselect) {
+        sel.value = sel.dataset.preselect;
+        sel.dispatchEvent(new Event('change'));
+      }
+
+      // Restaurar estado de reservación si el usuario volvió de login
+      const savedStep = restaurarEstadoReserva();
+      if (savedStep && reserva.cabana_id) {
+        // Rellenar campos del formulario
+        if (reserva.cabana_id) sel.value = reserva.cabana_id;
+        if (reserva.fecha_entrada) document.getElementById('fecha-entrada').value = reserva.fecha_entrada;
+        if (reserva.fecha_salida)  document.getElementById('fecha-salida').value  = reserva.fecha_salida;
+        document.getElementById('num-adultos').value = reserva.num_adultos || 1;
+        if (reserva.num_menores > 0) {
+          document.getElementById('tiene-menores').value = 'si';
+          document.getElementById('menores-group').classList.remove('hidden');
+          document.getElementById('num-menores').value = reserva.num_menores;
+        }
+        if (reserva.notas_cliente) document.getElementById('notas-cliente').value = reserva.notas_cliente;
+        await actualizarResumen();
+        // Si venía del paso 3, ir directamente a confirmar
+        if (savedStep >= 3 && reserva.huespedes?.length) {
+          setStep(3);
+          document.getElementById('resumen-final').innerHTML = `<p style="color:var(--text-muted);text-align:center">✅ Reservación lista. Haz clic en Confirmar.</p>`;
+        } else if (savedStep >= 2) {
+          goToStep2();
+        }
+      }
+    }
+
+    // ── Actualizar resumen ──────────────────────────────────
+    async function actualizarResumen() {
+      const cabanaId  = document.getElementById('sel-cabana').value;
+      const entrada   = document.getElementById('fecha-entrada').value;
+      const salida    = document.getElementById('fecha-salida').value;
+      const adultos   = parseInt(document.getElementById('num-adultos').value) || 1;
+      const menores   = document.getElementById('tiene-menores').value === 'si'
+                        ? parseInt(document.getElementById('num-menores').value) || 0 : 0;
+
+      if (!cabanaId || !entrada || !salida) {
+        document.getElementById('sidebar-content').innerHTML =
+          '<p style="color:var(--text-muted); font-size:0.9rem; font-style:italic">Selecciona cabaña y fechas para ver el resumen.</p>';
+        return;
+      }
+
+      const e = new Date(entrada + 'T12:00:00');
+      const s = new Date(salida  + 'T12:00:00');
+      if (s <= e) { Toast.warning('La fecha de salida debe ser posterior a la de entrada'); return; }
+
+      const noches = Math.round((s - e) / (1000 * 60 * 60 * 24));
+      reserva.num_noches    = noches;
+      reserva.num_adultos   = adultos;
+      reserva.num_menores   = menores;
+      reserva.fecha_entrada = entrada;
+      reserva.fecha_salida  = salida;
+      reserva.cabana_id     = cabanaId;
+
+      // Obtener tarifa
+      const tarifaRes = await API.get(`/api/cabanas/tarifa?cabana_id=${cabanaId}&num_personas=${adultos}`);
+      if (!tarifaRes.success) { Toast.error('No hay tarifa para esa configuración'); return; }
+
+      const precio = tarifaRes.data.precio_noche;
+      const subtotal = precio * noches;
+      const descuento = cuponAplicado ? (cuponAplicado.tipo === 'porcentaje' ? subtotal * cuponAplicado.valor / 100 : cuponAplicado.valor) : 0;
+      const total = Math.max(0, subtotal - descuento);
+
+      reserva.precio_noche = precio;
+      reserva.subtotal     = subtotal;
+      reserva.descuento    = descuento;
+      reserva.total        = total;
+      reserva.cabana_nombre = document.getElementById('sel-cabana').options[document.getElementById('sel-cabana').selectedIndex].text;
+
+      document.getElementById('sidebar-content').innerHTML = `
+        <div style="margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid var(--border)">
+          <strong style="font-size:0.95rem">${reserva.cabana_nombre}</strong>
+        </div>
+        <div class="precio-linea"><span>Check-in</span><span>${Format.date(entrada)}</span></div>
+        <div class="precio-linea"><span>Check-out</span><span>${Format.date(salida)}</span></div>
+        <div class="precio-linea"><span>Noches</span><span>${noches}</span></div>
+        <div class="precio-linea"><span>Adultos</span><span>${adultos}</span></div>
+        ${menores > 0 ? `<div class="precio-linea"><span>Menores (gratis)</span><span>${menores}</span></div>` : ''}
+        <div class="precio-linea"><span>$${precio} × ${noches} noches</span><span>$${subtotal.toFixed(2)}</span></div>
+        ${descuento > 0 ? `<div class="precio-linea" style="color:var(--success)"><span>Descuento</span><span>-$${descuento.toFixed(2)}</span></div>` : ''}
+        <div class="precio-total" style="border-top:2px solid var(--primary); margin-top:0.5rem; padding-top:0.75rem">
+          <span>TOTAL</span><span style="font-size:1.3rem">$${total.toFixed(2)}</span>
+        </div>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.5rem; text-align:center">USD · Sin cargos ocultos</p>
+      `;
+
+      // Verificar disponibilidad
+      const dispRes = await API.get(`/api/cabanas/disponibilidad?cabana_id=${cabanaId}&fecha_entrada=${entrada}&fecha_salida=${salida}`);
+      const dispMsg = document.getElementById('disponibilidad-msg');
+      if (dispRes.success) {
+        if (dispRes.disponible) {
+          dispMsg.className = 'alert alert-success mt-2';
+          dispMsg.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>✅ Fechas disponibles';
+        } else {
+          dispMsg.className = 'alert alert-error mt-2';
+          dispMsg.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>❌ Fechas no disponibles. Por favor selecciona otras fechas.';
+        }
+        dispMsg.classList.remove('hidden');
+      }
+    }
+
+    // ── Menores ────────────────────────────────────────────
+    document.getElementById('tiene-menores').addEventListener('change', function() {
+      document.getElementById('menores-group').classList.toggle('hidden', this.value === 'no');
+      actualizarResumen();
+    });
+
+    // ── Cupón ──────────────────────────────────────────────
+    document.getElementById('btn-cupon').addEventListener('click', async () => {
+      const codigo = document.getElementById('cupon-input').value.trim().toUpperCase();
+      if (!codigo) { Toast.warning('Ingresa un código de cupón'); return; }
+      if (!reserva.subtotal) { Toast.warning('Primero selecciona una cabaña y fechas'); return; }
+
+      const res = await API.post('/api/reservaciones/validar-cupon', { codigo, subtotal: reserva.subtotal });
+      const msg = document.getElementById('cupon-msg');
+      if (res.success) {
+        cuponAplicado = res.data;
+        reserva.cupon_codigo = codigo;
+        msg.className = 'alert alert-success mt-1';
+        msg.innerHTML = `✅ ${res.data.descripcion || 'Cupón aplicado'} — Ahorro: $${res.data.descuento.toFixed(2)}`;
+        msg.classList.remove('hidden');
+        Toast.success(`¡Cupón aplicado! Ahorro: $${res.data.descuento.toFixed(2)}`);
+        actualizarResumen();
+      } else {
+        cuponAplicado = null;
+        reserva.cupon_codigo = null;
+        msg.className = 'alert alert-error mt-1';
+        msg.innerHTML = `❌ ${res.message}`;
+        msg.classList.remove('hidden');
+      }
+    });
+
+    // ── Listeners de campos ────────────────────────────────
+    ['sel-cabana','fecha-entrada','fecha-salida','num-adultos','num-menores'].forEach(id => {
+      document.getElementById(id)?.addEventListener('change', actualizarResumen);
+    });
+
+    // ── PASO 2: Generar formularios de huéspedes ────────────
+    function goToStep2() {
+      if (!reserva.cabana_id)     { Toast.warning('Selecciona una cabaña'); return; }
+      if (!reserva.fecha_entrada) { Toast.warning('Selecciona la fecha de entrada'); return; }
+      if (!reserva.fecha_salida)  { Toast.warning('Selecciona la fecha de salida'); return; }
+      if (reserva.num_noches < 1) { Toast.warning('La fecha de salida debe ser posterior a la entrada'); return; }
+      if (!reserva.precio_noche)  { Toast.warning('Error al calcular precio. Intenta de nuevo'); return; }
+
+      const dispMsg = document.getElementById('disponibilidad-msg');
+      if (dispMsg.classList.contains('alert-error') && !dispMsg.classList.contains('hidden')) {
+        Toast.error('Las fechas seleccionadas no están disponibles'); return;
+      }
+
+      const container = document.getElementById('huespedes-container');
+      container.innerHTML = '';
+
+      // Adultos
+      for (let i = 0; i < reserva.num_adultos; i++) {
+        const esTitular = i === 0;
+        container.innerHTML += generarFormHuesped(i, esTitular, false);
+      }
+
+      // Menores
+      const numMenores = document.getElementById('tiene-menores').value === 'si'
+        ? parseInt(document.getElementById('num-menores').value) || 0 : 0;
+      reserva.num_menores = numMenores;
+
+      if (numMenores > 0) {
+        container.innerHTML += `
+          <div class="alert alert-info" style="margin:1rem 0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Los menores de 10 años <strong>no generan costo adicional</strong>, pero deben registrarse por motivos de seguridad.
+          </div>
+        `;
+        for (let i = 0; i < numMenores; i++) {
+          container.innerHTML += generarFormHuesped(reserva.num_adultos + i, false, true);
+        }
+      }
+
+      setStep(2);
+    }
+
+    function generarFormHuesped(idx, esTitular, esMenor) {
+      const label = esTitular ? '👤 Titular de la reservación' : esMenor ? `👶 Menor ${idx - reserva.num_adultos + 1}` : `👥 Acompañante ${idx}`;
+      return `
+        <div class="huesped-form" data-idx="${idx}">
+          <h4>${label} ${!esMenor ? '<span class="badge badge-primary" style="font-size:0.7rem">Adulto</span>' : '<span class="badge badge-info" style="font-size:0.7rem">Menor (sin costo)</span>'}</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nombre <span class="required">*</span></label>
+              <input type="text" class="form-control h-nombre" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Apellido <span class="required">*</span></label>
+              <input type="text" class="form-control h-apellido" placeholder="Apellido" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Identificación ${esMenor ? '(opcional)' : ''}</label>
+              <input type="text" class="form-control h-identificacion" placeholder="${esMenor ? 'Opcional' : 'Cédula / Pasaporte'}">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Fecha de nacimiento</label>
+              <input type="date" class="form-control h-nacimiento">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Sexo</label>
+              <select class="form-control h-sexo">
+                <option value="">Seleccionar</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nacionalidad</label>
+              <input type="text" class="form-control h-nacionalidad" value="Costarricense">
+            </div>
+          </div>
+          ${esTitular ? `
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Correo electrónico <span class="required">*</span></label>
+              <input type="email" class="form-control h-email" placeholder="correo@ejemplo.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teléfono</label>
+              <input type="tel" class="form-control h-telefono" placeholder="+506 8888-8888">
+            </div>
+          </div>` : ''}
+          ${esMenor ? `
+          <div class="form-group">
+            <label class="form-label">Relación con el titular</label>
+            <select class="form-control h-relacion">
+              <option value="Hijo/a">Hijo/a</option>
+              <option value="Sobrino/a">Sobrino/a</option>
+              <option value="Nieto/a">Nieto/a</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>` : ''}
+          <input type="hidden" class="h-es-titular" value="${esTitular ? '1' : '0'}">
+          <input type="hidden" class="h-es-menor" value="${esMenor ? '1' : '0'}">
+        </div>
+      `;
+    }
+
+    // ── PASO 3: Revisar ─────────────────────────────────────
+    function goToStep3() {
+      // Recopilar datos de huéspedes
+      const forms = document.querySelectorAll('.huesped-form');
+      reserva.huespedes = [];
+      let valid = true;
+
+      forms.forEach((form, idx) => {
+        const nombre = form.querySelector('.h-nombre').value.trim();
+        const apellido = form.querySelector('.h-apellido').value.trim();
+        if (!nombre || !apellido) { valid = false; }
+        reserva.huespedes.push({
+          nombre, apellido,
+          identificacion:  form.querySelector('.h-identificacion')?.value.trim() || null,
+          fecha_nacimiento:form.querySelector('.h-nacimiento')?.value || null,
+          sexo:            form.querySelector('.h-sexo')?.value || null,
+          nacionalidad:    form.querySelector('.h-nacionalidad')?.value || 'Costarricense',
+          es_titular:      form.querySelector('.h-es-titular').value === '1',
+          es_menor:        form.querySelector('.h-es-menor').value === '1',
+          relacion_titular:form.querySelector('.h-relacion')?.value || null,
+          email:           form.querySelector('.h-email')?.value.trim() || null,
+          telefono:        form.querySelector('.h-telefono')?.value.trim() || null,
+          edad:            null
+        });
+      });
+
+      if (!valid) { Toast.warning('Por favor completa nombre y apellido de todos los huéspedes'); return; }
+
+      // Mostrar resumen final
+      const rf = document.getElementById('resumen-final');
+      rf.innerHTML = `
+        <h4 style="margin-bottom:1rem; color:var(--primary)">🏕️ ${reserva.cabana_nombre}</h4>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem 2rem; margin-bottom:1rem; font-size:0.9rem">
+          <div><span style="color:var(--text-muted)">Entrada:</span> <strong>${Format.date(reserva.fecha_entrada)}</strong></div>
+          <div><span style="color:var(--text-muted)">Salida:</span> <strong>${Format.date(reserva.fecha_salida)}</strong></div>
+          <div><span style="color:var(--text-muted)">Noches:</span> <strong>${reserva.num_noches}</strong></div>
+          <div><span style="color:var(--text-muted)">Adultos:</span> <strong>${reserva.num_adultos}</strong></div>
+          ${reserva.num_menores > 0 ? `<div><span style="color:var(--text-muted)">Menores:</span> <strong>${reserva.num_menores} (gratis)</strong></div>` : ''}
+        </div>
+        <div style="border-top:1px solid var(--border); padding-top:1rem">
+          <div class="precio-linea"><span>Precio/noche</span><span>$${reserva.precio_noche}</span></div>
+          <div class="precio-linea"><span>Subtotal (${reserva.num_noches} noches)</span><span>$${reserva.subtotal.toFixed(2)}</span></div>
+          ${reserva.descuento > 0 ? `<div class="precio-linea" style="color:var(--success)"><span>Descuento</span><span>-$${reserva.descuento.toFixed(2)}</span></div>` : ''}
+          <div style="display:flex; justify-content:space-between; font-size:1.2rem; font-weight:700; color:var(--primary); padding:0.75rem 0; border-top:2px solid var(--primary); margin-top:0.5rem">
+            <span>TOTAL A PAGAR</span><span>$${reserva.total.toFixed(2)} USD</span>
+          </div>
+        </div>
+        <div style="margin-top:1rem">
+          <strong style="font-size:0.85rem; color:var(--text-muted)">Huéspedes registrados:</strong>
+          <ul style="margin-top:0.5rem">
+            ${reserva.huespedes.map(h => `<li style="font-size:0.85rem; color:var(--text-muted); padding:0.2rem 0">• ${h.nombre} ${h.apellido} ${h.es_titular?'(Titular)':h.es_menor?'(Menor)':''}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+      setStep(3);
+    }
+
+    // ── Confirmar reservación ──────────────────────────────
+    document.getElementById('btn-confirmar').addEventListener('click', async () => {
+      // Verificar autenticación
+      const loggedIn = await Auth.check();
+      if (!loggedIn) {
+        // Guardar estado antes de redirigir al login
+        guardarEstadoReserva();
+        pendingRedirect = window.location.href;
+        goToLogin();
+        return;
+      }
+
+      const btn = document.getElementById('btn-confirmar');
+      btn.disabled = true; btn.classList.add('btn-loading');
+
+      try {
+        reserva.notas_cliente = document.getElementById('notas-cliente').value.trim();
+        const res = await API.post('/api/reservaciones', reserva);
+
+        if (res.success) {
+          limpiarEstadoReserva();
+          Toast.success('¡Reservación creada!', 'Procesando pago...');
+          setTimeout(() => {
+            window.location.href = `/pago/${res.data.id}`;
+          }, 1000);
+        } else {
+          Toast.error(res.message || 'Error al crear la reservación');
+          btn.disabled = false; btn.classList.remove('btn-loading');
+        }
+      } catch (err) {
+        Toast.error('Error al crear la reservación. Intente de nuevo.');
+        btn.disabled = false; btn.classList.remove('btn-loading');
+      }
+    });
+
+    // ── Navegación wizard ──────────────────────────────────
+    function setStep(n) {
+      currentStep = n;
+      document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(`step-${n}`).classList.add('active');
+      document.querySelectorAll('.wizard-step').forEach((s, i) => {
+        s.classList.remove('active', 'done');
+        if (i + 1 < n)  s.classList.add('done');
+        if (i + 1 === n) s.classList.add('active');
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('btn-paso2').addEventListener('click', goToStep2);
+    document.getElementById('btn-paso3').addEventListener('click', goToStep3);
+    document.getElementById('btn-volver1').addEventListener('click', () => setStep(1));
+    document.getElementById('btn-volver2').addEventListener('click', () => setStep(2));
+    document.getElementById('nav-logout')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+    // Cargar cabañas al iniciar (el DOM ya está listo porque este script está al final del body)
+    loadCabanas();
+  </script>
+</body>
+</html>

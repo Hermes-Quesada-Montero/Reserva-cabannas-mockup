@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensajes | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+      Cabañas <span>Los Pinos</span>
+    </div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Mensajes</a>
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>Galería</a>
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios / Clientes</a>
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>FAQs</a>
+      <a href="/admin/contacto" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Contacto</a>
+      <a href="/admin/configuracion" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Configuración</a>
+      <div style="padding:1rem 1.25rem;margin-top:auto">
+        <a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Bandeja de Mensajes
+      </div>
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <span style="font-size:.875rem;color:#6b7280">👤 <span id="admin-name">Admin</span></span>
+        <button type="button" class="btn-admin btn-admin-outline btn-admin-sm" id="btn-actualizar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          Actualizar
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- Stats -->
+      <div class="stats-3" style="margin-bottom:1.5rem">
+        <div class="stat-box">
+          <div class="stat-icon" style="background:#dbeafe"><svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="width:22px;height:22px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="stat-val" id="stat-total">—</div><div class="stat-lbl">Total mensajes</div></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon" style="background:#fee2e2"><svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" style="width:22px;height:22px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><div class="stat-val" id="stat-nuevos">—</div><div class="stat-lbl">Sin responder</div></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon" style="background:#dcfce7"><svg viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" style="width:22px;height:22px"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div><div class="stat-val" id="stat-respondidos">—</div><div class="stat-lbl">Respondidos</div></div>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="admin-card" style="padding:1.25rem;margin-bottom:.75rem">
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:flex-end">
+          <div class="admin-search" style="flex:1;min-width:200px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="buscar" placeholder="Buscar por nombre o asunto...">
+          </div>
+          <select class="admin-input" id="filtro-estado" style="width:auto">
+            <option value="">Todos los estados</option>
+            <option value="nuevo">Sin responder</option>
+            <option value="respondido">Respondidos</option>
+          </select>
+          <div>
+            <label style="font-size:.75rem;color:#6b7280;display:block;margin-bottom:.25rem">Fecha inicio</label>
+            <input type="date" id="filtro-fecha-inicio" class="admin-input" style="padding:.4rem .6rem;font-size:.875rem;border:1px solid #e5e7eb;border-radius:6px">
+          </div>
+          <div>
+            <label style="font-size:.75rem;color:#6b7280;display:block;margin-bottom:.25rem">Fecha fin</label>
+            <input type="date" id="filtro-fecha-fin" class="admin-input" style="padding:.4rem .6rem;font-size:.875rem;border:1px solid #e5e7eb;border-radius:6px">
+          </div>
+          <button type="button" class="btn-admin btn-admin-primary btn-admin-sm" id="btn-filtrar-fechas">🔍 Filtrar</button>
+          <button type="button" class="btn-admin btn-admin-outline btn-admin-sm" id="btn-limpiar-fechas">✕ Limpiar</button>
+          <span id="total-count" style="font-size:.85rem;color:#6b7280;margin-left:auto;align-self:center"></span>
+        </div>
+      </div>
+
+      <!-- Lista de mensajes -->
+      <div id="mensajes-list" style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="text-align:center;padding:3rem;color:#9ca3af">Cargando mensajes...</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Ver mensaje -->
+<div class="admin-modal-overlay" id="modal-mensaje">
+  <div class="admin-modal" style="max-width:620px">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title" id="modal-asunto">Mensaje</div>
+      <button type="button" id="btn-cerrar-modal" style="background:none;border:none;cursor:pointer;font-size:1.5rem;color:#6b7280;line-height:1">×</button>
+    </div>
+    <div class="admin-modal-body">
+      <div style="background:#f9fafb;border-radius:8px;padding:1rem;margin-bottom:1rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;font-size:.875rem">
+          <div><span style="font-weight:700;color:#6b7280">De:</span> <span id="msg-nombre"></span></div>
+          <div><span style="font-weight:700;color:#6b7280">Email:</span> <span id="msg-email"></span></div>
+          <div><span style="font-weight:700;color:#6b7280">Tel:</span> <span id="msg-telefono"></span></div>
+          <div><span style="font-weight:700;color:#6b7280">Fecha:</span> <span id="msg-fecha"></span></div>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid var(--admin-border);border-radius:8px;padding:1rem;margin-bottom:1rem;font-size:.875rem;line-height:1.7;color:#374151" id="msg-mensaje"></div>
+      <div class="admin-form-group">
+        <label style="font-weight:600;color:#15803d">Respuesta al cliente <span style="font-size:.75rem;font-weight:400;color:#6b7280">(visible para el cliente en su cuenta)</span></label>
+        <textarea class="admin-input" id="msg-respuesta" rows="4" placeholder="Escribe aquí la respuesta que verá el cliente..."></textarea>
+        <div id="msg-respuesta-hint" style="margin-top:.35rem;font-size:.75rem;color:#9ca3af"></div>
+      </div>
+      <div class="admin-form-group">
+        <label>Nota interna <span style="font-size:.75rem;color:#6b7280">(solo visible para admins)</span></label>
+        <textarea class="admin-input" id="msg-nota" rows="2" placeholder="Agregar nota interna..."></textarea>
+      </div>
+      <div class="admin-form-group">
+        <label>Estado</label>
+        <select class="admin-input" id="msg-estado">
+          <option value="nuevo">Sin responder</option>
+          <option value="respondido">Respondido</option>
+        </select>
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button type="button" class="btn-admin btn-admin-danger btn-admin-sm" id="btn-eliminar-msg">Eliminar</button>
+      <button type="button" class="btn-admin btn-admin-outline" id="btn-cerrar-msg">Cerrar</button>
+      <button type="button" class="btn-admin btn-admin-primary" id="btn-guardar-msg">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast-container" id="toast-container"></div>
+<script src="/js/admin.js"></script>
+<script>
+  let mensajeActual = null;
+  let debounceTimer;
+
+  adminReady(() => {
+    loadMensajes();
+
+    // Registrar todos los listeners de filtros aquí, cuando el DOM y auth están listos
+    document.getElementById('buscar').addEventListener('input', function() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(loadMensajes, 400);
+    });
+    document.getElementById('filtro-estado').addEventListener('change', loadMensajes);
+    document.getElementById('btn-actualizar').addEventListener('click', loadMensajes);
+
+    document.getElementById('btn-filtrar-fechas').addEventListener('click', function() {
+      const fi = document.getElementById('filtro-fecha-inicio').value;
+      const ff = document.getElementById('filtro-fecha-fin').value;
+      if ((fi && !ff) || (!fi && ff)) {
+        showToast('Debes seleccionar fecha de inicio y fecha fin.', 'warning');
+        return;
+      }
+      if (fi && ff && fi > ff) {
+        showToast('La fecha de inicio debe ser anterior a la fecha fin.', 'warning');
+        return;
+      }
+      loadMensajes();
+    });
+
+    document.getElementById('btn-limpiar-fechas').addEventListener('click', function() {
+      document.getElementById('filtro-fecha-inicio').value = '';
+      document.getElementById('filtro-fecha-fin').value    = '';
+      loadMensajes();
+    });
+  });
+
+
+  async function loadMensajes() {
+    const q      = document.getElementById('buscar').value.trim();
+    const estado = document.getElementById('filtro-estado').value;
+    const fi     = document.getElementById('filtro-fecha-inicio').value;
+    const ff     = document.getElementById('filtro-fecha-fin').value;
+    const params = new URLSearchParams();
+    if (q)        params.set('q', q);
+    if (estado)   params.set('estado', estado);
+    if (fi && ff) { params.set('fechaInicio', fi); params.set('fechaFin', ff); }
+    const url = '/api/admin/mensajes?' + params.toString();
+
+    try {
+      const res = await adminFetch(url);
+      if (!res || res.success === false) {
+        showToast(res?.message || 'Error al cargar mensajes', 'error');
+        return;
+      }
+      const data  = res.data  || [];
+      const stats = res.stats || {};
+      document.getElementById('stat-total').textContent       = stats.total       ?? data.length;
+      document.getElementById('stat-nuevos').textContent      = stats.nuevos      ?? '—';
+      document.getElementById('stat-respondidos').textContent = stats.respondidos ?? '—';
+      document.getElementById('total-count').textContent      = `${data.length} mensaje(s)`;
+      renderMensajes(data);
+    } catch(e) {
+      showToast('Error al cargar mensajes', 'error');
+    }
+  }
+
+  function esc(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function renderMensajes(list) {
+    const cont = document.getElementById('mensajes-list');
+    if (!list.length) {
+      cont.innerHTML = '<div style="text-align:center;padding:3rem;color:#9ca3af">No hay mensajes</div>';
+      return;
+    }
+    window._mensajes = {};
+    list.forEach(m => { window._mensajes[m.id] = m; });
+    cont.innerHTML = list.map(m => {
+      const esRespondido  = m.estado === 'respondido';
+      const borderStyle   = !esRespondido ? 'border-left:3px solid #dc2626' : 'border-left:3px solid #15803d';
+      const badgeClass    = !esRespondido ? 'badge-red' : 'badge-green';
+      const badgeLabel    = esRespondido ? '✅ Respondido' : '● Sin responder';
+      const dotHtml       = !esRespondido ? '<span style="width:8px;height:8px;border-radius:50%;background:#dc2626;display:inline-block;"></span>' : '';
+      const respuestaHtml = esRespondido && m.respuesta_admin
+        ? `<div style="margin-top:.4rem;font-size:.75rem;color:#15803d;background:#f0fdf4;border-radius:4px;padding:.3rem .6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:380px">💬 ${esc(m.respuesta_admin)}</div>`
+        : '';
+      return `
+      <div class="admin-card" style="padding:1rem;cursor:pointer;${borderStyle}"
+           data-msg-id="${m.id}">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem">
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.2rem">
+              <strong style="font-size:.875rem">${esc(m.nombre)}</strong>
+              <span class="badge-admin ${badgeClass}">${badgeLabel}</span>
+              ${dotHtml}
+            </div>
+            <div style="font-size:.8rem;color:#374151;font-weight:600">${esc(m.asunto) || 'Sin asunto'}</div>
+            <div style="font-size:.75rem;color:#6b7280;margin-top:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px">${esc(m.mensaje)}</div>
+            ${respuestaHtml}
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            <div style="font-size:.75rem;color:#9ca3af">${formatDate(m.created_at)}</div>
+            <div style="font-size:.75rem;color:#6b7280">${esc(m.email)}</div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Delegación de eventos: un solo listener en el contenedor
+    cont.onclick = function(e) {
+      const card = e.target.closest('[data-msg-id]');
+      if (!card) return;
+      const id = card.dataset.msgId;
+      if (window._mensajes[id]) verMensaje(window._mensajes[id]);
+    };
+  }
+
+  function verMensaje(m) {
+    mensajeActual = m;
+    document.getElementById('modal-asunto').textContent   = m.asunto || 'Mensaje de contacto';
+    document.getElementById('msg-nombre').textContent     = m.nombre;
+    document.getElementById('msg-email').textContent      = m.email;
+    document.getElementById('msg-telefono').textContent   = m.telefono || '—';
+    document.getElementById('msg-fecha').textContent      = formatDate(m.created_at);
+    document.getElementById('msg-mensaje').textContent    = m.mensaje;
+    document.getElementById('msg-respuesta').value        = m.respuesta_admin || '';
+    document.getElementById('msg-nota').value             = m.nota_admin || '';
+    document.getElementById('msg-estado').value           = m.estado || 'nuevo';
+
+    // Visual: si ya fue respondido, resaltar el área de respuesta
+    const respuestaArea = document.getElementById('msg-respuesta');
+    const hintEl        = document.getElementById('msg-respuesta-hint');
+    if (m.estado === 'respondido' && m.respuesta_admin) {
+      respuestaArea.style.borderColor = '#15803d';
+      respuestaArea.style.background  = '#f0fdf4';
+      hintEl.textContent = m.respondido_en
+        ? '✅ Respondido el ' + formatDate(m.respondido_en)
+        : '✅ Este mensaje ya tiene respuesta guardada';
+    } else {
+      respuestaArea.style.borderColor = '';
+      respuestaArea.style.background  = '';
+      hintEl.textContent = '';
+    }
+
+    document.getElementById('modal-mensaje').classList.add('show');
+  }
+
+  function cerrarModal() {
+    document.getElementById('modal-mensaje').classList.remove('show');
+    document.body.style.overflow = '';
+    mensajeActual = null;
+  }
+
+  async function guardarMensaje() {
+    if (!mensajeActual) return;
+    const nuevoEstado = document.getElementById('msg-estado').value;
+    const nuevaNota   = document.getElementById('msg-nota').value.trim();
+    const btnGuardar  = document.getElementById('btn-guardar-msg');
+    if (btnGuardar) { btnGuardar.disabled = true; btnGuardar.textContent = 'Guardando...'; }
+    try {
+      const res = await adminFetch(`/api/admin/mensajes/${mensajeActual.id}`, 'PUT', {
+        estado:           nuevoEstado,
+        nota_admin:       nuevaNota || null,
+        respuesta_admin:  document.getElementById('msg-respuesta').value.trim() || null,
+      });
+      if (!res || res.success === false) {
+        showToast(res?.message || 'Error al guardar el mensaje', 'error');
+        return;
+      }
+      showToast('Mensaje actualizado', 'success');
+      cerrarModal();
+      await loadMensajes();
+    } catch(e) {
+      showToast('Error de conexión al guardar', 'error');
+    } finally {
+      if (btnGuardar) { btnGuardar.disabled = false; btnGuardar.textContent = 'Guardar cambios'; }
+    }
+  }
+
+  async function eliminarMensaje() {
+    if (!mensajeActual || !confirm('¿Eliminar este mensaje? Esta acción no se puede deshacer.')) return;
+    const btnEliminar = document.getElementById('btn-eliminar-msg');
+    if (btnEliminar) { btnEliminar.disabled = true; btnEliminar.textContent = 'Eliminando...'; }
+    try {
+      const res = await adminFetch(`/api/admin/mensajes/${mensajeActual.id}`, 'DELETE');
+      if (!res || res.success === false) {
+        showToast(res?.message || 'Error al eliminar el mensaje', 'error');
+        return;
+      }
+      showToast('Mensaje eliminado', 'success');
+      cerrarModal();
+      await loadMensajes();
+    } catch(e) {
+      showToast('Error de conexión al eliminar', 'error');
+    } finally {
+      if (btnEliminar) { btnEliminar.disabled = false; btnEliminar.textContent = 'Eliminar'; }
+    }
+  }
+
+  function formatDate(s) {
+    if (!s) return '—';
+    return new Date(s).toLocaleDateString('es-CR',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  }
+
+  // Listeners de botones del modal
+  document.getElementById('btn-cerrar-modal').addEventListener('click', cerrarModal);
+  document.getElementById('btn-cerrar-msg').addEventListener('click', cerrarModal);
+  document.getElementById('btn-guardar-msg').addEventListener('click', guardarMensaje);
+  document.getElementById('btn-eliminar-msg').addEventListener('click', eliminarMensaje);
+
+  // Cerrar al hacer clic en el fondo del overlay
+  document.getElementById('modal-mensaje').addEventListener('click', function(e){ if(e.target===this) cerrarModal(); });
+</script>
+</body>
+</html>

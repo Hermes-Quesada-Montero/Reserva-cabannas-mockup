@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservaciones | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo"><svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>Cabañas <span>Los Pinos</span></div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Mensajes</a>
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galería</a>
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios</a>
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>FAQs</a>
+      <a href="/admin/configuracion" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Configuración</a>
+      <div style="padding:1rem 1.25rem; margin-top:0.5rem"><a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,0.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a></div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">📅 Reservaciones</div>
+      <div style="display:flex; align-items:center; gap:0.75rem">
+        <span style="font-size:0.875rem; color:#6b7280">👤 <span id="admin-name">Admin</span></span>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- Filtros -->
+      <div class="admin-card" style="padding:1.25rem">
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center">
+          <div class="admin-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="buscar" placeholder="Buscar por cliente o número...">
+          </div>
+          <select class="admin-input" id="filtro-estado" style="width:auto">
+            <option value="">Todos los estados</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmada">Confirmada</option>
+            <option value="cancelada">Cancelada</option>
+            <option value="completada">Completada</option>
+          </select>
+          <select class="admin-input" id="filtro-cabana" style="width:auto">
+            <option value="">Todas las cabañas</option>
+          </select>
+          <input type="date" class="admin-input" id="filtro-desde" style="width:auto">
+          <input type="date" class="admin-input" id="filtro-hasta" style="width:auto">
+          <span id="total-count" style="font-size:0.85rem; color:#6b7280; margin-left:auto"></span>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <div class="admin-card" style="padding:0">
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nº Reserva</th>
+                <th>Cliente</th>
+                <th>Cabaña</th>
+                <th>Entrada</th>
+                <th>Salida</th>
+                <th>Personas</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Pago</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-reservas">
+              <tr><td colspan="10" style="text-align:center; padding:3rem; color:#6b7280">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="paginacion" style="padding:0.75rem 1rem"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal editar reservación -->
+<div class="admin-modal-overlay" id="modal-reserva">
+  <div class="admin-modal" style="max-width:560px">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title">Editar Reservación</div>
+      <button id="btn-cerrar-modal-reserva" style="background:none; border:none; cursor:pointer; font-size:1.2rem; color:#6b7280">✕</button>
+    </div>
+    <div class="admin-modal-body">
+      <input type="hidden" id="edit-id">
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Estado</label>
+          <select id="edit-estado" class="admin-input">
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmada">Confirmada</option>
+            <option value="cancelada">Cancelada</option>
+            <option value="completada">Completada</option>
+            <option value="no_show">No Show</option>
+          </select>
+        </div>
+        <div class="admin-form-group">
+          <label>Estado del Pago</label>
+          <select id="edit-estado-pago" class="admin-input">
+            <option value="pendiente">Pendiente</option>
+            <option value="pagado">Pagado</option>
+            <option value="reembolsado">Reembolsado</option>
+            <option value="fallido">Fallido</option>
+          </select>
+        </div>
+        <div class="admin-form-group">
+          <label>Método de Pago</label>
+          <select id="edit-metodo" class="admin-input">
+            <option value="tarjeta">Tarjeta</option>
+            <option value="sinpe">SINPE</option>
+            <option value="efectivo">Efectivo</option>
+            <option value="pendiente">Pendiente</option>
+          </select>
+        </div>
+      </div>
+      <div class="admin-form-group">
+        <label>Notas del Administrador</label>
+        <textarea id="edit-notas" class="admin-input" rows="3" style="resize:vertical"></textarea>
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button id="btn-cancelar-reserva" class="btn-admin btn-admin-outline">Cancelar</button>
+      <button id="btn-guardar-reserva" class="btn-admin btn-admin-primary">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/admin.js"></script>
+<script>
+  let currentPage = 1;
+  const LIMIT = 20;
+
+  async function loadCabanas() {
+    const res = await AdminAPI.get('/cabanas');
+    if (res.success) {
+      const sel = document.getElementById('filtro-cabana');
+      res.data.forEach(c => {
+        sel.innerHTML += `<option value="${c.id}">${c.nombre}</option>`;
+      });
+    }
+  }
+
+  async function loadReservaciones(page = 1) {
+    currentPage = page;
+    const buscar = document.getElementById('buscar').value;
+    const estado = document.getElementById('filtro-estado').value;
+    const cabana = document.getElementById('filtro-cabana').value;
+    const desde  = document.getElementById('filtro-desde').value;
+    const hasta  = document.getElementById('filtro-hasta').value;
+
+    const params = new URLSearchParams({ page, limit: LIMIT });
+    if (buscar) params.append('buscar', buscar);
+    if (estado) params.append('estado', estado);
+    if (cabana) params.append('cabana_id', cabana);
+    if (desde)  params.append('desde', desde);
+    if (hasta)  params.append('hasta', hasta);
+
+    const res = await AdminAPI.get(`/reservaciones?${params}`);
+    if (!res.success) return;
+
+    document.getElementById('total-count').textContent = `${res.total} reserva${res.total !== 1 ? 's' : ''} encontrada${res.total !== 1 ? 's' : ''}`;
+
+    const tbody = document.getElementById('tbody-reservas');
+    if (!res.data.length) {
+      tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding:3rem; color:#6b7280">No se encontraron reservaciones</td></tr>';
+      return;
+    }
+
+    // Guardar reservaciones en un mapa para delegación de eventos
+    window._reservasMap = {};
+    res.data.forEach(r => { window._reservasMap[String(r.id)] = r; });
+
+    tbody.innerHTML = res.data.map(r => `
+      <tr>
+        <td><a href="/reservacion/${r.id}" target="_blank" style="color:var(--primary); font-weight:600; font-size:0.8rem">${r.numero_reserva}</a></td>
+        <td><div style="font-size:0.875rem">${r.cliente_nombre} ${r.cliente_apellido}</div><div style="font-size:0.75rem; color:#6b7280">${r.cliente_email}</div></td>
+        <td style="font-size:0.8rem">${r.cabana_nombre}</td>
+        <td style="font-size:0.8rem">${AdminFmt.date(r.fecha_entrada)}</td>
+        <td style="font-size:0.8rem">${AdminFmt.date(r.fecha_salida)}</td>
+        <td style="text-align:center">${r.num_adultos}A${r.num_menores>0?' +'+r.num_menores+'M':''}</td>
+        <td style="font-weight:700; color:var(--primary)">$${r.total}</td>
+        <td>${AdminFmt.estado(r.estado)}</td>
+        <td>${AdminFmt.estado(r.estado_pago)}</td>
+        <td>
+          <div class="tbl-actions">
+            <button data-action="editar" data-id="${r.id}" class="btn-admin btn-admin-outline btn-admin-sm">✏️</button>
+            <button data-action="eliminar" data-id="${r.id}" class="btn-admin btn-admin-danger btn-admin-sm">🗑️</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+
+    // Delegación de eventos en el tbody (se re-asigna en cada carga)
+    tbody.onclick = function(e) {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      if (btn.dataset.action === 'editar') {
+        const r = window._reservasMap[id];
+        if (r) editarReservacion(r);
+      } else if (btn.dataset.action === 'eliminar') {
+        eliminarReservacion(id);
+      }
+    };
+
+    // Paginación
+    const pagDiv = document.getElementById('paginacion');
+    renderPagination(pagDiv, currentPage, res.total, LIMIT, 'loadReservaciones');
+  }
+
+  function editarReservacion(r) {
+    document.getElementById('edit-id').value = r.id;
+    document.getElementById('edit-estado').value = r.estado;
+    document.getElementById('edit-estado-pago').value = r.estado_pago;
+    document.getElementById('edit-metodo').value = r.metodo_pago || 'pendiente';
+    document.getElementById('edit-notas').value = r.notas_admin || '';
+    AdminModal.open('modal-reserva');
+  }
+
+  async function guardarReservacion() {
+    const id = document.getElementById('edit-id').value;
+    const res = await AdminAPI.put(`/reservaciones/${id}`, {
+      estado:      document.getElementById('edit-estado').value,
+      estado_pago: document.getElementById('edit-estado-pago').value,
+      metodo_pago: document.getElementById('edit-metodo').value,
+      notas_admin: document.getElementById('edit-notas').value
+    });
+    if (res.success) { AdminToast.success('Reservación actualizada'); AdminModal.close('modal-reserva'); loadReservaciones(currentPage); }
+    else AdminToast.error(res.message);
+  }
+
+  async function eliminarReservacion(id) {
+    if (!confirmDelete('¿Eliminar esta reservación? Esta acción no se puede deshacer.')) return;
+    const res = await AdminAPI.delete(`/reservaciones/${id}`);
+    if (res.success) { AdminToast.success('Reservación eliminada'); loadReservaciones(currentPage); }
+    else AdminToast.error(res.message);
+  }
+
+  let searchTimer;
+
+  adminReady(() => {
+    loadCabanas();
+    loadReservaciones();
+
+    // Filtros y búsqueda
+    document.getElementById('buscar').addEventListener('input', function() {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => loadReservaciones(1), 400);
+    });
+    document.getElementById('filtro-estado').addEventListener('change', () => loadReservaciones(1));
+    document.getElementById('filtro-cabana').addEventListener('change', () => loadReservaciones(1));
+    document.getElementById('filtro-desde').addEventListener('change', () => loadReservaciones(1));
+    document.getElementById('filtro-hasta').addEventListener('change', () => loadReservaciones(1));
+
+    // Botones del modal
+    document.getElementById('btn-cerrar-modal-reserva').addEventListener('click', () => AdminModal.close('modal-reserva'));
+    document.getElementById('btn-cancelar-reserva').addEventListener('click', () => AdminModal.close('modal-reserva'));
+    document.getElementById('btn-guardar-reserva').addEventListener('click', guardarReservacion);
+
+    // Cerrar al hacer clic en el fondo del overlay
+    document.getElementById('modal-reserva').addEventListener('click', function(e) {
+      if (e.target === this) AdminModal.close('modal-reserva');
+    });
+  });
+</script>
+</body>
+</html>

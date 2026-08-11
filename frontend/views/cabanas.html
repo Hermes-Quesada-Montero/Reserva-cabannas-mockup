@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabañas | Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div id="page-loader"><div class="loader-logo">🌲 Los Pinos</div><div class="loader-spinner"></div></div>
+
+  <!-- Navbar completo igual que index -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg viewBox="0 0 40 40"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9" fill="currentColor"/><rect x="17" y="30" width="6" height="6" rx="1" fill="currentColor"/></svg>Cabañas <span>Los Pinos</span></a>
+      <div class="nav-links">
+        <a href="/">Inicio</a><a href="/cabanas" class="active">Cabañas</a><a href="/galeria">Galería</a><a href="/faq">FAQ</a><a href="/contacto">Contacto</a>
+        <div id="nav-guest"><a href="/login">Iniciar sesión</a><a href="/reservar" class="btn btn-accent btn-sm nav-btn-reservar">Reservar</a></div>
+        <div id="nav-user" class="nav-user-menu hidden"><button class="nav-user-btn" id="nav-user-btn"><div class="avatar" id="nav-avatar">U</div><span id="nav-user-name">Usuario</span></button><div class="nav-dropdown" id="nav-dropdown"><a href="/mi-cuenta">Mi Cuenta</a><a href="/mi-cuenta/reservaciones">Mis Reservaciones</a><hr><a href="#" id="nav-logout">Cerrar Sesión</a></div></div>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav"><a href="/">Inicio</a><a href="/cabanas">Cabañas</a><a href="/galeria">Galería</a><a href="/faq">FAQ</a><a href="/contacto">Contacto</a><a href="/login" id="mobile-login">Iniciar Sesión</a><a href="/mi-cuenta" id="mobile-cuenta" class="hidden">Mi Cuenta</a></div>
+
+  <!-- Hero pequeño -->
+  <div style="background:linear-gradient(135deg,var(--primary-dark),var(--primary)); padding: 6rem 0 3rem; margin-top:var(--nav-height)">
+    <div class="container text-center" style="color:white">
+      <span class="section-badge" style="background:rgba(200,169,81,0.2); color:var(--accent); border-color:rgba(200,169,81,0.3)">Nuestras cabañas</span>
+      <h1 style="color:white; margin:1rem 0 0.5rem">Tres Refugios, Una Experiencia</h1>
+      <p style="color:rgba(255,255,255,0.75); max-width:560px; margin:0 auto">Elige la cabaña perfecta para tu estadía en el bosque nuboso de Monteverde</p>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div style="background:var(--white); border-bottom:1px solid var(--border); padding:1.25rem 0; position:sticky; top:var(--nav-height); z-index:100; box-shadow:var(--shadow-sm)">
+    <div class="container d-flex align-center justify-between flex-wrap gap-2">
+      <div class="d-flex align-center gap-2">
+        <button class="filter-btn active" data-filter="all" style="padding:0.4rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--primary); color:var(--primary); font-size:0.85rem; font-weight:600; transition:all 0.2s; background:rgba(45,80,22,0.07)">Todas</button>
+        <button class="filter-btn" data-filter="1" style="padding:0.4rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); color:var(--text-muted); font-size:0.85rem; font-weight:600; transition:all 0.2s; background:var(--white)">1 hab.</button>
+        <button class="filter-btn" data-filter="2" style="padding:0.4rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); color:var(--text-muted); font-size:0.85rem; font-weight:600; transition:all 0.2s; background:var(--white)">2 hab.</button>
+        <button class="filter-btn" data-filter="piscina" style="padding:0.4rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); color:var(--text-muted); font-size:0.85rem; font-weight:600; transition:all 0.2s; background:var(--white)">Con piscina</button>
+      </div>
+      <div style="font-size:0.875rem; color:var(--text-muted)" id="results-count"></div>
+    </div>
+  </div>
+
+  <!-- Grid de cabañas -->
+  <section class="section" style="padding-top:3rem">
+    <div class="container">
+      <div class="cabanas-grid" id="cabanas-grid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr))"></div>
+      <div id="loading-cabanas" class="text-center mt-4" style="color:var(--text-muted)">
+        <div class="loader-spinner" style="margin:0 auto; border-color:rgba(45,80,22,0.2); border-top-color:var(--primary)"></div>
+        <p style="margin-top:1rem">Cargando cabañas...</p>
+      </div>
+      <div id="no-results" class="hidden text-center mt-4">
+        <p style="color:var(--text-muted)">No se encontraron cabañas con esos filtros.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de tarifas resumidas -->
+  <section class="section" style="background:var(--bg); padding-top:0">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">Precios</span>
+        <h2 class="section-title">Tarifas por Cabaña</h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Los menores de 10 años no tienen costo, pero deben registrarse por seguridad.</p>
+      </div>
+      <div id="tarifas-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="padding:1.5rem 0">
+        <p>© 2024 Cabañas Los Pinos · <a href="/" style="color:var(--accent)">Inicio</a> · <a href="/contacto" style="color:var(--accent)">Contacto</a></p>
+      </div>
+    </div>
+  </footer>
+  <button class="scroll-top" id="scroll-top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+  <script src="/js/main.js"></script>
+  <script>
+    let allCabanas = [];
+
+    async function loadCabanas() {
+      try {
+        const res = await API.get('/api/cabanas');
+        document.getElementById('loading-cabanas').style.display = 'none';
+        if (!res.success) return;
+
+        allCabanas = res.data;
+        renderCabanas(allCabanas);
+        renderTarifas(allCabanas);
+      } catch (err) {
+        document.getElementById('loading-cabanas').innerHTML = '<p style="color:var(--error)">Error al cargar las cabañas. Intente de nuevo.</p>';
+      }
+    }
+
+    function renderCabanas(cabanas) {
+      const grid = document.getElementById('cabanas-grid');
+      const count = document.getElementById('results-count');
+      count.textContent = `${cabanas.length} cabaña${cabanas.length !== 1 ? 's' : ''} encontrada${cabanas.length !== 1 ? 's' : ''}`;
+
+      if (!cabanas.length) {
+        grid.innerHTML = '';
+        document.getElementById('no-results').classList.remove('hidden');
+        return;
+      }
+      document.getElementById('no-results').classList.add('hidden');
+
+      const fallbacks = [
+        'https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=700&q=80',
+        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80',
+        'https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?w=700&q=80',
+      ];
+
+      grid.innerHTML = cabanas.map((c, i) => {
+        let servicios = [];
+        try { servicios = JSON.parse(c.servicios) || []; } catch {}
+        const serviciosMostrar = servicios.slice(0, 4);
+
+        return `
+        <div class="cabana-card reveal" data-habitaciones="${c.num_habitaciones}" data-piscina="${c.tiene_piscina}">
+          <div class="cabana-card-img">
+            <img src="${c.imagen_principal || fallbacks[i % 3]}" alt="${c.nombre}" loading="lazy"
+              onerror="this.src='${fallbacks[i % 3]}'">
+            <span class="cabana-badge">Desde $${c.precio_desde || 50}/noche</span>
+            ${c.tiene_piscina ? '<span class="cabana-badge-piscina">💦 Piscina Privada</span>' : ''}
+          </div>
+          <div class="cabana-card-body">
+            <h3 class="cabana-card-title">${c.nombre}</h3>
+            <p class="cabana-card-desc">${c.descripcion_corta || ''}</p>
+            <div class="cabana-features">
+              <span class="cabana-feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+                ${c.num_habitaciones} habitación${c.num_habitaciones > 1 ? 'es' : ''}
+              </span>
+              <span class="cabana-feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Hasta ${c.capacidad_max} personas
+              </span>
+              ${serviciosMostrar.map(s => `<span class="cabana-feature" title="${s}">✓ ${s.length > 18 ? s.slice(0,18)+'…' : s}</span>`).join('')}
+            </div>
+            <div class="cabana-card-footer">
+              <div class="cabana-precio">
+                <span>Desde</span>
+                <span class="price">$${c.precio_desde || 50} <small class="price-unit">/noche</small></span>
+              </div>
+              <div style="display:flex; gap:0.5rem; align-items:center">
+                ${c.calificacion_promedio ? `<div class="cabana-rating"><span class="stars">${'★'.repeat(Math.round(c.calificacion_promedio))}</span> ${parseFloat(c.calificacion_promedio||5).toFixed(1)}</div>` : '<div class="cabana-rating"><span class="stars">★★★★★</span> Nuevo</div>'}
+                <a href="/cabanas/${c.id}" class="btn btn-primary btn-sm">Ver detalles</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `}).join('');
+      initReveal();
+    }
+
+    function renderTarifas(cabanas) {
+      const grid = document.getElementById('tarifas-grid');
+      grid.innerHTML = cabanas.map(c => {
+        const infoTarifas = [
+          { personas: 1 }, { personas: 2 }, { personas: 3 }
+        ].filter(t => t.personas <= c.capacidad_max);
+
+        return `
+        <div style="background:var(--white); border-radius:var(--radius-lg); padding:1.75rem; border:1px solid var(--border); box-shadow:var(--shadow-sm)" class="reveal">
+          <h3 style="font-size:1.2rem; margin-bottom:0.25rem; color:var(--primary)">${c.nombre}</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1.25rem">${c.num_habitaciones} hab. · Máx. ${c.capacidad_max} personas${c.tiene_piscina ? ' · 🏊 Piscina' : ''}</p>
+          <div id="tarifas-${c.id}">
+            <div class="loader-spinner" style="margin:0 auto 0.5rem; width:24px; height:24px; border-width:2px; border-color:rgba(45,80,22,0.2); border-top-color:var(--primary)"></div>
+          </div>
+          <a href="/cabanas/${c.id}" class="btn btn-outline-primary btn-sm" style="width:100%; justify-content:center; margin-top:1rem">Ver cabaña</a>
+        </div>
+      `}).join('');
+
+      // Cargar tarifas para cada cabaña
+      cabanas.forEach(async c => {
+        try {
+          const res = await API.get(`/api/cabanas/${c.id}`);
+          if (!res.success) return;
+          const tarifas = res.data.tarifas || [];
+          const container = document.getElementById(`tarifas-${c.id}`);
+          if (!container) return;
+          container.innerHTML = tarifas.map(t => `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; border-bottom:1px solid var(--border)">
+              <span style="font-size:0.875rem; color:var(--text-muted)">${t.num_personas} persona${t.num_personas>1?'s':''}</span>
+              <span style="font-weight:700; color:var(--primary)">$${t.precio_noche}<small style="font-weight:400; color:var(--text-muted)">/noche</small></span>
+            </div>
+          `).join('') || '<p style="font-size:0.85rem; color:var(--text-muted)">Consultar tarifas</p>';
+        } catch {}
+      });
+    }
+
+    // Filtros
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.style.background = 'var(--white)';
+          b.style.color = 'var(--text-muted)';
+          b.style.borderColor = 'var(--border)';
+          b.classList.remove('active');
+        });
+        btn.style.background = 'rgba(45,80,22,0.07)';
+        btn.style.color = 'var(--primary)';
+        btn.style.borderColor = 'var(--primary)';
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        let filtered = allCabanas;
+        if (filter === 'piscina') filtered = allCabanas.filter(c => c.tiene_piscina);
+        else if (filter !== 'all') filtered = allCabanas.filter(c => c.num_habitaciones == filter);
+        renderCabanas(filtered);
+      });
+    });
+
+    document.getElementById('nav-logout')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+    document.addEventListener('DOMContentLoaded', loadCabanas);
+  </script>
+</body>
+</html>

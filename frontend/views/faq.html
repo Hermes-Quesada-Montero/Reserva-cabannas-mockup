@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .faq-item { border:1px solid var(--border); border-radius:var(--radius); margin-bottom:0.75rem; overflow:hidden; background:white; transition:all var(--transition); }
+    .faq-item:hover { border-color:var(--primary); }
+    .faq-question { width:100%; text-align:left; padding:1.25rem 1.5rem; display:flex; justify-content:space-between; align-items:center; background:white; font-weight:600; font-size:0.95rem; color:var(--text); cursor:pointer; gap:1rem; }
+    .faq-icon { width:24px; height:24px; border-radius:50%; background:var(--bg); display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all var(--transition); }
+    .faq-item.open .faq-icon { background:var(--primary); color:white; transform:rotate(45deg); }
+    .faq-answer { max-height:0; overflow:hidden; transition:max-height 0.35s ease; }
+    .faq-answer-inner { padding:0 1.5rem 1.25rem; color:var(--text-muted); font-size:0.9rem; line-height:1.7; }
+    .category-tabs { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:2rem; }
+    .cat-btn { padding:0.4rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); background:white; color:var(--text-muted); font-size:0.85rem; font-weight:600; cursor:pointer; transition:all var(--transition); }
+    .cat-btn:hover, .cat-btn.active { background:rgba(45,80,22,0.07); color:var(--primary); border-color:var(--primary); }
+  </style>
+</head>
+<body>
+  <div id="page-loader"><div class="loader-logo">🌲</div><div class="loader-spinner"></div></div>
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg viewBox="0 0 40 40"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9" fill="currentColor"/><rect x="17" y="30" width="6" height="6" rx="1" fill="currentColor"/></svg>Cabañas <span>Los Pinos</span></a>
+      <div class="nav-links"><a href="/">Inicio</a><a href="/cabanas">Cabañas</a><a href="/galeria">Galería</a><a href="/faq" class="active">FAQ</a><a href="/contacto">Contacto</a>
+        <div id="nav-guest"><a href="/login">Iniciar sesión</a><a href="/reservar" class="btn btn-accent btn-sm nav-btn-reservar">Reservar</a></div>
+        <div id="nav-user" class="nav-user-menu hidden"><button class="nav-user-btn" id="nav-user-btn"><div class="avatar" id="nav-avatar">U</div><span id="nav-user-name">U</span></button><div class="nav-dropdown" id="nav-dropdown"><a href="/mi-cuenta">Mi Cuenta</a><hr><a href="#" id="nav-logout">Cerrar Sesión</a></div></div>
+      </div>
+    </div>
+  </nav>
+
+  <div style="background:linear-gradient(135deg,var(--primary-dark),var(--primary)); padding:6rem 0 3rem; margin-top:var(--nav-height)">
+    <div class="container text-center" style="color:white">
+      <span class="section-badge" style="background:rgba(200,169,81,0.2); color:var(--accent); border-color:rgba(200,169,81,0.3)">Ayuda</span>
+      <h1 style="color:white; margin:1rem 0 0.5rem">Preguntas Frecuentes</h1>
+      <p style="color:rgba(255,255,255,0.75); max-width:540px; margin:0 auto">Respuestas a las dudas más comunes sobre tu estadía</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container" style="max-width:760px">
+      <div class="category-tabs" id="cat-tabs">
+        <button class="cat-btn active" data-cat="">Todas</button>
+        <button class="cat-btn" data-cat="reservaciones">Reservaciones</button>
+        <button class="cat-btn" data-cat="servicios">Servicios</button>
+        <button class="cat-btn" data-cat="politicas">Políticas</button>
+        <button class="cat-btn" data-cat="pagos">Pagos</button>
+        <button class="cat-btn" data-cat="general">General</button>
+      </div>
+
+      <div id="faq-list"></div>
+
+      <div style="margin-top:3rem; padding:2rem; background:rgba(45,80,22,0.05); border-radius:var(--radius-lg); border:1px solid rgba(45,80,22,0.1); text-align:center">
+        <p style="font-weight:700; margin-bottom:0.5rem">¿No encontraste lo que buscabas?</p>
+        <p style="color:var(--text-muted); margin-bottom:1.5rem; font-size:0.9rem">Nuestro equipo está disponible para ayudarte</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap">
+          <a href="/contacto" class="btn btn-primary btn-sm">✉️ Contactarnos</a>
+          <a href="https://wa.me/50688888888" target="_blank" class="btn btn-outline-primary btn-sm">💬 WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container"><div class="footer-bottom" style="padding:1.5rem 0"><p>© 2024 Cabañas Los Pinos</p></div></div></footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    let allFaqs = [];
+    let currentCat = '';
+
+    async function loadFaqs() {
+      try {
+        const res = await API.get('/api/faqs');
+        if (res.success) { allFaqs = res.data; renderFaqs(allFaqs); }
+      } catch { console.error('Error cargando FAQs'); }
+    }
+
+    /* delegación — registrado una sola vez, fuera de renderFaqs */
+    document.getElementById('faq-list').addEventListener('click', function (e) {
+      var btn = e.target.closest('.faq-question');
+      if (!btn) return;
+      var item   = btn.closest('.faq-item');
+      var answer = item.querySelector('.faq-answer');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function (el) {
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+
+    function renderFaqs(faqs) {
+      const container = document.getElementById('faq-list');
+      if (!faqs.length) { container.innerHTML = '<p style="color:var(--text-muted); text-align:center">No hay preguntas en esta categoría.</p>'; return; }
+      container.innerHTML = faqs.map(f =>
+        '<div class="faq-item reveal" data-id="' + f.id + '">' +
+          '<button class="faq-question">' +
+            f.pregunta +
+            '<div class="faq-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>' +
+          '</button>' +
+          '<div class="faq-answer"><div class="faq-answer-inner">' + f.respuesta + '</div></div>' +
+        '</div>'
+      ).join('');
+      initReveal();
+    }
+
+    // Filtros
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCat = btn.dataset.cat;
+        const filtered = currentCat ? allFaqs.filter(f => f.categoria === currentCat) : allFaqs;
+        renderFaqs(filtered);
+      });
+    });
+
+    document.getElementById('nav-logout')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+    document.addEventListener('DOMContentLoaded', loadFaqs);
+  </script>
+</body>
+</html>

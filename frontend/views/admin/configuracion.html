@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-logo"><svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>Cabañas <span>Los Pinos</span></div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Mensajes</a>
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galería</a>
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios</a>
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/></svg>FAQs</a>
+      <a href="/admin/contacto" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Contacto</a>
+      <a href="/admin/configuracion" class="admin-menu-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 015.07 4.93M4.93 19.07A10 10 0 0019.07 19.07"/></svg>Configuración</a>
+      <div style="padding:1rem 1.25rem"><a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,0.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a></div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">⚙️ Configuración del Sitio</div>
+      <span style="font-size:0.875rem; color:#6b7280">👤 <span id="admin-name">Admin</span></span>
+    </header>
+
+    <div class="admin-content">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div class="admin-card-title">Información General</div>
+          <button id="btn-guardar-config" class="btn-admin btn-admin-primary">💾 Guardar todo</button>
+        </div>
+
+        <div class="admin-form-2">
+          <div class="admin-form-group">
+            <label>Nombre del sitio</label>
+            <input type="text" id="c-nombre_sitio" class="admin-input" placeholder="Cabañas Los Pinos">
+          </div>
+          <div class="admin-form-group">
+            <label>Eslogan</label>
+            <input type="text" id="c-slogan" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label>Email de contacto</label>
+            <input type="email" id="c-email_contacto" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label>Teléfono</label>
+            <input type="text" id="c-telefono_contacto" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label>SINPE Móvil número</label>
+            <input type="text" id="c-sinpe_numero" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label>SINPE nombre beneficiario</label>
+            <input type="text" id="c-sinpe_nombre" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label>WhatsApp (código país + número)</label>
+            <input type="text" id="c-whatsapp" class="admin-input" placeholder="50688888888">
+          </div>
+          <div class="admin-form-group">
+            <label>Instagram (username)</label>
+            <input type="text" id="c-instagram" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label>Facebook (username / URL)</label>
+            <input type="text" id="c-facebook" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label>Color primario (hex)</label>
+            <div style="display:flex; gap:0.5rem; align-items:center">
+              <input type="color" id="c-color_primario-picker" style="width:44px; height:34px; border-radius:8px; border:none; cursor:pointer; padding:2px">
+              <input type="text" id="c-color_primario" class="admin-input" placeholder="#2D5016">
+            </div>
+          </div>
+          <div class="admin-form-group">
+            <label>Color de acento (hex)</label>
+            <div style="display:flex; gap:0.5rem; align-items:center">
+              <input type="color" id="c-color_acento-picker" style="width:44px; height:34px; border-radius:8px; border:none; cursor:pointer; padding:2px">
+              <input type="text" id="c-color_acento" class="admin-input" placeholder="#C8A951">
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-form-group">
+          <label>Dirección</label>
+          <input type="text" id="c-direccion" class="admin-input" style="max-width:100%">
+        </div>
+        <div class="admin-form-group">
+          <label>Descripción SEO (meta description)</label>
+          <textarea id="c-descripcion_seo" class="admin-input" rows="2" style="resize:vertical"></textarea>
+        </div>
+        <div class="admin-form-group">
+          <label>Política de cancelación</label>
+          <textarea id="c-politica_cancelacion" class="admin-input" rows="3" style="resize:vertical"></textarea>
+        </div>
+      </div>
+
+      <!-- Pagos y operación -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div class="admin-card-title">💳 Pagos y Operación</div>
+          <button id="btn-guardar-config-2" class="btn-admin btn-admin-primary">💾 Guardar</button>
+        </div>
+        <div class="admin-form-2">
+          <div class="admin-form-group">
+            <label>Stripe Publishable Key</label>
+            <input type="text" id="c-stripe_publishable_key" class="admin-input" placeholder="pk_live_...">
+          </div>
+          <div class="admin-form-group">
+            <label>Hora Check-in</label>
+            <input type="time" id="c-hora_checkin" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label>Hora Check-out</label>
+            <input type="time" id="c-hora_checkout" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label>Moneda</label>
+            <select id="c-moneda" class="admin-input">
+              <option value="USD">USD ($)</option>
+              <option value="CRC">CRC (₡)</option>
+            </select>
+          </div>
+          <div class="admin-form-group">
+            <label>SINPE número</label>
+            <input type="text" id="c-sinpe_numero2" class="admin-input" placeholder="88887777">
+          </div>
+          <div class="admin-form-group">
+            <label>SINPE nombre beneficiario</label>
+            <input type="text" id="c-sinpe_nombre2" class="admin-input" placeholder="Juan Pérez">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="/js/admin.js"></script>
+<script>
+(function () {
+  var CONFIG_KEYS = [
+    'nombre_sitio','slogan','email_contacto','telefono_contacto','sinpe_numero','sinpe_nombre',
+    'whatsapp','instagram','facebook','color_primario','color_acento','direccion',
+    'descripcion_seo','politica_cancelacion','stripe_publishable_key','hora_checkin',
+    'hora_checkout','moneda','sinpe_numero2','sinpe_nombre2'
+  ];
+
+  /* ── event listeners — DOM ya listo ── */
+  document.getElementById('btn-guardar-config').addEventListener('click', guardarConfig);
+  document.getElementById('btn-guardar-config-2').addEventListener('click', guardarConfig);
+
+  adminReady(function () { loadConfig(); });
+
+  /* ──────────────────────────── */
+
+  async function loadConfig() {
+    try {
+      var res = await adminFetch('/api/admin/configuracion');
+      if (!res || !res.success) return;
+      CONFIG_KEYS.forEach(function (key) {
+        var el = document.getElementById('c-' + key);
+        if (el && res.data[key] != null) el.value = res.data[key];
+      });
+      /* Sync color pickers */
+      ['color_primario', 'color_acento'].forEach(function (k) {
+        var picker = document.getElementById('c-' + k + '-picker');
+        var input  = document.getElementById('c-' + k);
+        if (picker && input && input.value) picker.value = input.value;
+        if (picker) picker.addEventListener('input', function () { if (input) input.value = picker.value; });
+        if (input)  input.addEventListener('input',  function () { if (picker && /^#[0-9A-Fa-f]{6}$/.test(input.value)) picker.value = input.value; });
+      });
+    } catch (e) { showToast('Error al cargar configuración', 'error'); }
+  }
+
+  async function guardarConfig() {
+    var configs = {};
+    CONFIG_KEYS.forEach(function (key) {
+      var el = document.getElementById('c-' + key);
+      if (el) configs[key] = el.value;
+    });
+    try {
+      var res = await adminFetch('/api/admin/configuracion', 'PUT', { configs: configs });
+      if (!res || !res.success) throw new Error((res && res.message) || 'Error al guardar');
+      showToast('Configuración guardada correctamente', 'success');
+    } catch (e) { showToast(e.message || 'Error al guardar', 'error'); }
+  }
+
+}());
+</script>
+</body>
+</html>

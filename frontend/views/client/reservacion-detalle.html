@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle Reservación | Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .det-grid { display:grid; grid-template-columns:1fr 380px; gap:1.5rem; }
+    .info-row { display:flex; justify-content:space-between; padding:.75rem 0; border-bottom:1px solid #f3f4f6; font-size:.875rem; }
+    .info-row:last-child { border-bottom:none; }
+    .badge-est { display:inline-flex; align-items:center; padding:.25rem .75rem; border-radius:999px; font-size:.7rem; font-weight:700; text-transform:uppercase; }
+    @media(max-width:768px) { .det-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="currentColor"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+        Cabañas <span>Los Pinos</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/cabanas">Cabañas</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div id="nav-user-area"></div>
+      </div>
+    </div>
+  </nav>
+
+  <div style="min-height:100vh; background:#f8f9fa; padding-top:80px">
+    <div style="max-width:1000px; margin:0 auto; padding:2.5rem 1.5rem">
+      <!-- Breadcrumb -->
+      <div style="display:flex; align-items:center; gap:.5rem; font-size:.875rem; color:#6b7280; margin-bottom:2rem">
+        <a href="/mi-cuenta" style="color:#2D5016; text-decoration:none">Mi cuenta</a>
+        <span>›</span>
+        <a href="/mi-cuenta/reservaciones" style="color:#2D5016; text-decoration:none">Reservaciones</a>
+        <span>›</span>
+        <span id="bc-numero">Detalle</span>
+      </div>
+
+      <!-- Loading / Error -->
+      <div id="loading-state" style="text-align:center; padding:4rem; color:#9ca3af">Cargando reservación...</div>
+      <div id="error-state" style="display:none; text-align:center; padding:4rem; color:#dc2626">Error al cargar la reservación.</div>
+
+      <!-- Contenido -->
+      <div id="reservacion-content" style="display:none">
+        <!-- Header -->
+        <div style="background:white; border-radius:16px; border:1px solid #e5e7eb; padding:1.75rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem">
+          <div>
+            <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.5rem">
+              <h1 id="res-cabana" style="font-family:'Playfair Display',serif; font-size:1.5rem; color:#1a1a1a"></h1>
+              <span id="res-estado-badge" class="badge-est"></span>
+            </div>
+            <div style="font-size:.875rem; color:#6b7280">Reservación <strong id="res-numero"></strong></div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:2rem; font-weight:700; color:#2D5016" id="res-total"></div>
+            <div style="font-size:.8rem; color:#6b7280" id="res-noches"></div>
+          </div>
+        </div>
+
+        <!-- Detalle 2 columnas -->
+        <div class="det-grid">
+          <!-- Columna izquierda -->
+          <div>
+            <!-- Fechas -->
+            <div style="background:white; border-radius:12px; border:1px solid #e5e7eb; padding:1.5rem; margin-bottom:1.25rem">
+              <h3 style="font-size:.875rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#6b7280; margin-bottom:1rem">Fechas de Estadía</h3>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem">
+                <div style="background:#f9fafb; border-radius:8px; padding:1rem; text-align:center">
+                  <div style="font-size:.75rem; color:#6b7280; margin-bottom:.25rem; text-transform:uppercase; letter-spacing:.5px">Entrada</div>
+                  <div style="font-size:1.1rem; font-weight:700; color:#2D5016" id="res-entrada"></div>
+                  <div style="font-size:.75rem; color:#9ca3af">1:00 PM</div>
+                </div>
+                <div style="background:#f9fafb; border-radius:8px; padding:1rem; text-align:center">
+                  <div style="font-size:.75rem; color:#6b7280; margin-bottom:.25rem; text-transform:uppercase; letter-spacing:.5px">Salida</div>
+                  <div style="font-size:1.1rem; font-weight:700; color:#2D5016" id="res-salida"></div>
+                  <div style="font-size:.75rem; color:#9ca3af">12:00 PM</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Huéspedes -->
+            <div style="background:white; border-radius:12px; border:1px solid #e5e7eb; padding:1.5rem; margin-bottom:1.25rem">
+              <h3 style="font-size:.875rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#6b7280; margin-bottom:1rem">Huéspedes Registrados</h3>
+              <div id="huespedes-list" style="display:flex; flex-direction:column; gap:.5rem"></div>
+            </div>
+
+            <!-- Notas -->
+            <div id="notas-section" style="display:none; background:#fffbeb; border-radius:12px; border:1px solid #fcd34d; padding:1.25rem; margin-bottom:1.25rem">
+              <h4 style="font-size:.8rem; font-weight:700; color:#92400e; margin-bottom:.5rem">Notas de la reservación</h4>
+              <p id="res-notas" style="font-size:.875rem; color:#78350f; line-height:1.6"></p>
+            </div>
+          </div>
+
+          <!-- Columna derecha -->
+          <div>
+            <!-- Resumen de pago -->
+            <div style="background:white; border-radius:12px; border:1px solid #e5e7eb; padding:1.5rem; margin-bottom:1.25rem">
+              <h3 style="font-size:.875rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#6b7280; margin-bottom:1rem">Resumen de Pago</h3>
+              <div id="pago-desglose"></div>
+              <div style="border-top:2px solid #e5e7eb; margin-top:.75rem; padding-top:.75rem; display:flex; justify-content:space-between">
+                <span style="font-weight:700">Total</span>
+                <span style="font-weight:700; font-size:1.1rem; color:#2D5016" id="pago-total"></span>
+              </div>
+            </div>
+
+            <!-- Método de pago -->
+            <div style="background:white; border-radius:12px; border:1px solid #e5e7eb; padding:1.5rem; margin-bottom:1.25rem">
+              <h3 style="font-size:.875rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#6b7280; margin-bottom:.75rem">Método de Pago</h3>
+              <div id="metodo-pago-info" style="font-size:.875rem; color:#374151"></div>
+            </div>
+
+            <!-- Acciones -->
+            <div style="background:white; border-radius:12px; border:1px solid #e5e7eb; padding:1.5rem">
+              <h3 style="font-size:.875rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#6b7280; margin-bottom:1rem">Acciones</h3>
+              <div style="display:flex; flex-direction:column; gap:.5rem">
+                <a id="btn-pdf" href="#" target="_blank" style="display:flex; align-items:center; gap:.5rem; padding:.65rem 1rem; background:#f3f4f6; border-radius:8px; text-decoration:none; color:#374151; font-size:.875rem; font-weight:600">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Descargar PDF
+                </a>
+                <a id="btn-ics" href="#" style="display:flex; align-items:center; gap:.5rem; padding:.65rem 1rem; background:#f3f4f6; border-radius:8px; text-decoration:none; color:#374151; font-size:.875rem; font-weight:600">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  Agregar al Calendario
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" style="position:fixed; bottom:1.5rem; right:1.5rem; z-index:9999; display:flex; flex-direction:column; gap:.5rem"></div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    let reservacion = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initNavbar();
+      const id = window.location.pathname.split('/').pop();
+      loadReservacion(id);
+    });
+
+    async function loadReservacion(id) {
+      try {
+        const res = await fetch(`/api/mis-reservaciones/${id}`, { credentials: 'include' });
+        const data = await res.json();
+        if (!res.ok) {
+          if (res.status === 401) { window.location.href = '/login?redirect=/reservacion/' + id; return; }
+          throw new Error(data.message);
+        }
+        reservacion = data.data;
+        renderReservacion(reservacion);
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('reservacion-content').style.display = 'block';
+      } catch(e) {
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('error-state').style.display = 'block';
+        document.getElementById('error-state').textContent = 'Error: ' + e.message;
+      }
+    }
+
+    function renderReservacion(r) {
+      document.getElementById('bc-numero').textContent = '#' + r.numero_reserva;
+      document.getElementById('res-numero').textContent = r.numero_reserva;
+      document.getElementById('res-cabana').textContent = r.cabana_nombre || 'Cabaña';
+      document.getElementById('res-total').textContent = '$' + parseFloat(r.total || 0).toFixed(2);
+
+      const noches = calcNoches(r.fecha_entrada, r.fecha_salida);
+      document.getElementById('res-noches').textContent = `${noches} noche(s)`;
+
+      // Estado
+      const badge = document.getElementById('res-estado-badge');
+      const colors = { pendiente:'#854d0e,#fef9c3', confirmada:'#15803d,#dcfce7', cancelada:'#dc2626,#fee2e2', completada:'#1d4ed8,#dbeafe' };
+      const [fg, bg] = (colors[r.estado] || '#6b7280,#f3f4f6').split(',');
+      badge.style.cssText = `color:${fg};background:${bg}`;
+      badge.textContent = r.estado;
+
+      // Fechas
+      document.getElementById('res-entrada').textContent = formatDate(r.fecha_entrada);
+      document.getElementById('res-salida').textContent = formatDate(r.fecha_salida);
+
+      // Huéspedes
+      const hList = document.getElementById('huespedes-list');
+      if (r.huespedes && r.huespedes.length) {
+        hList.innerHTML = r.huespedes.map(h => `
+          <div style="display:flex; align-items:center; gap:.75rem; padding:.5rem; background:#f9fafb; border-radius:8px; font-size:.875rem">
+            <div style="width:32px;height:32px;border-radius:50%;background:#2D5016;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0">${h.nombre_completo[0].toUpperCase()}</div>
+            <div>
+              <div style="font-weight:600">${h.nombre_completo}</div>
+              <div style="color:#6b7280;font-size:.75rem">${h.es_titular ? 'Titular' : 'Acompañante'} ${h.es_menor ? '· Menor' : ''}</div>
+            </div>
+          </div>`).join('');
+      } else {
+        hList.innerHTML = '<div style="color:#6b7280;font-size:.875rem">Sin información de huéspedes</div>';
+      }
+
+      // Notas
+      if (r.notas) {
+        document.getElementById('notas-section').style.display = 'block';
+        document.getElementById('res-notas').textContent = r.notas;
+      }
+
+      // Desglose pago
+      const precioNoche = (r.total / noches).toFixed(2);
+      document.getElementById('pago-desglose').innerHTML = `
+        <div class="info-row"><span style="color:#6b7280">Tarifa por noche</span><span>$${precioNoche}</span></div>
+        <div class="info-row"><span style="color:#6b7280">Noches</span><span>${noches}</span></div>
+        ${r.descuento ? `<div class="info-row" style="color:#15803d"><span>Descuento aplicado</span><span>-$${parseFloat(r.descuento).toFixed(2)}</span></div>` : ''}
+      `;
+      document.getElementById('pago-total').textContent = '$' + parseFloat(r.total).toFixed(2);
+
+      // Método de pago
+      const pagoLabels = {
+        tarjeta:  '💳 Tarjeta de crédito/débito',
+        sinpe:    '📱 SINPE Móvil',
+        efectivo: '💵 Efectivo',
+        llegada:  '🏠 Pago al llegar'
+      };
+      const metodoPagoTexto = pagoLabels[r.metodo_pago] || (r.metodo_pago ? r.metodo_pago : '—');
+      const estadoPagoBg    = r.estado_pago === 'pagado' ? '#dcfce7' : '#fef9c3';
+      const estadoPagoColor = r.estado_pago === 'pagado' ? '#15803d' : '#854d0e';
+      const estadoPagoLabel = r.estado_pago === 'pagado' ? 'Pagado' : 'Pendiente';
+      document.getElementById('metodo-pago-info').innerHTML =
+        '<div style="margin-bottom:.5rem">' + metodoPagoTexto + '</div>' +
+        '<span style="font-size:.75rem;padding:.2rem .6rem;border-radius:999px;font-weight:700;background:' + estadoPagoBg + ';color:' + estadoPagoColor + '">' + estadoPagoLabel + '</span>';
+
+      // Acciones
+      document.getElementById('btn-pdf').href = '/api/reservaciones/' + r.id + '/pdf';
+      document.getElementById('btn-ics').href = '/api/reservaciones/' + r.id + '/ics';
+    }
+
+    function calcNoches(desde, hasta) {
+      return Math.round((new Date(hasta) - new Date(desde)) / 86400000);
+    }
+
+    function formatDate(str) {
+      if (!str) return '—';
+      return new Date(str).toLocaleDateString('es-CR', { weekday:'short', day:'2-digit', month:'short', year:'numeric' });
+    }
+
+    function showToastLocal(msg, tipo) {
+      const t = document.createElement('div');
+      t.style.cssText = `background:white;border-radius:10px;padding:1rem 1.25rem;box-shadow:0 8px 30px rgba(0,0,0,.15);border-left:4px solid ${tipo==='success'?'#16a34a':'#dc2626'};font-size:.875rem`;
+      t.textContent = msg;
+      document.getElementById('toast-container').appendChild(t);
+      setTimeout(() => t.remove(), 4000);
+    }
+  </script>
+</body>
+</html>

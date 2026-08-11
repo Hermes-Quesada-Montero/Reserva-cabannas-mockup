@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarifas | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+      Cabañas <span>Los Pinos</span>
+    </div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Mensajes</a>
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galería</a>
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios / Clientes</a>
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>FAQs</a>
+      <a href="/admin/contacto" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Contacto</a>
+      <a href="/admin/configuracion" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Configuración</a>
+      <div style="padding:1rem 1.25rem; margin-top:auto">
+        <a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,0.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Tarifas por Cabaña
+      </div>
+      <div style="display:flex; align-items:center; gap:0.75rem">
+        <span style="font-size:0.875rem; color:#6b7280">👤 <span id="admin-name">Admin</span></span>
+        <button class="btn-admin btn-admin-primary" id="btn-nueva-tarifa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nueva Tarifa
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- Selector de cabaña -->
+      <div class="admin-card" style="padding:1.25rem">
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center">
+          <label style="font-weight:600; font-size:0.875rem">Filtrar por cabaña:</label>
+          <select class="admin-input" id="filtro-cabana" style="width:auto">
+            <option value="">Todas las cabañas</option>
+          </select>
+          <span id="total-count" style="font-size:0.85rem; color:#6b7280; margin-left:auto"></span>
+        </div>
+      </div>
+
+      <!-- Info precios base -->
+      <div class="admin-card" style="background:#fffbeb; border-color:#fcd34d; padding:1rem 1.25rem; margin-bottom:1.25rem">
+        <p style="font-size:0.875rem; color:#92400e">
+          <strong>ℹ️ Referencia de precios actuales:</strong>
+          Cabaña 1 (1 hab): 1p=$50, 2p=$75 &nbsp;|&nbsp;
+          Cabaña 2 (2 hab): 1p=$100, 2p=$150, 3p=$175 &nbsp;|&nbsp;
+          Cabaña 3 (piscina): 1p=$140, 2p=$190, 3p=$215
+        </p>
+      </div>
+
+      <!-- Tabla de tarifas -->
+      <div class="admin-card" style="padding:0">
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Cabaña</th>
+                <th>Personas</th>
+                <th>Precio / noche</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tarifas-tbody">
+              <tr><td colspan="6" style="text-align:center; padding:2rem; color:#9ca3af">Cargando tarifas...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Tarifa -->
+<div class="admin-modal-overlay" id="modal-tarifa">
+  <div class="admin-modal">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title" id="modal-title">Nueva Tarifa</div>
+      <button id="btn-cerrar-modal-tarifa" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:#6b7280">×</button>
+    </div>
+    <div class="admin-modal-body">
+      <input type="hidden" id="tarifa-id">
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Cabaña *</label>
+          <select class="admin-input" id="tarifa-cabana"></select>
+        </div>
+        <div class="admin-form-group">
+          <label>Número de personas *</label>
+          <input type="number" class="admin-input" id="tarifa-personas" min="1" max="10" value="1">
+        </div>
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Precio por noche (USD) *</label>
+          <input type="number" class="admin-input" id="tarifa-precio" min="0" step="0.01" placeholder="0.00">
+        </div>
+        <div class="admin-form-group">
+          <label>Estado</label>
+          <select class="admin-input" id="tarifa-estado">
+            <option value="activa">Activa</option>
+            <option value="inactiva">Inactiva</option>
+          </select>
+        </div>
+      </div>
+      <div class="admin-form-group">
+        <label>Descripción</label>
+        <input type="text" class="admin-input" id="tarifa-descripcion" placeholder="Ej: Precio adulto, temporada regular...">
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="btn-admin btn-admin-outline" id="btn-cancelar-tarifa">Cancelar</button>
+      <button class="btn-admin btn-admin-primary" id="btn-guardar-tarifa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/></svg>
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast-container" id="toast-container"></div>
+
+<script src="/js/admin.js"></script>
+<script>
+  let editando = null;
+  let cabanasList = [];
+
+  adminReady(() => {
+    loadCabanas();
+
+    // Filtro de cabaña
+    document.getElementById('filtro-cabana').addEventListener('change', loadTarifas);
+
+    // Botones estáticos
+    document.getElementById('btn-nueva-tarifa').addEventListener('click', () => abrirModal());
+    document.getElementById('btn-cerrar-modal-tarifa').addEventListener('click', cerrarModal);
+    document.getElementById('btn-cancelar-tarifa').addEventListener('click', cerrarModal);
+    document.getElementById('btn-guardar-tarifa').addEventListener('click', guardarTarifa);
+    document.getElementById('modal-tarifa').addEventListener('click', function(e) {
+      if (e.target === this) cerrarModal();
+    });
+  });
+
+  async function loadCabanas() {
+    const res = await adminFetch('/api/admin/cabanas');
+    cabanasList = res.data || [];
+
+    // Llenar selects de cabañas
+    const opts = cabanasList.map(c => `<option value="${c.id}">${c.nombre}</option>`).join('');
+    document.getElementById('filtro-cabana').innerHTML = '<option value="">Todas las cabañas</option>' + opts;
+    document.getElementById('tarifa-cabana').innerHTML = opts;
+
+    loadTarifas();
+  }
+
+  async function loadTarifas() {
+    const cabana = document.getElementById('filtro-cabana').value;
+    const url = '/api/admin/tarifas' + (cabana ? `?cabana_id=${cabana}` : '');
+    try {
+      const res = await adminFetch(url);
+      const tarifas = res.data || [];
+      document.getElementById('total-count').textContent = `${tarifas.length} tarifa(s)`;
+      renderTabla(tarifas);
+    } catch(e) {
+      showToast('Error al cargar tarifas', 'error');
+    }
+  }
+
+  function renderTabla(list) {
+    const tbody = document.getElementById('tarifas-tbody');
+    if (!list.length) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:2rem; color:#9ca3af">Sin tarifas registradas</td></tr>';
+      return;
+    }
+    window._tarifas = {};
+    list.forEach(t => { window._tarifas[String(t.id)] = t; });
+    tbody.innerHTML = list.map(t => {
+      const cabana = cabanasList.find(c => c.id === t.cabana_id);
+      return `
+        <tr>
+          <td><strong>${cabana?.nombre || 'Cabaña ' + t.cabana_id}</strong></td>
+          <td>${t.num_personas} persona(s)</td>
+          <td><strong style="color:var(--primary)">$${parseFloat(t.precio_noche).toFixed(2)}</strong></td>
+          <td style="font-size:0.8rem; color:#6b7280">${t.descripcion || '—'}</td>
+          <td><span class="badge-admin ${t.activa ? 'badge-green' : 'badge-gray'}">${t.activa ? 'Activa' : 'Inactiva'}</span></td>
+          <td>
+            <div class="tbl-actions">
+              <button class="btn-admin btn-admin-outline btn-admin-sm" data-action="editar" data-id="${t.id}">Editar</button>
+              <button class="btn-admin btn-admin-danger btn-admin-sm" data-action="eliminar" data-id="${t.id}">Eliminar</button>
+            </div>
+          </td>
+        </tr>`;
+    }).join('');
+
+    // Delegación de eventos en el tbody
+    tbody.onclick = function(e) {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      if (btn.dataset.action === 'editar') editarTarifa(window._tarifas[id]);
+      else if (btn.dataset.action === 'eliminar') eliminarTarifa(id);
+    };
+  }
+
+  function abrirModal(datos = null) {
+    editando = datos?.id || null;
+    document.getElementById('modal-title').textContent = datos ? 'Editar Tarifa' : 'Nueva Tarifa';
+    document.getElementById('tarifa-id').value = datos?.id || '';
+    document.getElementById('tarifa-cabana').value = datos?.cabana_id || cabanasList[0]?.id || '';
+    document.getElementById('tarifa-personas').value = datos?.num_personas || 1;
+    document.getElementById('tarifa-precio').value = datos?.precio_noche || '';
+    document.getElementById('tarifa-descripcion').value = datos?.descripcion || '';
+    document.getElementById('tarifa-estado').value = (datos?.activa || datos?.activa === 1) ? 'activa' : (datos ? 'inactiva' : 'activa');
+    document.getElementById('modal-tarifa').classList.add('show');
+  }
+
+  function cerrarModal() {
+    document.getElementById('modal-tarifa').classList.remove('show');
+    editando = null;
+  }
+
+  function editarTarifa(datos) { abrirModal(datos); }
+
+  async function guardarTarifa() {
+    const precio = parseFloat(document.getElementById('tarifa-precio').value);
+    if (!precio || precio <= 0) { showToast('Ingresa un precio válido', 'error'); return; }
+    const cabana_id = parseInt(document.getElementById('tarifa-cabana').value);
+    if (!cabana_id) { showToast('Selecciona una cabaña', 'error'); return; }
+
+    const payload = {
+      cabana_id,
+      num_personas: parseInt(document.getElementById('tarifa-personas').value),
+      precio_noche: precio,
+      descripcion:  document.getElementById('tarifa-descripcion').value.trim() || null,
+      estado:       document.getElementById('tarifa-estado').value,
+    };
+
+    try {
+      if (editando) {
+        await adminFetch(`/api/admin/tarifas/${editando}`, 'PUT', payload);
+        showToast('Tarifa actualizada', 'success');
+      } else {
+        await adminFetch('/api/admin/tarifas', 'POST', payload);
+        showToast('Tarifa creada', 'success');
+      }
+      cerrarModal();
+      loadTarifas();
+    } catch(e) {
+      showToast(e.message || 'Error al guardar', 'error');
+    }
+  }
+
+  async function eliminarTarifa(id) {
+    if (!confirm('¿Eliminar esta tarifa?')) return;
+    try {
+      await adminFetch(`/api/admin/tarifas/${id}`, 'DELETE');
+      showToast('Tarifa eliminada', 'success');
+      loadTarifas();
+    } catch(e) {
+      showToast('Error al eliminar', 'error');
+    }
+  }
+
+  function formatDate(str) {
+    return new Date(str).toLocaleDateString('es-CR', { day:'2-digit', month:'short', year:'numeric' });
+  }
+
+</script>
+</body>
+</html>

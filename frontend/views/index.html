@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabañas Los Pinos | Monteverde, Costa Rica</title>
+  <meta name="description" content="Resort de cabañas en Monteverde Costa Rica. Reservaciones en línea, piscina privada y naturaleza. Un refugio de paz en el bosque nuboso.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    /* ── Estilos específicos de la página principal ── */
+    .about-section { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-img-stack {
+      position: relative;
+      height: 450px;
+    }
+    .about-img-main {
+      width: 75%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      position: absolute;
+      top: 0; left: 0;
+    }
+    .about-img-accent {
+      width: 55%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      position: absolute;
+      bottom: 0; right: 0;
+      border: 4px solid var(--white);
+    }
+    .about-badge-float {
+      position: absolute;
+      bottom: 40px; left: 55%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      z-index: 10;
+      white-space: nowrap;
+    }
+    .mapa-section { background: var(--bg); }
+    .mapa-wrapper {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a4001, #2d6008);
+      position: relative;
+    }
+    .mapa-placeholder {
+      text-align: center;
+      color: white;
+      padding: 2rem;
+    }
+    .mapa-placeholder svg { width: 60px; height: 60px; color: var(--accent); margin: 0 auto 1rem; display: block; }
+    .mapa-placeholder h3 { color: white; margin-bottom: 0.5rem; }
+    .mapa-placeholder p  { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    }
+    .newsletter-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 0.75rem;
+      flex: 1;
+      max-width: 460px;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.75rem 1.25rem;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--radius-xl);
+      color: white;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.5); }
+    .newsletter-form input:focus { border-color: var(--accent); }
+    @media(max-width:768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img-stack { height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="page-loader">
+    <div class="loader-logo">🌲 Los Pinos</div>
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Cargando experiencia...</div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar hero-transparent" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/>
+          <rect x="17" y="30" width="6" height="6" rx="1"/>
+        </svg>
+        Cabañas <span>Los Pinos</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/" class="active">Inicio</a>
+        <a href="/cabanas">Cabañas</a>
+        <a href="/galeria">Galería</a>
+        <a href="/faq">FAQ</a>
+        <a href="/contacto">Contacto</a>
+        <div id="nav-guest" class="d-flex align-center gap-1">
+          <a href="/login">Iniciar sesión</a>
+          <a href="/reservar" class="btn btn-accent btn-sm nav-btn-reservar">Reservar</a>
+        </div>
+        <div id="nav-user" class="nav-user-menu hidden">
+          <button class="nav-user-btn" id="nav-user-btn">
+            <div class="avatar" id="nav-avatar">U</div>
+            <span id="nav-user-name">Usuario</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-dropdown" id="nav-dropdown">
+            <a href="/mi-cuenta">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Mi Cuenta
+            </a>
+            <a href="/mi-cuenta/reservaciones">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Mis Reservaciones
+            </a>
+            <hr>
+            <a href="#" id="nav-logout">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Cerrar Sesión
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="/">Inicio</a>
+    <a href="/cabanas">Cabañas</a>
+    <a href="/galeria">Galería</a>
+    <a href="/faq">Preguntas Frecuentes</a>
+    <a href="/contacto">Contacto</a>
+    <a href="/login" id="mobile-login">Iniciar Sesión</a>
+    <a href="/mi-cuenta" id="mobile-cuenta" class="hidden">Mi Cuenta</a>
+    <a href="/reservar" class="btn btn-accent" style="justify-content:center; margin-top:1rem;">🏕️ Reservar Ahora</a>
+  </div>
+
+  <!-- HERO PRINCIPAL -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=1600&q=80"
+        alt="Cabaña en el bosque"
+        class="hero-bg-img"
+        id="hero-bg-img"
+        loading="eager"
+      >
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Reserva con confianza
+      </div>
+      <h1>Tu Refugio en<br><span>el Bosque Nuboso</span></h1>
+      <p>Tres cabañas de ensueño en Monteverde, Costa Rica. Naturaleza pura, silencio absoluto y todo el confort que mereces.</p>
+      <div class="hero-btns">
+        <a href="/reservar" class="btn btn-accent btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Reservar Ahora
+        </a>
+        <a href="/cabanas" class="btn btn-outline btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Ver Cabañas
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">Desliza</div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number" data-target="500">500+</span>
+          <span class="stat-label">Familias felices</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="3">3</span>
+          <span class="stat-label">Cabañas exclusivas</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="4.9">4.9</span>
+          <span class="stat-label">Calificación promedio</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="8">8</span>
+          <span class="stat-label">Años de experiencia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CABAÑAS -->
+  <section class="section about-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">Nuestras cabañas</span>
+        <h2 class="section-title">Encuentra tu Refugio Ideal</h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Tres experiencias únicas en el corazón del bosque nuboso de Monteverde. Cada cabaña ofrece privacidad, confort y conexión con la naturaleza.</p>
+      </div>
+      <div class="cabanas-grid" id="cabanas-home"></div>
+      <div class="text-center mt-4">
+        <a href="/cabanas" class="btn btn-outline-primary btn-lg">
+          Ver todas las cabañas
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NOSOTROS -->
+  <section class="section" style="background:var(--bg)">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-stack reveal">
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+            alt="Bosque nuboso Monteverde"
+            class="about-img-main"
+          >
+          <img
+            src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=600&q=80"
+            alt="Interior cabaña"
+            class="about-img-accent"
+          >
+          <div class="about-badge-float">⭐ Calificación 4.9/5</div>
+        </div>
+        <div class="reveal delay-2">
+          <span class="section-badge">Sobre nosotros</span>
+          <h2 style="margin:1rem 0 1.25rem">Un Santuario Natural desde 2016</h2>
+          <p style="margin-bottom:1.25rem">Cabañas Los Pinos nació con una visión: crear un espacio donde las familias y parejas puedan reconectar con la naturaleza sin sacrificar el confort moderno.</p>
+          <p style="margin-bottom:1.75rem">Ubicados en el bosque nuboso de Monteverde — uno de los ecosistemas más biodiversos del planeta — nuestras tres cabañas se diseñaron respetando el entorno natural, usando materiales locales y prácticas sostenibles.</p>
+          <div class="features-grid" style="grid-template-columns: repeat(2,1fr); gap:1rem; margin-bottom:2rem">
+            <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.9rem; color:var(--text-muted)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Construcción eco-amigable
+            </div>
+            <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.9rem; color:var(--text-muted)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Senderos privados
+            </div>
+            <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.9rem; color:var(--text-muted)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Personal bilingüe
+            </div>
+            <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.9rem; color:var(--text-muted)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Tour guiados de naturaleza
+            </div>
+          </div>
+          <a href="/cabanas" class="btn btn-primary">Explorar cabañas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS / FEATURES -->
+  <section class="section" style="background:var(--white)">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">Servicios</span>
+        <h2 class="section-title">Todo lo que Necesitas</h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Cada detalle está pensado para que su estadía sea perfecta.</p>
+      </div>
+      <div class="features-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+        <div class="feature-card reveal delay-1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          </div>
+          <h4>Wi-Fi Gratis</h4>
+          <p>Alta velocidad en todas las cabañas, sin cargos adicionales.</p>
+        </div>
+        <div class="feature-card reveal delay-2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h4>Privacidad Total</h4>
+          <p>Cada cabaña tiene su propio espacio privado y entrada independiente.</p>
+        </div>
+        <div class="feature-card reveal delay-3">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <h4>Cocina Equipada</h4>
+          <p>Utensilios completos, refrigeradora y fogón para cocinar.</p>
+        </div>
+        <div class="feature-card reveal delay-4">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h4>Check-in Flex</h4>
+          <p>Check-in desde 1 PM. Check-out a las 12 PM. Horarios especiales disponibles.</p>
+        </div>
+        <div class="feature-card reveal delay-1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Seguridad 24/7</h4>
+          <p>Vigilancia permanente para su tranquilidad y descanso.</p>
+        </div>
+        <div class="feature-card reveal delay-2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h4>Grupos y Familias</h4>
+          <p>Cabañas de 1 a 3 personas, ideales para parejas, familias y grupos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA RÁPIDA -->
+  <section class="section" style="background:var(--bg)" id="galeria-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">Galería</span>
+        <h2 class="section-title">Imágenes que Enamoran</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="gallery-grid" id="home-gallery" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))"></div>
+      <div class="text-center mt-4">
+        <a href="/galeria" class="btn btn-outline-primary">Ver galería completa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="section" style="background:var(--white)" id="testimonios">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">Reseñas</span>
+        <h2 class="section-title">Lo que Dicen Nuestros Huéspedes</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="testimonios-grid" id="testimonios-grid"></div>
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <section class="section mapa-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">Ubicación</span>
+        <h2 class="section-title">Cómo Llegar</h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">Sector Los Pinos, Monteverde, Puntarenas, Costa Rica. A 3 horas de San José.</p>
+      </div>
+      <div class="mapa-wrapper reveal">
+        <div class="mapa-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <h3>Monteverde, Costa Rica</h3>
+          <p>Sector Los Pinos, a 3 horas de San José por la Ruta 1.<br>Ofrecemos servicio de traslado desde el aeropuerto.</p>
+          <a href="https://maps.google.com/maps?q=Monteverde+Costa+Rica" target="_blank" class="btn btn-accent">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Abrir en Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ RÁPIDA -->
+  <section class="section" style="background:var(--white)">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">FAQ</span>
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <div class="divider"></div>
+      </div>
+      <div id="faq-home" style="max-width:760px; margin:0 auto"></div>
+      <div class="text-center mt-4">
+        <a href="/faq" class="btn btn-outline-primary">Ver todas las preguntas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="reveal">
+          <h3 style="color:white; margin-bottom:0.5rem">Recibe Ofertas Exclusivas</h3>
+          <p style="color:rgba(255,255,255,0.7); font-size:0.9rem">Suscríbete y recibe descuentos de temporada directamente en tu correo.</p>
+        </div>
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" placeholder="Tu correo electrónico" required>
+          <button type="submit" class="btn btn-accent">Suscribirse</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            🌲 Cabañas <span>Los Pinos</span>
+          </div>
+          <p class="footer-desc">Un refugio de paz en el bosque nuboso de Monteverde. Tres cabañas exclusivas para quienes buscan la perfecta armonía entre lujo y naturaleza.</p>
+          <div class="footer-social">
+            <a href="https://instagram.com/cabanaslospinos" target="_blank" title="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://facebook.com/cabanaslospinos" target="_blank" title="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://wa.me/50688888888" target="_blank" title="WhatsApp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="/">🏠 Inicio</a></li>
+            <li><a href="/cabanas">🏕️ Cabañas</a></li>
+            <li><a href="/galeria">📸 Galería</a></li>
+            <li><a href="/reservar">📅 Reservar</a></li>
+            <li><a href="/faq">❓ FAQ</a></li>
+            <li><a href="/contacto">✉️ Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/politicas">Políticas</a></li>
+            <li><a href="/politicas#cancelacion">Cancelación</a></li>
+            <li><a href="/politicas#privacidad">Privacidad</a></li>
+            <li><a href="/politicas#terminos">Términos</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Sector Los Pinos, Monteverde, Puntarenas, CR
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            +506 2222-3333
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@cabanaslospinos.com
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Cabañas Los Pinos. Todos los derechos reservados.</p>
+        <p>Diseñado con ♥ en Costa Rica</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scroll-top" title="Volver arriba">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="/js/main.js"></script>
+  <script>
+    /* ── Cargar cabañas en el home ─────────────────────────── */
+    async function loadHomeCabanas() {
+      try {
+        const res = await API.get('/api/cabanas');
+        if (!res.success) return;
+
+        const container = document.getElementById('cabanas-home');
+        container.innerHTML = res.data.map(c => `
+          <div class="cabana-card reveal">
+            <div class="cabana-card-img">
+              <img
+                src="${c.imagen_principal || 'https://images.unsplash.com/photo-1551806235-a86f80dce5e4?w=600&q=80'}"
+                alt="${c.nombre}"
+                loading="lazy"
+                onerror="this.src='https://images.unsplash.com/photo-1551806235-a86f80dce5e4?w=600&q=80'"
+              >
+              <span class="cabana-badge">Desde $${c.precio_desde || 50}/noche</span>
+              ${c.tiene_piscina ? '<span class="cabana-badge-piscina"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 12c2-2 4-2 5 0s3 2 5 0 3 2 5 0M4 17c2-2 4-2 5 0s3 2 5 0 3 2 5 0M4 7c2-2 4-2 5 0s3 2 5 0 3 2 5 0"/></svg> Piscina</span>' : ''}
+            </div>
+            <div class="cabana-card-body">
+              <h3 class="cabana-card-title">${c.nombre}</h3>
+              <p class="cabana-card-desc">${c.descripcion_corta || c.descripcion}</p>
+              <div class="cabana-features">
+                <span class="cabana-feature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                  ${c.num_habitaciones} hab.
+                </span>
+                <span class="cabana-feature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                  Max. ${c.capacidad_max} personas
+                </span>
+                ${c.tiene_piscina ? `<span class="cabana-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20"/></svg> Piscina privada</span>` : ''}
+              </div>
+              <div class="cabana-card-footer">
+                <div class="cabana-precio">
+                  <span>Desde</span>
+                  <span class="price">$${c.precio_desde || 50} <small class="price-unit">/noche</small></span>
+                </div>
+                <div style="display:flex; gap:0.5rem; align-items:center">
+                  ${c.calificacion_promedio ? `<div class="cabana-rating"><span class="stars">${'★'.repeat(Math.round(c.calificacion_promedio))}</span> ${parseFloat(c.calificacion_promedio).toFixed(1)}</div>` : ''}
+                  <a href="/cabanas/${c.id}" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        // Re-inicializar reveal
+        initReveal();
+      } catch (err) {
+        console.error('Error cargando cabañas:', err);
+      }
+    }
+
+    /* ── Cargar galería en home ─────────────────────────────── */
+    async function loadHomeGallery() {
+      try {
+        const res = await API.get('/api/galeria?limit=8');
+        if (!res.success) return;
+
+        const fallbackImgs = [
+          'https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=600&q=80',
+          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
+          'https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=600&q=80',
+          'https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=600&q=80',
+          'https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?w=600&q=80',
+          'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80',
+          'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80',
+          'https://images.unsplash.com/photo-1551806235-a86f80dce5e4?w=600&q=80',
+        ];
+
+        const items = res.data.slice(0, 8);
+        const container = document.getElementById('home-gallery');
+
+        const itemsToShow = items.length >= 4 ? items : fallbackImgs.slice(0, 8).map((u, i) => ({
+          url_imagen: u, titulo: 'Los Pinos', descripcion: ''
+        }));
+
+        container.innerHTML = itemsToShow.map((g, i) => `
+          <div class="gallery-item reveal delay-${(i % 4) + 1}" data-lightbox
+               data-src="${g.url_imagen || fallbackImgs[i]}"
+               data-title="${g.titulo || ''}">
+            <img
+              src="${g.url_imagen || fallbackImgs[i]}"
+              alt="${g.titulo || 'Galería'}"
+              loading="lazy"
+              onerror="this.src='${fallbackImgs[i % fallbackImgs.length]}'"
+            >
+            <div class="gallery-item-overlay">
+              <span class="gallery-item-title">${g.titulo || ''}</span>
+            </div>
+          </div>
+        `).join('');
+
+        initReveal();
+        initLightbox();
+      } catch (err) {
+        console.error('Error cargando galería:', err);
+      }
+    }
+
+    /* ── Cargar comentarios/testimonios ─────────────────────── */
+    async function loadTestimonios() {
+      try {
+        const res = await API.get('/api/comentarios/0'); // 0 = todos sin filtrar
+        const container = document.getElementById('testimonios-grid');
+
+        // Testimonios ficticios fijos + dinámicos
+        const fijos = [
+          { calificacion:5, nombre_publico:'María González', comentario:'Experiencia increíble. La cabaña estaba limpia, el entorno es mágico. Definitivamente regresaremos.', cabana:'Cabaña El Roble' },
+          { calificacion:5, nombre_publico:'Carlos Rodríguez', comentario:'Villa Esmeralda superó todas nuestras expectativas. La piscina privada en medio del bosque es simplemente espectacular.', cabana:'Villa Esmeralda' },
+          { calificacion:4, nombre_publico:'Ana Martínez', comentario:'Muy buena estadía. Las cabañas son cómodas y el personal muy atento. Recomendado para familias.', cabana:'Cabaña Los Pinos' },
+          { calificacion:5, nombre_publico:'Roberto Pérez', comentario:'Lugar perfecto para desconectarse. Silencio absoluto, naturaleza pura y una cabaña acogedora. 10/10.', cabana:'Cabaña El Roble' },
+          { calificacion:5, nombre_publico:'Pareja Díaz', comentario:'Celebramos nuestro aniversario en Villa Esmeralda y fue el viaje más romántico de nuestra vida.', cabana:'Villa Esmeralda' },
+          { calificacion:4, nombre_publico:'Familia Vargas', comentario:'Llegamos con los niños y todo estuvo perfecto. Los senderos cercanos son ideales para caminatas.', cabana:'Cabaña Los Pinos' },
+        ];
+
+        container.innerHTML = fijos.map(t => `
+          <div class="testimonio-card reveal">
+            <div class="stars">${'★'.repeat(t.calificacion)}${'☆'.repeat(5-t.calificacion)}</div>
+            <p class="testimonio-text">"${t.comentario}"</p>
+            <div class="testimonio-author">
+              <div class="testimonio-avatar">${t.nombre_publico[0]}</div>
+              <div class="testimonio-info">
+                <strong>${t.nombre_publico}</strong>
+                <span>${t.cabana}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        initReveal();
+      } catch (err) {}
+    }
+
+    /* ── Cargar FAQs en home ────────────────────────────────── */
+    async function loadHomeFaqs() {
+      try {
+        const res = await API.get('/api/faqs');
+        if (!res.success) return;
+
+        const container = document.getElementById('faq-home');
+        const faqs = res.data.slice(0, 5);
+
+        container.innerHTML = faqs.map((f, i) => `
+          <div style="border:1px solid var(--border); border-radius:var(--radius); margin-bottom:0.75rem; overflow:hidden;" class="reveal">
+            <button onclick="toggleFaq(this)" style="width:100%; text-align:left; padding:1.1rem 1.5rem; display:flex; justify-content:space-between; align-items:center; background:var(--white); font-weight:600; font-size:0.95rem; color:var(--text); gap:1rem; cursor:pointer;">
+              ${f.pregunta}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="faq-icon" style="flex-shrink:0; transition:transform 0.3s"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease">
+              <p style="padding:1rem 1.5rem 1.25rem; color:var(--text-muted); margin:0">${f.respuesta}</p>
+            </div>
+          </div>
+        `).join('');
+        initReveal();
+      } catch (err) {}
+    }
+
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
+
+      // Cerrar todos
+      document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = '0');
+      document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+
+      if (!isOpen) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    /* ── Newsletter ─────────────────────────────────────────── */
+    document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      Toast.success('¡Gracias! Te contactaremos con nuestras mejores ofertas.', '¡Suscrito!');
+      e.target.reset();
+    });
+
+    /* ── Logout ─────────────────────────────────────────────── */
+    document.getElementById('nav-logout').addEventListener('click', (e) => {
+      e.preventDefault();
+      Auth.logout();
+    });
+
+    /* ── Inicializar todo ─────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', () => {
+      loadHomeCabanas();
+      loadHomeGallery();
+      loadTestimonios();
+      loadHomeFaqs();
+    });
+  </script>
+</body>
+</html>

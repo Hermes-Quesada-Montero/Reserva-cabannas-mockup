@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Cabañas Los Pinos//Reservación//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:RES-2026-45077@cabanaslospinos.com
+DTSTAMP:20260705T214908Z
+DTSTART;TZID=America/Costa_Rica:20260707T130000
+DTEND;TZID=America/Costa_Rica:20260709T120000
+SUMMARY:Reservación: Cabaña El Roble
+DESCRIPTION:Reservación RES-2026-45077\nCabaña: Cabaña El Roble\nHuéspedes: 1 adulto(s)\nTotal: $100\nCheck-in: 1:00 PM\nCheck-out: 12:00 PM
+LOCATION:Sector Los Pinos\, Monteverde\, Puntarenas\, Costa Rica
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-PT24H
+ACTION:DISPLAY
+DESCRIPTION:Recordatorio: Check-in mañana a la 1:00 PM
+END:VALARM
+END:VEVENT
+END:VCALENDAR

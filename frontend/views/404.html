@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página no encontrada | Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    body { margin:0; font-family:'Lato',sans-serif; background:#f8f9fa; }
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .error-code {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-weight: 700;
+      color: #2D5016;
+      line-height: 1;
+      opacity: .15;
+      position: absolute;
+    }
+    .error-content { position: relative; z-index: 1; }
+    .tree-svg { margin-bottom: 2rem; }
+    .error-title { font-family:'Playfair Display',serif; font-size:2rem; color:#1a1a1a; margin-bottom:.75rem; }
+    .error-desc { color:#6b7280; font-size:1rem; max-width:400px; line-height:1.7; margin-bottom:2rem; }
+    .error-actions { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+    .btn-home { background:#2D5016; color:white; padding:.75rem 1.75rem; border-radius:8px; text-decoration:none; font-weight:700; }
+    .btn-back { background:white; color:#2D5016; border:2px solid #2D5016; padding:.75rem 1.75rem; border-radius:8px; text-decoration:none; font-weight:700; }
+    .quick-links { margin-top:3rem; padding-top:2rem; border-top:1px solid #e5e7eb; }
+    .quick-links h3 { font-size:.875rem; text-transform:uppercase; letter-spacing:1px; color:#9ca3af; margin-bottom:1rem; }
+    .quick-links ul { list-style:none; padding:0; display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center; }
+    .quick-links a { color:#2D5016; text-decoration:none; font-size:.875rem; font-weight:600; }
+    .quick-links a:hover { text-decoration:underline; }
+  </style>
+</head>
+<body>
+  <div class="error-page">
+    <span class="error-code">404</span>
+    <div class="error-content">
+      <!-- Árbol decorativo SVG -->
+      <div class="tree-svg">
+        <svg width="80" height="80" viewBox="0 0 40 40" fill="#2D5016">
+          <path d="M20 4 L36 30 L4 30 Z" opacity="0.7"/>
+          <rect x="17" y="30" width="6" height="8" rx="1" opacity="0.9"/>
+        </svg>
+      </div>
+
+      <h1 class="error-title">Página no encontrada</h1>
+      <p class="error-desc">
+        Parece que te perdiste en el bosque. La página que buscas no existe o fue movida a otro lugar.
+      </p>
+
+      <div class="error-actions">
+        <a href="/" class="btn-home">Ir al inicio</a>
+        <a href="javascript:history.back()" class="btn-back">Volver</a>
+      </div>
+
+      <div class="quick-links">
+        <h3>¿Qué buscabas?</h3>
+        <ul>
+          <li><a href="/cabanas">Ver Cabañas</a></li>
+          <li><a href="/reservar">Hacer una Reserva</a></li>
+          <li><a href="/galeria">Galería</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/faq">Preguntas Frecuentes</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

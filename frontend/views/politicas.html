@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Políticas | Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="currentColor"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+        Cabañas <span>Los Pinos</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/cabanas">Cabañas</a></li>
+        <li><a href="/galeria">Galería</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="/reservar" class="btn-reservar">Reservar</a>
+        <div id="nav-user-area"></div>
+      </div>
+      <button class="nav-toggle" id="nav-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero simple -->
+  <section style="background:linear-gradient(135deg,#1a3009 0%,#2D5016 60%,#3d6b1e 100%); padding:6rem 2rem 4rem; text-align:center; color:white">
+    <div style="max-width:700px; margin:0 auto">
+      <div style="font-size:.8rem; text-transform:uppercase; letter-spacing:3px; color:var(--accent); margin-bottom:1rem">Transparencia & Confianza</div>
+      <h1 style="font-family:'Playfair Display',serif; font-size:2.5rem; margin-bottom:1rem">Políticas del Establecimiento</h1>
+      <p style="font-size:1.1rem; opacity:.85; line-height:1.7">Todo lo que necesitas saber antes de hacer tu reservación. Tu tranquilidad es nuestra prioridad.</p>
+    </div>
+  </section>
+
+  <!-- Contenido de políticas -->
+  <section style="max-width:900px; margin:0 auto; padding:4rem 2rem">
+    <div id="politicas-container">
+      <!-- Cargado dinámicamente -->
+      <div style="text-align:center; padding:3rem; color:#9ca3af">Cargando políticas...</div>
+    </div>
+
+    <!-- Políticas estáticas de respaldo si no hay dinámicas -->
+    <div id="politicas-estaticas" style="display:none">
+
+      <div class="politica-section" style="margin-bottom:3rem">
+        <h2 style="font-family:'Playfair Display',serif; color:#2D5016; font-size:1.5rem; margin-bottom:1rem; display:flex; align-items:center; gap:.75rem">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#C8A951"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Horarios de Check-in y Check-out
+        </h2>
+        <div style="background:#f9fafb; border-radius:12px; padding:1.5rem; border-left:4px solid #C8A951">
+          <p style="margin-bottom:.75rem"><strong>Entrada (check-in):</strong> A partir de la 1:00 PM</p>
+          <p style="margin-bottom:.75rem"><strong>Salida (check-out):</strong> Antes de las 12:00 PM (mediodía)</p>
+          <p style="color:#6b7280; font-size:.9rem">Check-in o check-out fuera de horario puede tener un cargo adicional. Consúltenos con anticipación.</p>
+        </div>
+      </div>
+
+      <div class="politica-section" style="margin-bottom:3rem">
+        <h2 style="font-family:'Playfair Display',serif; color:#2D5016; font-size:1.5rem; margin-bottom:1rem; display:flex; align-items:center; gap:.75rem">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#C8A951"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Política de Cancelación
+        </h2>
+        <div style="background:#f9fafb; border-radius:12px; padding:1.5rem; border-left:4px solid #C8A951">
+          <ul style="list-style:none; padding:0">
+            <li style="padding:.5rem 0; border-bottom:1px solid #e5e7eb; display:flex; gap:.75rem"><span style="color:#15803d">✓</span> <span><strong>Cancelación gratuita</strong> hasta 7 días antes del check-in</span></li>
+            <li style="padding:.5rem 0; border-bottom:1px solid #e5e7eb; display:flex; gap:.75rem"><span style="color:#f59e0b">⚠</span> <span><strong>50% de penalización</strong> si se cancela entre 3 y 7 días antes</span></li>
+            <li style="padding:.5rem 0; display:flex; gap:.75rem"><span style="color:#dc2626">✗</span> <span><strong>Sin reembolso</strong> si se cancela con menos de 3 días de anticipación o no se presenta</span></li>
+          </ul>
+          <p style="margin-top:1rem; color:#6b7280; font-size:.9rem">Todas las cancelaciones deben realizarse por escrito al correo electrónico o WhatsApp.</p>
+        </div>
+      </div>
+
+      <div class="politica-section" style="margin-bottom:3rem">
+        <h2 style="font-family:'Playfair Display',serif; color:#2D5016; font-size:1.5rem; margin-bottom:1rem; display:flex; align-items:center; gap:.75rem">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#C8A951"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><line x1="16" y1="21" x2="16" y2="7"/><line x1="8" y1="21" x2="8" y2="7"/></svg>
+          Métodos de Pago
+        </h2>
+        <div style="background:#f9fafb; border-radius:12px; padding:1.5rem; border-left:4px solid #C8A951">
+          <ul style="list-style:none; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:.75rem">
+            <li style="display:flex; align-items:center; gap:.5rem"><span style="width:32px; height:32px; background:#2D5016; border-radius:8px; display:flex; align-items:center; justify-content:center; color:white; font-size:.8rem">💳</span> Tarjeta de crédito/débito (Stripe)</li>
+            <li style="display:flex; align-items:center; gap:.5rem"><span style="width:32px; height:32px; background:#2D5016; border-radius:8px; display:flex; align-items:center; justify-content:center; color:white; font-size:.8rem">📱</span> SINPE Móvil</li>
+            <li style="display:flex; align-items:center; gap:.5rem"><span style="width:32px; height:32px; background:#2D5016; border-radius:8px; display:flex; align-items:center; justify-content:center; color:white; font-size:.8rem">🏠</span> Pago al llegar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="politica-section" style="margin-bottom:3rem">
+        <h2 style="font-family:'Playfair Display',serif; color:#2D5016; font-size:1.5rem; margin-bottom:1rem; display:flex; align-items:center; gap:.75rem">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#C8A951"><circle cx="12" cy="12" r="10"/><line x1="4.22" y1="4.22" x2="19.78" y2="19.78"/></svg>
+          Normas de Convivencia
+        </h2>
+        <div style="background:#f9fafb; border-radius:12px; padding:1.5rem; border-left:4px solid #C8A951">
+          <ul style="padding-left:1.25rem; line-height:2">
+            <li>Respetar el horario de silencio (10:00 PM – 7:00 AM)</li>
+            <li>Prohibido fumar dentro de las instalaciones</li>
+            <li>Mascotas bajo consulta previa y con cargo adicional</li>
+            <li>No se permiten fiestas o eventos sin autorización previa</li>
+            <li>Uso responsable de las instalaciones y equipamiento</li>
+            <li>Cualquier daño será cobrado al responsable de la reservación</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="politica-section" style="margin-bottom:3rem">
+        <h2 style="font-family:'Playfair Display',serif; color:#2D5016; font-size:1.5rem; margin-bottom:1rem; display:flex; align-items:center; gap:.75rem">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#C8A951"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Menores de Edad
+        </h2>
+        <div style="background:#fffbeb; border-radius:12px; padding:1.5rem; border-left:4px solid #C8A951">
+          <p style="margin-bottom:.75rem"><strong>Los menores de 10 años no generan costo adicional.</strong></p>
+          <p>Sin embargo, por medidas de seguridad, <strong>todos los huéspedes deben registrarse</strong>, incluyendo los menores. Se solicitará: nombre, fecha de nacimiento, edad, nacionalidad y relación con el titular.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align:center; margin-top:3rem; padding:2.5rem; background:#f0f4f0; border-radius:16px">
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; color:#2D5016; margin-bottom:.75rem">¿Tienes alguna pregunta?</h3>
+      <p style="color:#6b7280; margin-bottom:1.5rem">Nuestro equipo está disponible para aclarar cualquier duda antes de tu reservación.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap">
+        <a href="/contacto" class="btn-primary">Contáctanos</a>
+        <a href="/faq" class="btn-outline">Ver FAQ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+          Cabañas Los Pinos
+        </div>
+        <p>Tu refugio en la naturaleza, donde cada momento se convierte en un recuerdo.</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/cabanas">Cabañas</a></li>
+          <li><a href="/galeria">Galería</a></li>
+          <li><a href="/politicas">Políticas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="/politicas">Políticas de cancelación</a></li>
+          <li><a href="/politicas">Política de privacidad</a></li>
+          <li><a href="/faq">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Cabañas Los Pinos. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Cargar políticas dinámicas desde el API
+    async function loadPoliticas() {
+      try {
+        const res = await fetch('/api/politicas');
+        const data = await res.json();
+        const lista = data.data || [];
+
+        if (!lista.length) {
+          document.getElementById('politicas-container').innerHTML = '';
+          document.getElementById('politicas-estaticas').style.display = 'block';
+          return;
+        }
+
+        document.getElementById('politicas-container').innerHTML = lista.map(p => `
+          <div style="margin-bottom:3rem">
+            <h2 style="font-family:'Playfair Display',serif; color:#2D5016; font-size:1.5rem; margin-bottom:1rem; display:flex; align-items:center; gap:.75rem">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#C8A951; flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              ${p.titulo}
+            </h2>
+            <div style="background:#f9fafb; border-radius:12px; padding:1.5rem; border-left:4px solid #C8A951; line-height:1.8; color:#374151">
+              ${p.contenido}
+            </div>
+          </div>
+        `).join('');
+      } catch(e) {
+        document.getElementById('politicas-container').innerHTML = '';
+        document.getElementById('politicas-estaticas').style.display = 'block';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPoliticas();
+      initNavbar();
+    });
+  </script>
+</body>
+</html>

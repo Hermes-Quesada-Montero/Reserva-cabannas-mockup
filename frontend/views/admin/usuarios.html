@@ -1,0 +1,410 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+      Cabañas <span>Los Pinos</span>
+    </div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Mensajes</a>
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galería</a>
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Usuarios / Clientes</a>
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>FAQs</a>
+      <a href="/admin/contacto" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Contacto</a>
+      <a href="/admin/configuracion" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Configuración</a>
+      <div style="padding:1rem 1.25rem; margin-top:auto">
+        <a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,0.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Usuarios y Clientes
+      </div>
+      <div style="display:flex; align-items:center; gap:0.75rem">
+        <span style="font-size:0.875rem; color:#6b7280">👤 <span id="admin-name">Admin</span></span>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- Stats -->
+      <div class="stats-4" style="margin-bottom:1.5rem">
+        <div class="stat-box">
+          <div class="stat-icon" style="background:#dbeafe"><svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="width:22px;height:22px"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div><div class="stat-val" id="stat-total">—</div><div class="stat-lbl">Total clientes</div></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon" style="background:#dcfce7"><svg viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" style="width:22px;height:22px"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div><div class="stat-val" id="stat-activos">—</div><div class="stat-lbl">Activos</div></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon" style="background:#fef9c3"><svg viewBox="0 0 24 24" fill="none" stroke="#854d0e" stroke-width="2" style="width:22px;height:22px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg></div>
+          <div><div class="stat-val" id="stat-reservas">—</div><div class="stat-lbl">Con reservas</div></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon" style="background:#ede9fe"><svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" style="width:22px;height:22px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><div class="stat-val" id="stat-nuevos">—</div><div class="stat-lbl">Nuevos este mes</div></div>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="admin-card" style="padding:1.25rem">
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center">
+          <div class="admin-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="buscar" placeholder="Buscar por nombre, email o teléfono...">
+          </div>
+          <select class="admin-input" id="filtro-estado" style="width:auto">
+            <option value="">Todos los estados</option>
+            <option value="activo">Activos</option>
+            <option value="inactivo">Inactivos</option>
+          </select>
+          <span id="total-count" style="font-size:0.85rem; color:#6b7280; margin-left:auto"></span>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <div class="admin-card" style="padding:0">
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Nacionalidad</th>
+                <th>Registro</th>
+                <th>Reservas</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="usuarios-tbody">
+              <tr><td colspan="8" style="text-align:center; padding:2rem; color:#9ca3af">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:1rem 1.5rem; border-top:1px solid var(--admin-border)">
+          <div id="pagination" class="admin-pagination"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Ver/Editar usuario -->
+<div class="admin-modal-overlay" id="modal-usuario">
+  <div class="admin-modal" style="max-width:650px">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title" id="modal-title">Detalle del Cliente</div>
+      <button id="btn-cerrar-x" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:#6b7280">×</button>
+    </div>
+    <div class="admin-modal-body">
+      <input type="hidden" id="user-id">
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Nombre completo *</label>
+          <input type="text" class="admin-input" id="user-nombre">
+        </div>
+        <div class="admin-form-group">
+          <label>Número de identificación</label>
+          <input type="text" class="admin-input" id="user-identificacion">
+        </div>
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Correo electrónico</label>
+          <input type="email" class="admin-input" id="user-email">
+        </div>
+        <div class="admin-form-group">
+          <label>Teléfono</label>
+          <input type="text" class="admin-input" id="user-telefono">
+        </div>
+      </div>
+      <div class="admin-form-3">
+        <div class="admin-form-group">
+          <label>Fecha de nacimiento</label>
+          <input type="date" class="admin-input" id="user-nacimiento">
+        </div>
+        <div class="admin-form-group">
+          <label>Sexo</label>
+          <select class="admin-input" id="user-sexo">
+            <option value="">Sin especificar</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="O">Otro</option>
+          </select>
+        </div>
+        <div class="admin-form-group">
+          <label>Nacionalidad</label>
+          <input type="text" class="admin-input" id="user-nacionalidad">
+        </div>
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Estado</label>
+          <select class="admin-input" id="user-estado">
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </select>
+        </div>
+        <div class="admin-form-group">
+          <label>Nueva contraseña (opcional)</label>
+          <input type="password" class="admin-input" id="user-password" placeholder="Dejar vacío para no cambiar">
+        </div>
+      </div>
+      <!-- Historial de reservas del cliente -->
+      <div id="user-reservas-section" style="margin-top:1rem; display:none">
+        <hr style="margin-bottom:1rem; border-color:var(--admin-border)">
+        <h4 style="font-size:0.875rem; font-weight:700; color:var(--primary); margin-bottom:0.75rem">Historial de Reservas</h4>
+        <div id="user-reservas-list"></div>
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="btn-admin btn-admin-outline" id="btn-cancelar">Cancelar</button>
+      <button class="btn-admin btn-admin-primary" id="btn-guardar">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast-container" id="toast-container"></div>
+
+<script src="/js/admin.js"></script>
+<script>
+(function () {
+  var currentPage = 1;
+  var perPage = 15;
+  var debounceTimer;
+
+  /* ── helpers globales para onclick en HTML generado ── */
+  window.verUsuario     = verUsuario;
+  window.toggleEstado   = toggleEstado;
+  window.cerrarModal    = cerrarModal;
+  window.guardarUsuario = guardarUsuario;
+  window.loadUsuarios   = loadUsuarios;
+
+  /* ── event listeners — el script está al final del body, el DOM ya está listo ── */
+  document.getElementById('buscar').addEventListener('input', function () {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function () { loadUsuarios(1); }, 400);
+  });
+  document.getElementById('filtro-estado').addEventListener('change', function () {
+    loadUsuarios(1);
+  });
+  document.getElementById('btn-cerrar-x').addEventListener('click', cerrarModal);
+  document.getElementById('btn-cancelar').addEventListener('click', cerrarModal);
+  document.getElementById('btn-guardar').addEventListener('click', guardarUsuario);
+  document.getElementById('modal-usuario').addEventListener('click', function (e) {
+    if (e.target === this) cerrarModal();
+  });
+  /* delegación en tbody — se registra una sola vez */
+  document.getElementById('usuarios-tbody').addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    var id     = btn.getAttribute('data-id');
+    var action = btn.getAttribute('data-action');
+    if (action === 'ver')    verUsuario(id);
+    if (action === 'toggle') toggleEstado(id, btn.getAttribute('data-estado'));
+  });
+  /* delegación en paginación */
+  document.getElementById('pagination').addEventListener('click', function (e) {
+    var sp = e.target.closest('.page-item');
+    if (!sp || sp.classList.contains('disabled') || sp.classList.contains('active')) return;
+    loadUsuarios(parseInt(sp.getAttribute('data-pg')));
+  });
+
+  adminReady(function () { loadUsuarios(1); });
+
+  /* ──────────────────────────────────────────────────── */
+
+  async function loadUsuarios(page) {
+    page = page || 1;
+    currentPage = page;
+    var buscar = document.getElementById('buscar').value.trim();
+    var estado = document.getElementById('filtro-estado').value;
+    var url = '/api/admin/clientes?page=' + page + '&per_page=' + perPage;
+    if (buscar) url += '&q=' + encodeURIComponent(buscar);
+    if (estado) url += '&estado=' + estado;
+
+    try {
+      var res = await adminFetch(url);
+      if (!res || !res.success) throw new Error((res && res.message) || 'Error del servidor');
+      var data  = res.data  || [];
+      var total = res.total || 0;
+      var stats = res.stats || {};
+
+      document.getElementById('total-count').textContent = total + ' cliente(s)';
+      document.getElementById('stat-total').textContent    = (stats.total    != null) ? stats.total    : total;
+      document.getElementById('stat-activos').textContent  = (stats.activos  != null) ? stats.activos  : '—';
+      document.getElementById('stat-reservas').textContent = (stats.con_reservas != null) ? stats.con_reservas : '—';
+      document.getElementById('stat-nuevos').textContent   = (stats.nuevos_mes  != null) ? stats.nuevos_mes   : '—';
+
+      renderTabla(data);
+      renderPagination(total, page);
+    } catch (e) {
+      console.error('loadUsuarios:', e);
+      showToast('Error al cargar clientes: ' + e.message, 'error');
+    }
+  }
+
+  function renderTabla(list) {
+    var tbody = document.getElementById('usuarios-tbody');
+    if (!list.length) {
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;color:#9ca3af">No hay clientes registrados</td></tr>';
+      return;
+    }
+    tbody.innerHTML = list.map(function (u) {
+      var nombre   = u.nombre_completo || u.nombre || '—';
+      var inicial  = (nombre[0] || '?').toUpperCase();
+      var estado   = u.estado || 'activo';
+      var badgeCls = estado === 'activo' ? 'badge-green' : 'badge-gray';
+      var btnText  = estado === 'activo' ? 'Suspender' : 'Activar';
+      return '<tr>' +
+        '<td><div style="display:flex;align-items:center;gap:.75rem">' +
+          '<div style="width:36px;height:36px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.875rem;flex-shrink:0">' + inicial + '</div>' +
+          '<div><div style="font-weight:600;font-size:.875rem">' + nombre + '</div>' +
+               '<div style="font-size:.75rem;color:#6b7280">' + (u.username || '') + '</div></div>' +
+        '</div></td>' +
+        '<td style="font-size:.875rem">' + (u.email || '—') + '</td>' +
+        '<td style="font-size:.875rem">' + (u.telefono || '—') + '</td>' +
+        '<td style="font-size:.875rem">' + (u.nacionalidad || '—') + '</td>' +
+        '<td style="font-size:.8rem;color:#6b7280">' + formatDate(u.created_at) + '</td>' +
+        '<td><span class="badge-admin badge-blue">' + (u.total_reservas || 0) + '</span></td>' +
+        '<td><span class="badge-admin ' + badgeCls + '">' + estado + '</span></td>' +
+        '<td><div class="tbl-actions">' +
+          '<button class="btn-admin btn-admin-outline btn-admin-sm" data-id="' + u.id + '" data-action="ver">Ver / Editar</button>' +
+          '<button class="btn-admin btn-admin-danger btn-admin-sm" data-id="' + u.id + '" data-estado="' + estado + '" data-action="toggle">' + btnText + '</button>' +
+        '</div></td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  function renderPagination(total, page) {
+    var pages = Math.ceil(total / perPage);
+    var pg = document.getElementById('pagination');
+    if (pages <= 1) { pg.innerHTML = ''; return; }
+    var html = '';
+    html += '<span class="page-item' + (page === 1 ? ' disabled' : '') + '" data-pg="' + (page - 1) + '">‹</span>';
+    for (var i = 1; i <= pages; i++) {
+      html += '<span class="page-item' + (i === page ? ' active' : '') + '" data-pg="' + i + '">' + i + '</span>';
+    }
+    html += '<span class="page-item' + (page === pages ? ' disabled' : '') + '" data-pg="' + (page + 1) + '">›</span>';
+    pg.innerHTML = html;
+  }
+
+  async function verUsuario(id) {
+    try {
+      var res = await adminFetch('/api/admin/clientes/' + id);
+      if (!res || !res.success) throw new Error((res && res.message) || 'No encontrado');
+      var u = res.data;
+      document.getElementById('modal-title').textContent        = 'Editar Cliente: ' + (u.nombre_completo || u.nombre || '');
+      document.getElementById('user-id').value                  = u.id;
+      document.getElementById('user-nombre').value              = u.nombre_completo || u.nombre || '';
+      document.getElementById('user-identificacion').value      = u.num_identificacion || '';
+      document.getElementById('user-email').value               = u.email || '';
+      document.getElementById('user-telefono').value            = u.telefono || '';
+      document.getElementById('user-nacimiento').value          = u.fecha_nacimiento ? u.fecha_nacimiento.split('T')[0] : '';
+      document.getElementById('user-sexo').value                = u.sexo || '';
+      document.getElementById('user-nacionalidad').value        = u.nacionalidad || '';
+      document.getElementById('user-estado').value              = u.estado || 'activo';
+      document.getElementById('user-password').value            = '';
+
+      var seccion = document.getElementById('user-reservas-section');
+      var lista   = document.getElementById('user-reservas-list');
+      if (u.reservas && u.reservas.length) {
+        seccion.style.display = 'block';
+        lista.innerHTML = u.reservas.map(function (r) {
+          var cls = r.estado === 'confirmada' ? 'badge-green' : r.estado === 'cancelada' ? 'badge-red' : 'badge-yellow';
+          return '<div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--admin-border);font-size:.8rem">' +
+            '<span><strong>' + r.numero_reserva + '</strong> — ' + r.cabana_nombre + '</span>' +
+            '<span>' + formatDate(r.fecha_entrada) + ' → ' + formatDate(r.fecha_salida) + '</span>' +
+            '<span class="badge-admin ' + cls + '">' + r.estado + '</span>' +
+            '</div>';
+        }).join('');
+      } else {
+        seccion.style.display = 'none';
+      }
+      document.getElementById('modal-usuario').classList.add('show');
+    } catch (e) {
+      showToast('Error al cargar datos del cliente', 'error');
+    }
+  }
+
+  function cerrarModal() {
+    document.getElementById('modal-usuario').classList.remove('show');
+  }
+
+  async function guardarUsuario() {
+    var id       = document.getElementById('user-id').value;
+    var nombreVal = document.getElementById('user-nombre').value.trim();
+    if (!nombreVal) { showToast('El nombre es obligatorio', 'error'); return; }
+    var payload = {
+      nombre_completo:    nombreVal,
+      num_identificacion: document.getElementById('user-identificacion').value.trim(),
+      email:              document.getElementById('user-email').value.trim(),
+      telefono:           document.getElementById('user-telefono').value.trim(),
+      fecha_nacimiento:   document.getElementById('user-nacimiento').value || null,
+      sexo:               document.getElementById('user-sexo').value || null,
+      nacionalidad:       document.getElementById('user-nacionalidad').value.trim(),
+      estado:             document.getElementById('user-estado').value
+    };
+    var pwd = document.getElementById('user-password').value.trim();
+    if (pwd) payload.password = pwd;
+    try {
+      var res = await adminFetch('/api/admin/clientes/' + id, 'PUT', payload);
+      if (!res || !res.success) throw new Error((res && res.message) || 'Error al guardar');
+      showToast('Cliente actualizado correctamente', 'success');
+      cerrarModal();
+      loadUsuarios(currentPage);
+    } catch (e) {
+      showToast(e.message || 'Error al guardar', 'error');
+    }
+  }
+
+  async function toggleEstado(id, estadoActual) {
+    var nuevo = estadoActual === 'activo' ? 'inactivo' : 'activo';
+    var accion = nuevo === 'inactivo' ? 'suspender' : 'activar';
+    if (!confirm('¿Deseas ' + accion + ' este cliente?')) return;
+    try {
+      var res = await adminFetch('/api/admin/clientes/' + id, 'PUT', { estado: nuevo });
+      if (!res || !res.success) throw new Error((res && res.message) || 'Error al actualizar estado');
+      showToast('Cliente ' + (nuevo === 'activo' ? 'activado' : 'suspendido'), 'success');
+      loadUsuarios(currentPage);
+    } catch (e) {
+      showToast(e.message || 'Error al actualizar estado', 'error');
+    }
+  }
+
+  function formatDate(str) {
+    if (!str) return '—';
+    return new Date(str).toLocaleDateString('es-CR', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+}());
+</script>
+</body>
+</html>

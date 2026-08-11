@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banners | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+      Cabañas <span>Los Pinos</span>
+    </div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Mensajes</a>
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>Galería</a>
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios / Clientes</a>
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>FAQs</a>
+      <a href="/admin/contacto" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Contacto</a>
+      <a href="/admin/configuracion" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Configuración</a>
+      <div style="padding:1rem 1.25rem; margin-top:auto">
+        <a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,0.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8"/></svg>
+        Banners del Hero
+      </div>
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <span style="font-size:.875rem;color:#6b7280">👤 <span id="admin-name">Admin</span></span>
+        <button class="btn-admin btn-admin-primary" onclick="abrirModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nuevo Banner
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <div class="admin-card" style="background:#fffbeb;border-color:#fcd34d;padding:1rem 1.25rem;margin-bottom:1.25rem">
+        <p style="font-size:.875rem;color:#92400e">
+          <strong>ℹ️ Nota:</strong> Los banners aparecen en la sección hero de la página principal. El primer banner activo se muestra como principal. Se recomiendan imágenes de al menos 1920×800 px.
+        </p>
+      </div>
+
+      <!-- Lista de banners -->
+      <div id="banners-list" style="display:flex;flex-direction:column;gap:1rem">
+        <div style="text-align:center;padding:3rem;color:#9ca3af">Cargando banners...</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Banner -->
+<div class="admin-modal-overlay" id="modal-banner">
+  <div class="admin-modal" style="max-width:650px">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title" id="modal-title">Nuevo Banner</div>
+      <button onclick="cerrarModal()" style="background:none;border:none;cursor:pointer;font-size:1.5rem;color:#6b7280">×</button>
+    </div>
+    <div class="admin-modal-body">
+      <input type="hidden" id="banner-id">
+      <div class="admin-form-group">
+        <label>URL de la imagen *</label>
+        <input type="text" class="admin-input" id="banner-url" placeholder="https://..." oninput="previewBanner()">
+      </div>
+      <div id="banner-preview" style="margin-bottom:1rem;display:none">
+        <img id="banner-preview-img" style="width:100%;max-height:160px;object-fit:cover;border-radius:8px;border:1px solid var(--admin-border)">
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Título del hero</label>
+          <input type="text" class="admin-input" id="banner-titulo" placeholder="Bienvenidos a Cabañas Los Pinos">
+        </div>
+        <div class="admin-form-group">
+          <label>Subtítulo</label>
+          <input type="text" class="admin-input" id="banner-subtitulo" placeholder="Tu refugio en la naturaleza">
+        </div>
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Texto del botón principal</label>
+          <input type="text" class="admin-input" id="banner-btn1" placeholder="Reservar ahora">
+        </div>
+        <div class="admin-form-group">
+          <label>Texto del botón secundario</label>
+          <input type="text" class="admin-input" id="banner-btn2" placeholder="Ver cabañas">
+        </div>
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Orden</label>
+          <input type="number" class="admin-input" id="banner-orden" value="0" min="0">
+        </div>
+        <div class="admin-form-group">
+          <label>Estado</label>
+          <select class="admin-input" id="banner-activo">
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="btn-admin btn-admin-outline" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn-admin btn-admin-primary" onclick="guardarBanner()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast-container" id="toast-container"></div>
+<script src="/js/admin.js"></script>
+<script>
+  let editando = null;
+
+  adminReady(() => {
+    loadBanners();
+  });
+
+  async function loadBanners() {
+    try {
+      const res = await adminFetch('/api/admin/banners');
+      renderBanners(res.data || []);
+    } catch(e) { showToast('Error al cargar banners','error'); }
+  }
+
+  function renderBanners(list) {
+    const cont = document.getElementById('banners-list');
+    if (!list.length) { cont.innerHTML = '<div style="text-align:center;padding:3rem;color:#9ca3af">No hay banners configurados</div>'; return; }
+    window._banners = {};
+    list.forEach(b => { window._banners[b.id] = b; });
+    cont.innerHTML = list.map(b => `
+      <div class="admin-card" style="padding:0;overflow:hidden;display:flex">
+        <img src="${b.url_imagen}" alt="${b.titulo||'Banner'}" style="width:200px;height:110px;object-fit:cover;flex-shrink:0"
+             onerror="this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400&q=60'">
+        <div style="padding:1rem;flex:1;display:flex;flex-direction:column;justify-content:space-between">
+          <div>
+            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.25rem">
+              <strong style="font-size:.95rem">${b.titulo||'Sin título'}</strong>
+              <span class="badge-admin ${b.activo ? 'badge-green':'badge-gray'}">${b.activo?'Activo':'Inactivo'}</span>
+              <span class="badge-admin badge-blue" style="margin-left:auto">Orden: ${b.orden||0}</span>
+            </div>
+            <p style="font-size:.8rem;color:#6b7280">${b.subtitulo||'Sin subtítulo'}</p>
+          </div>
+          <div class="tbl-actions">
+            <button class="btn-admin btn-admin-outline btn-admin-sm" onclick="editarBanner(window._banners[${b.id}])">Editar</button>
+            <button class="btn-admin btn-admin-danger btn-admin-sm" onclick="eliminarBanner(${b.id})">Eliminar</button>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  function abrirModal(d=null) {
+    editando = d?.id||null;
+    document.getElementById('modal-title').textContent = d ? 'Editar Banner' : 'Nuevo Banner';
+    document.getElementById('banner-id').value = d?.id||'';
+    document.getElementById('banner-url').value = d?.url_imagen||'';
+    document.getElementById('banner-titulo').value = d?.titulo||'';
+    document.getElementById('banner-subtitulo').value = d?.subtitulo||'';
+    document.getElementById('banner-btn1').value = d?.texto_boton||'';
+    document.getElementById('banner-btn2').value = d?.btn_texto_2||'';
+    document.getElementById('banner-orden').value = d?.orden||0;
+    document.getElementById('banner-activo').value = d?.activo!==undefined?(d.activo?'1':'0'):'1';
+    if (d?.url_imagen) { document.getElementById('banner-preview-img').src=d.url_imagen; document.getElementById('banner-preview').style.display='block'; }
+    else { document.getElementById('banner-preview').style.display='none'; }
+    document.getElementById('modal-banner').classList.add('show');
+  }
+  function cerrarModal() { document.getElementById('modal-banner').classList.remove('show'); editando=null; }
+  function editarBanner(d) { abrirModal(d); }
+  function previewBanner() {
+    const u = document.getElementById('banner-url').value.trim();
+    if (u) { document.getElementById('banner-preview-img').src=u; document.getElementById('banner-preview').style.display='block'; }
+    else document.getElementById('banner-preview').style.display='none';
+  }
+
+  async function guardarBanner() {
+    const url = document.getElementById('banner-url').value.trim();
+    if (!url) { showToast('La URL de imagen es obligatoria','error'); return; }
+    const payload = {
+      url_imagen: url,
+      titulo: document.getElementById('banner-titulo').value.trim(),
+      subtitulo: document.getElementById('banner-subtitulo').value.trim(),
+      texto_boton: document.getElementById('banner-btn1').value.trim(),
+      btn_texto_2: document.getElementById('banner-btn2').value.trim(),
+      orden: parseInt(document.getElementById('banner-orden').value)||0,
+      activo: document.getElementById('banner-activo').value==='1'?1:0,
+    };
+    try {
+      if (editando) { await adminFetch(`/api/admin/banners/${editando}`,'PUT',payload); showToast('Banner actualizado','success'); }
+      else { await adminFetch('/api/admin/banners','POST',payload); showToast('Banner creado','success'); }
+      cerrarModal(); loadBanners();
+    } catch(e) { showToast(e.message||'Error al guardar','error'); }
+  }
+
+  async function eliminarBanner(id) {
+    if (!confirm('¿Eliminar este banner?')) return;
+    try { await adminFetch(`/api/admin/banners/${id}`,'DELETE'); showToast('Banner eliminado','success'); loadBanners(); }
+    catch(e) { showToast('Error al eliminar','error'); }
+  }
+
+  document.getElementById('modal-banner').addEventListener('click', function(e) { if(e.target===this) cerrarModal(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería | Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div id="page-loader"><div class="loader-logo">🌲</div><div class="loader-spinner"></div></div>
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg viewBox="0 0 40 40"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9" fill="currentColor"/><rect x="17" y="30" width="6" height="6" rx="1" fill="currentColor"/></svg>Cabañas <span>Los Pinos</span></a>
+      <div class="nav-links"><a href="/">Inicio</a><a href="/cabanas">Cabañas</a><a href="/galeria" class="active">Galería</a><a href="/faq">FAQ</a><a href="/contacto">Contacto</a>
+        <div id="nav-guest"><a href="/login">Iniciar sesión</a><a href="/reservar" class="btn btn-accent btn-sm nav-btn-reservar">Reservar</a></div>
+        <div id="nav-user" class="nav-user-menu hidden"><button class="nav-user-btn" id="nav-user-btn"><div class="avatar" id="nav-avatar">U</div><span id="nav-user-name">U</span></button><div class="nav-dropdown" id="nav-dropdown"><a href="/mi-cuenta">Mi Cuenta</a><hr><a href="#" id="nav-logout">Cerrar Sesión</a></div></div>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- Hero pequeño -->
+  <div style="background:linear-gradient(135deg,var(--primary-dark),var(--primary)); padding:6rem 0 3rem; margin-top:var(--nav-height)">
+    <div class="container text-center" style="color:white">
+      <span class="section-badge" style="background:rgba(200,169,81,0.2); color:var(--accent); border-color:rgba(200,169,81,0.3)">Imágenes</span>
+      <h1 style="color:white; margin:1rem 0 0.5rem">Nuestra Galería</h1>
+      <p style="color:rgba(255,255,255,0.75); max-width:540px; margin:0 auto">Descubre la belleza de Cabañas Los Pinos a través de nuestras fotografías</p>
+    </div>
+  </div>
+
+  <!-- Filtros de categoría -->
+  <div style="background:white; border-bottom:1px solid var(--border); padding:1rem 0; position:sticky; top:0; z-index:100">
+    <div class="container d-flex align-center gap-2 flex-wrap">
+      <button class="filter-cat active" data-cat="" style="padding:0.35rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--primary); background:rgba(45,80,22,0.07); color:var(--primary); font-size:0.85rem; font-weight:600; cursor:pointer;">Todas</button>
+      <button class="filter-cat" data-cat="exterior" style="padding:0.35rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); background:white; color:var(--text-muted); font-size:0.85rem; font-weight:600; cursor:pointer;">🏡 Exterior</button>
+      <button class="filter-cat" data-cat="habitacion" style="padding:0.35rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); background:white; color:var(--text-muted); font-size:0.85rem; font-weight:600; cursor:pointer;">🛏️ Habitaciones</button>
+      <button class="filter-cat" data-cat="piscina" style="padding:0.35rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); background:white; color:var(--text-muted); font-size:0.85rem; font-weight:600; cursor:pointer;">🏊 Piscina</button>
+      <button class="filter-cat" data-cat="naturaleza" style="padding:0.35rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); background:white; color:var(--text-muted); font-size:0.85rem; font-weight:600; cursor:pointer;">🌿 Naturaleza</button>
+      <button class="filter-cat" data-cat="actividades" style="padding:0.35rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); background:white; color:var(--text-muted); font-size:0.85rem; font-weight:600; cursor:pointer;">🎯 Actividades</button>
+      <button class="filter-cat" data-cat="restaurante" style="padding:0.35rem 1rem; border-radius:var(--radius-xl); border:1.5px solid var(--border); background:white; color:var(--text-muted); font-size:0.85rem; font-weight:600; cursor:pointer;">🍽️ Restaurante</button>
+    </div>
+  </div>
+
+  <!-- Grid galería -->
+  <section class="section" style="padding-top:2.5rem">
+    <div class="container">
+      <div class="gallery-grid" id="galeria-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem"></div>
+      <div id="galeria-empty" class="hidden text-center mt-4">
+        <p style="color:var(--text-muted)">No hay imágenes en esta categoría.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container"><div class="footer-bottom" style="padding:1.5rem 0"><p>© 2024 Cabañas Los Pinos · <a href="/" style="color:var(--accent)">Inicio</a></p></div></div></footer>
+  <button class="scroll-top" id="scroll-top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Fallbacks de Unsplash
+    const galeriaFallback = [
+      { url:'https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=600&q=80', titulo:'Exterior de la cabaña', categoria:'exterior' },
+      { url:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80', titulo:'Vista del bosque', categoria:'naturaleza' },
+      { url:'https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=600&q=80', titulo:'Habitación principal', categoria:'habitacion' },
+      { url:'https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=600&q=80', titulo:'Piscina privada', categoria:'piscina' },
+      { url:'https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?w=600&q=80', titulo:'Deck exterior', categoria:'exterior' },
+      { url:'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80', titulo:'Jacuzzi con vista', categoria:'piscina' },
+      { url:'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80', titulo:'Habitación de lujo', categoria:'habitacion' },
+      { url:'https://images.unsplash.com/photo-1551806235-a86f80dce5e4?w=600&q=80', titulo:'Sendero natural', categoria:'naturaleza' },
+      { url:'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600&q=80', titulo:'Fogata nocturna', categoria:'actividades' },
+      { url:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80', titulo:'Restaurante', categoria:'restaurante' },
+      { url:'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80', titulo:'Amanecer', categoria:'naturaleza' },
+      { url:'https://images.unsplash.com/photo-1436891678271-9c672565d8f6?w=600&q=80', titulo:'Actividades al aire libre', categoria:'actividades' },
+    ];
+
+    let allItems = [];
+    let currentCat = '';
+
+    async function loadGaleria() {
+      try {
+        const res = await API.get('/api/galeria');
+        if (res.success && res.data.length >= 6) {
+          allItems = res.data.map(g => ({ url: g.url_imagen, titulo: g.titulo, categoria: g.categoria }));
+        } else {
+          allItems = galeriaFallback;
+        }
+        renderGaleria(allItems);
+      } catch {
+        allItems = galeriaFallback;
+        renderGaleria(allItems);
+      }
+    }
+
+    function renderGaleria(items) {
+      const grid = document.getElementById('galeria-grid');
+      if (!items.length) {
+        document.getElementById('galeria-empty').classList.remove('hidden');
+        grid.innerHTML = '';
+        return;
+      }
+      document.getElementById('galeria-empty').classList.add('hidden');
+      grid.innerHTML = items.map((g, i) => `
+        <div class="gallery-item reveal" data-lightbox data-src="${g.url}" data-title="${g.titulo || ''}">
+          <img src="${g.url}" alt="${g.titulo || ''}" loading="lazy" onerror="this.src='${galeriaFallback[i % galeriaFallback.length].url}'">
+          <div class="gallery-item-overlay"><span class="gallery-item-title">${g.titulo || ''}</span></div>
+        </div>
+      `).join('');
+      initReveal();
+      initLightbox();
+    }
+
+    // Filtros
+    document.querySelectorAll('.filter-cat').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-cat').forEach(b => {
+          b.style.background = 'white';
+          b.style.color = 'var(--text-muted)';
+          b.style.borderColor = 'var(--border)';
+          b.classList.remove('active');
+        });
+        btn.style.background = 'rgba(45,80,22,0.07)';
+        btn.style.color = 'var(--primary)';
+        btn.style.borderColor = 'var(--primary)';
+        btn.classList.add('active');
+        currentCat = btn.dataset.cat;
+        const filtered = currentCat ? allItems.filter(i => i.categoria === currentCat) : allItems;
+        renderGaleria(filtered);
+      });
+    });
+
+    document.getElementById('nav-logout')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+    document.addEventListener('DOMContentLoaded', loadGaleria);
+  </script>
+</body>
+</html>

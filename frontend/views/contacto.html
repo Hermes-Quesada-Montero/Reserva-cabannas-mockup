@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .contacto-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
+    .info-card { display:flex; align-items:flex-start; gap:1rem; padding:1.25rem; background:white; border-radius:var(--radius); border:1px solid var(--border); margin-bottom:1rem; transition:all var(--transition); }
+    .info-card:hover { border-color:var(--accent); transform:translateX(4px); }
+    .info-icon { width:44px; height:44px; border-radius:var(--radius); background:rgba(45,80,22,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.2rem; }
+    @media(max-width:768px){ .contacto-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div id="page-loader"><div class="loader-logo">🌲</div><div class="loader-spinner"></div></div>
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg viewBox="0 0 40 40"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9" fill="currentColor"/><rect x="17" y="30" width="6" height="6" rx="1" fill="currentColor"/></svg>Cabañas <span>Los Pinos</span></a>
+      <div class="nav-links"><a href="/">Inicio</a><a href="/cabanas">Cabañas</a><a href="/galeria">Galería</a><a href="/faq">FAQ</a><a href="/contacto" class="active">Contacto</a>
+        <div id="nav-guest"><a href="/login">Iniciar sesión</a><a href="/reservar" class="btn btn-accent btn-sm nav-btn-reservar">Reservar</a></div>
+        <div id="nav-user" class="nav-user-menu hidden"><button class="nav-user-btn" id="nav-user-btn"><div class="avatar" id="nav-avatar">U</div><span id="nav-user-name">U</span></button><div class="nav-dropdown" id="nav-dropdown"><a href="/mi-cuenta">Mi Cuenta</a><hr><a href="#" id="nav-logout">Cerrar Sesión</a></div></div>
+      </div>
+    </div>
+  </nav>
+
+  <div style="background:linear-gradient(135deg,var(--primary-dark),var(--primary)); padding:6rem 0 3rem; margin-top:var(--nav-height)">
+    <div class="container text-center" style="color:white">
+      <span class="section-badge" style="background:rgba(200,169,81,0.2); color:var(--accent); border-color:rgba(200,169,81,0.3)">Hablemos</span>
+      <h1 style="color:white; margin:1rem 0 0.5rem">Contáctanos</h1>
+      <p style="color:rgba(255,255,255,0.75); max-width:480px; margin:0 auto">Estamos para ayudarte. Responderemos en menos de 24 horas.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="contacto-grid">
+        <!-- Info de contacto -->
+        <div class="reveal">
+          <h2 style="margin-bottom:2rem">Información de Contacto</h2>
+
+          <div class="info-card">
+            <div class="info-icon">📍</div>
+            <div>
+              <strong style="display:block; margin-bottom:0.25rem">Ubicación</strong>
+              <span style="color:var(--text-muted); font-size:0.9rem">Sector Los Pinos, Monteverde, Puntarenas, Costa Rica</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">📞</div>
+            <div>
+              <strong style="display:block; margin-bottom:0.25rem">Teléfono</strong>
+              <a href="tel:+50622223333" style="color:var(--primary); font-size:0.9rem">+506 2222-3333</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">💬</div>
+            <div>
+              <strong style="display:block; margin-bottom:0.25rem">WhatsApp</strong>
+              <a href="https://wa.me/50688888888" target="_blank" style="color:var(--success); font-size:0.9rem">+506 8888-8888</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">✉️</div>
+            <div>
+              <strong style="display:block; margin-bottom:0.25rem">Correo electrónico</strong>
+              <a href="mailto:info@cabanaslospinos.com" style="color:var(--primary); font-size:0.9rem">info@cabanaslospinos.com</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">⏰</div>
+            <div>
+              <strong style="display:block; margin-bottom:0.25rem">Horario de atención</strong>
+              <span style="color:var(--text-muted); font-size:0.9rem">Lunes a Domingo: 7:00 AM - 9:00 PM</span>
+            </div>
+          </div>
+
+          <!-- Redes sociales -->
+          <div style="margin-top:1.5rem">
+            <strong style="display:block; margin-bottom:1rem; font-size:0.875rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted)">Síguenos</strong>
+            <div style="display:flex; gap:0.75rem">
+              <a href="https://instagram.com/cabanaslospinos" target="_blank" class="btn btn-outline-primary btn-sm" style="gap:0.5rem">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/></svg> Instagram
+              </a>
+              <a href="https://facebook.com/cabanaslospinos" target="_blank" class="btn btn-outline-primary btn-sm" style="gap:0.5rem">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> Facebook
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de contacto -->
+        <div class="reveal delay-2">
+          <div style="background:white; border-radius:var(--radius-lg); padding:2.5rem; border:1px solid var(--border); box-shadow:var(--shadow-md)">
+            <h2 style="margin-bottom:0.5rem">Envíanos un mensaje</h2>
+            <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:2rem">Responderemos lo antes posible</p>
+
+            <form id="contacto-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Nombre <span class="required">*</span></label>
+                  <input type="text" id="c-nombre" class="form-control" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email <span class="required">*</span></label>
+                  <input type="email" id="c-email" class="form-control" placeholder="correo@ejemplo.com" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Teléfono</label>
+                  <input type="tel" id="c-telefono" class="form-control" placeholder="+506 8888-8888">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Asunto</label>
+                  <select id="c-asunto" class="form-control">
+                    <option value="Reservación">Consulta sobre reservación</option>
+                    <option value="Precios">Precios y tarifas</option>
+                    <option value="Servicios">Servicios y amenidades</option>
+                    <option value="Cancelación">Cancelación</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mensaje <span class="required">*</span></label>
+                <textarea id="c-mensaje" class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center" id="btn-enviar">
+                <span class="btn-text">Enviar Mensaje</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container"><div class="footer-bottom" style="padding:1.5rem 0"><p>© 2024 Cabañas Los Pinos</p></div></div></footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.getElementById('contacto-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('btn-enviar');
+      btn.disabled = true; btn.classList.add('btn-loading');
+      try {
+        const res = await API.post('/api/contacto', {
+          nombre:   document.getElementById('c-nombre').value.trim(),
+          email:    document.getElementById('c-email').value.trim(),
+          telefono: document.getElementById('c-telefono').value.trim(),
+          asunto:   document.getElementById('c-asunto').value,
+          mensaje:  document.getElementById('c-mensaje').value.trim()
+        });
+        if (res.success) {
+          Toast.success(res.message, '¡Enviado!');
+          e.target.reset();
+        } else {
+          Toast.error(res.message);
+        }
+      } catch { Toast.error('Error al enviar el mensaje'); }
+      btn.disabled = false; btn.classList.remove('btn-loading');
+    });
+
+    document.getElementById('nav-logout')?.addEventListener('click', e => { e.preventDefault(); Auth.logout(); });
+  </script>
+</body>
+</html>

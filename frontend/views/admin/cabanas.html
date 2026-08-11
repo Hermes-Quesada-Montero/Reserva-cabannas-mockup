@@ -1,0 +1,406 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabañas | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+      Cabañas <span>Los Pinos</span>
+    </div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Mensajes</a>
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galería</a>
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Usuarios / Clientes</a>
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>FAQs</a>
+      <a href="/admin/contacto" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Contacto</a>
+      <a href="/admin/configuracion" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 015.07 4.93M4.93 19.07A10 10 0 0019.07 19.07"/></svg>Configuración</a>
+      <div style="padding:1rem 1.25rem; margin-top:auto">
+        <a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,0.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a>
+        <a href="/" target="_blank" class="admin-menu-item" style="color:rgba(255,255,255,0.4); font-size:0.8rem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ver sitio</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Cabañas
+      </div>
+      <div style="display:flex; align-items:center; gap:0.75rem">
+        <span style="font-size:0.875rem; color:#6b7280">👤 <span id="admin-name">Admin</span></span>
+        <button class="btn-admin btn-admin-primary" id="btn-nueva-cabana">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nueva Cabaña
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- Grid de cabañas -->
+      <div id="cabanas-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:1.25rem;">
+        <div style="text-align:center; padding:3rem; grid-column:1/-1; color:#9ca3af">Cargando cabañas...</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Cabaña -->
+<div class="admin-modal-overlay" id="modal-cabana">
+  <div class="admin-modal" style="max-width:700px">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title" id="modal-title">Nueva Cabaña</div>
+      <button id="btn-cerrar-modal-cabana" style="background:none; border:none; cursor:pointer; font-size:1.5rem; color:#6b7280">×</button>
+    </div>
+    <div class="admin-modal-body">
+      <input type="hidden" id="cabana-id">
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Nombre *</label>
+          <input type="text" class="admin-input" id="cabana-nombre" placeholder="Ej: Cabaña El Roble">
+        </div>
+        <div class="admin-form-group">
+          <label>Número de habitaciones</label>
+          <input type="number" class="admin-input" id="cabana-habitaciones" min="1" max="10" value="1">
+        </div>
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Capacidad máxima (personas)</label>
+          <input type="number" class="admin-input" id="cabana-capacidad" min="1" max="20" value="2">
+        </div>
+        <div class="admin-form-group">
+          <label>Estado</label>
+          <select class="admin-input" id="cabana-estado">
+            <option value="disponible">Disponible</option>
+            <option value="mantenimiento">Mantenimiento</option>
+            <option value="inactiva">Inactiva</option>
+          </select>
+        </div>
+      </div>
+      <div class="admin-form-group">
+        <label>Descripción corta</label>
+        <input type="text" class="admin-input" id="cabana-descripcion-corta" placeholder="Descripción breve que aparece en el listado">
+      </div>
+      <div class="admin-form-group">
+        <label>Descripción completa</label>
+        <textarea class="admin-input" id="cabana-descripcion" rows="4" placeholder="Descripción detallada de la cabaña..."></textarea>
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Imagen principal</label>
+          <div style="display:flex;gap:.5rem;margin-bottom:.5rem">
+            <button type="button" id="tab-url-cabana" class="btn-admin btn-admin-primary btn-admin-sm">Desde URL</button>
+            <button type="button" id="tab-archivo-cabana" class="btn-admin btn-admin-outline btn-admin-sm">Subir archivo</button>
+          </div>
+          <div id="panel-url-cabana">
+            <input type="text" class="admin-input" id="cabana-imagen" placeholder="https://...">
+          </div>
+          <div id="panel-archivo-cabana" style="display:none">
+            <input type="file" class="admin-input" id="cabana-imagen-archivo" accept="image/*" style="padding:.4rem">
+            <div id="upload-progress-cabana" style="display:none;margin-top:.4rem;font-size:.8rem;color:#6b7280">Subiendo...</div>
+          </div>
+          <div id="cabana-img-preview" style="margin-top:.5rem;display:none">
+            <img id="cabana-preview-src" style="width:100%;max-height:160px;object-fit:cover;border-radius:8px;border:1px solid var(--admin-border)">
+          </div>
+        </div>
+        <div class="admin-form-group">
+          <label>¿Tiene piscina privada?</label>
+          <select class="admin-input" id="cabana-piscina">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+          </select>
+        </div>
+      </div>
+      <div class="admin-form-group">
+        <label>Servicios (separados por coma)</label>
+        <input type="text" class="admin-input" id="cabana-servicios" placeholder="WiFi, Aire acondicionado, Cocina equipada...">
+      </div>
+      <div class="admin-form-group">
+        <label>Reglas (separadas por coma)</label>
+        <input type="text" class="admin-input" id="cabana-reglas" placeholder="No fumar, No mascotas...">
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="btn-admin btn-admin-outline" id="btn-cancelar-cabana">Cancelar</button>
+      <button class="btn-admin btn-admin-primary" id="btn-guardar-cabana">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="admin-toast-container" id="toast-container"></div>
+
+<script src="/js/admin.js"></script>
+<script>
+  // ── Variables globales ────────────────────────────────────────────────────────
+  let editando = null;
+
+  // ── Carga inicial ─────────────────────────────────────────────────────────────
+  adminReady(() => {
+    loadCabanas();
+
+    // Botones estáticos
+    document.getElementById('btn-nueva-cabana').addEventListener('click', () => abrirModal());
+    document.getElementById('btn-cerrar-modal-cabana').addEventListener('click', cerrarModal);
+    document.getElementById('btn-cancelar-cabana').addEventListener('click', cerrarModal);
+    document.getElementById('btn-guardar-cabana').addEventListener('click', guardarCabana);
+    document.getElementById('modal-cabana').addEventListener('click', function(e) {
+      if (e.target === this) cerrarModal();
+    });
+
+    // Tabs URL / Archivo para imagen de cabaña
+    document.getElementById('tab-url-cabana').addEventListener('click', () => switchTabCabana('url'));
+    document.getElementById('tab-archivo-cabana').addEventListener('click', () => switchTabCabana('archivo'));
+
+    // Preview al seleccionar archivo local
+    document.getElementById('cabana-imagen-archivo').addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById('cabana-preview-src').src = e.target.result;
+        document.getElementById('cabana-img-preview').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Preview al escribir URL
+    document.getElementById('cabana-imagen').addEventListener('input', function() {
+      const url = this.value.trim();
+      if (url) {
+        document.getElementById('cabana-preview-src').src = url;
+        document.getElementById('cabana-img-preview').style.display = 'block';
+      } else {
+        document.getElementById('cabana-img-preview').style.display = 'none';
+      }
+    });
+  });
+
+  function switchTabCabana(tab) {
+    const isUrl = tab === 'url';
+    document.getElementById('panel-url-cabana').style.display = isUrl ? '' : 'none';
+    document.getElementById('panel-archivo-cabana').style.display = isUrl ? 'none' : '';
+    document.getElementById('tab-url-cabana').className = 'btn-admin btn-admin-sm ' + (isUrl ? 'btn-admin-primary' : 'btn-admin-outline');
+    document.getElementById('tab-archivo-cabana').className = 'btn-admin btn-admin-sm ' + (isUrl ? 'btn-admin-outline' : 'btn-admin-primary');
+  }
+
+  // ── Cargar cabañas ────────────────────────────────────────────────────────────
+  async function loadCabanas() {
+    try {
+      const res = await adminFetch('/api/admin/cabanas?incluir_inactivas=true');
+      const cabanas = res.data || [];
+      renderCabanas(cabanas);
+    } catch(e) {
+      showToast('Error al cargar cabañas', 'error');
+    }
+  }
+
+  // ── Renderizar cards ──────────────────────────────────────────────────────────
+  function renderCabanas(list) {
+    const grid = document.getElementById('cabanas-grid');
+    if (!list.length) {
+      grid.innerHTML = '<div style="text-align:center; padding:3rem; grid-column:1/-1; color:#9ca3af">No hay cabañas registradas</div>';
+      return;
+    }
+
+    grid.innerHTML = list.map(c => `
+      <div class="admin-card" style="padding:0; overflow:hidden">
+        <div style="position:relative">
+          <img src="${c.imagen_principal || 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80'}"
+               alt="${c.nombre}" style="width:100%; height:180px; object-fit:cover;">
+          <div style="position:absolute; top:0.75rem; right:0.75rem">
+            ${badgeEstado(c.estado)}
+          </div>
+        </div>
+        <div style="padding:1.25rem">
+          <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:0.5rem">
+            <h3 style="font-size:1rem; font-weight:700; color:var(--primary)">${c.nombre}</h3>
+            <span style="font-size:0.75rem; color:#6b7280">${c.habitaciones} hab.</span>
+          </div>
+          <p style="font-size:0.8rem; color:#6b7280; margin-bottom:0.75rem; line-height:1.5">
+            ${c.descripcion_corta || 'Sin descripción'}
+          </p>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem">
+            <span class="badge-admin badge-blue">Máx. ${c.capacidad_maxima} personas</span>
+            ${c.tiene_piscina ? '<span class="badge-admin badge-green">🏊 Piscina</span>' : ''}
+            <span class="badge-admin badge-gray">${c.habitaciones} habitación(es)</span>
+          </div>
+          <div class="tbl-actions">
+            <button class="btn-admin btn-admin-outline btn-admin-sm" data-action="editar" data-id="${c.id}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Editar
+            </button>
+            <button class="btn-admin btn-admin-danger btn-admin-sm" data-action="eliminar" data-id="${c.id}" data-nombre="${c.nombre.replace(/'/g,"\\'")}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+              Eliminar
+            </button>
+            <a href="/cabanas/${c.id}" target="_blank" class="btn-admin btn-admin-outline btn-admin-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Ver
+            </a>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Delegación de eventos en el grid
+    grid.onclick = function(e) {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      if (btn.dataset.action === 'editar') editarCabana(btn.dataset.id);
+      else if (btn.dataset.action === 'eliminar') eliminarCabana(btn.dataset.id, btn.dataset.nombre);
+    };
+  }
+
+  function badgeEstado(estado) {
+    const map = { disponible: 'badge-green', mantenimiento: 'badge-yellow', inactiva: 'badge-red' };
+    const labels = { disponible: 'Disponible', mantenimiento: 'Mantenimiento', inactiva: 'Inactiva' };
+    return `<span class="badge-admin ${map[estado] || 'badge-gray'}">${labels[estado] || estado}</span>`;
+  }
+
+  // ── Abrir / cerrar modal ──────────────────────────────────────────────────────
+  function abrirModal(datos = null) {
+    editando = datos ? datos.id : null;
+    document.getElementById('modal-title').textContent = datos ? 'Editar Cabaña' : 'Nueva Cabaña';
+    document.getElementById('cabana-id').value = datos?.id || '';
+    document.getElementById('cabana-nombre').value = datos?.nombre || '';
+    document.getElementById('cabana-habitaciones').value = datos?.habitaciones || 1;
+    document.getElementById('cabana-capacidad').value = datos?.capacidad_maxima || 2;
+    document.getElementById('cabana-estado').value = datos?.estado || 'disponible';
+    document.getElementById('cabana-descripcion-corta').value = datos?.descripcion_corta || '';
+    document.getElementById('cabana-descripcion').value = datos?.descripcion || '';
+    document.getElementById('cabana-imagen').value = datos?.imagen_principal || '';
+    document.getElementById('cabana-imagen-archivo').value = '';
+    document.getElementById('cabana-piscina').value = datos?.tiene_piscina ? '1' : '0';
+    document.getElementById('cabana-servicios').value = datos?.servicios || '';
+    document.getElementById('cabana-reglas').value = datos?.reglas || '';
+    switchTabCabana('url');
+    const imgUrl = datos?.imagen_principal || '';
+    if (imgUrl) {
+      document.getElementById('cabana-preview-src').src = imgUrl;
+      document.getElementById('cabana-img-preview').style.display = 'block';
+    } else {
+      document.getElementById('cabana-img-preview').style.display = 'none';
+    }
+    document.getElementById('modal-cabana').classList.add('show');
+  }
+
+  function cerrarModal() {
+    document.getElementById('modal-cabana').classList.remove('show');
+    editando = null;
+  }
+
+  // ── Editar ────────────────────────────────────────────────────────────────────
+  async function editarCabana(id) {
+    try {
+      const res = await adminFetch(`/api/admin/cabanas/${id}`);
+      abrirModal(res.data);
+    } catch(e) {
+      showToast('Error al cargar datos', 'error');
+    }
+  }
+
+  // ── Guardar (crear / actualizar) ──────────────────────────────────────────────
+  async function guardarCabana() {
+    const nombre = document.getElementById('cabana-nombre').value.trim();
+    if (!nombre) { showToast('El nombre es obligatorio', 'error'); return; }
+
+    const btnGuardar = document.getElementById('btn-guardar-cabana');
+    const panelArchivo = document.getElementById('panel-archivo-cabana');
+    let imagenFinal = document.getElementById('cabana-imagen').value.trim();
+
+    // Si el panel activo es "archivo", subir primero
+    if (panelArchivo.style.display !== 'none') {
+      const file = document.getElementById('cabana-imagen-archivo').files[0];
+      if (!file) { showToast('Selecciona una imagen', 'error'); return; }
+      const progress = document.getElementById('upload-progress-cabana');
+      progress.style.display = 'block';
+      btnGuardar.disabled = true;
+      try {
+        const fd = new FormData();
+        fd.append('imagen', file);
+        const upRes = await fetch('/api/admin/upload-imagen', {
+          method: 'POST', credentials: 'include', body: fd,
+          headers: { 'Accept': 'application/json' }
+        });
+        const upData = await upRes.json();
+        if (!upData.success) { showToast(upData.message || 'Error al subir imagen', 'error'); return; }
+        imagenFinal = upData.path;
+      } catch(e) {
+        showToast('Error al subir imagen: ' + e.message, 'error'); return;
+      } finally {
+        progress.style.display = 'none';
+        btnGuardar.disabled = false;
+      }
+    }
+
+    const payload = {
+      nombre,
+      habitaciones:        parseInt(document.getElementById('cabana-habitaciones').value),
+      capacidad_maxima:    parseInt(document.getElementById('cabana-capacidad').value),
+      estado:              document.getElementById('cabana-estado').value,
+      descripcion_corta:   document.getElementById('cabana-descripcion-corta').value.trim(),
+      descripcion:         document.getElementById('cabana-descripcion').value.trim(),
+      imagen_principal:    imagenFinal,
+      tiene_piscina:       document.getElementById('cabana-piscina').value === '1' ? 1 : 0,
+      servicios:           document.getElementById('cabana-servicios').value.trim(),
+      reglas:              document.getElementById('cabana-reglas').value.trim(),
+    };
+
+    btnGuardar.disabled = true;
+    try {
+      if (editando) {
+        await adminFetch(`/api/admin/cabanas/${editando}`, 'PUT', payload);
+        showToast('Cabaña actualizada correctamente', 'success');
+      } else {
+        await adminFetch('/api/admin/cabanas', 'POST', payload);
+        showToast('Cabaña creada correctamente', 'success');
+      }
+      cerrarModal();
+      loadCabanas();
+    } catch(e) {
+      showToast(e.message || 'Error al guardar', 'error');
+    } finally {
+      btnGuardar.disabled = false;
+    }
+  }
+
+  // ── Eliminar ──────────────────────────────────────────────────────────────────
+  async function eliminarCabana(id, nombre) {
+    if (!confirm(`¿Eliminar la cabaña "${nombre}"?\nEsta acción no se puede deshacer.`)) return;
+    try {
+      await adminFetch(`/api/admin/cabanas/${id}`, 'DELETE');
+      showToast('Cabaña eliminada', 'success');
+      loadCabanas();
+    } catch(e) {
+      showToast(e.message || 'Error al eliminar', 'error');
+    }
+  }
+
+</script>
+</body>
+</html>

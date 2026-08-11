@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disponibilidad | Admin Cabañas Los Pinos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+  <style>
+    .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
+    .cal-day { padding:.5rem .25rem; text-align:center; border-radius:6px; font-size:.8rem; cursor:pointer; border:1px solid transparent; transition:all .2s; }
+    .cal-day:hover { border-color:var(--primary); }
+    .cal-day.disponible { background:#dcfce7; color:#15803d; }
+    .cal-day.reservado  { background:#fee2e2; color:#dc2626; cursor:not-allowed; }
+    .cal-day.bloqueo    { background:#fef9c3; color:#854d0e; }
+    .cal-day.pasado     { background:#f3f4f6; color:#9ca3af; cursor:not-allowed; }
+    .cal-day.hoy        { border-color:var(--primary); font-weight:700; }
+  </style>
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <svg width="28" height="28" viewBox="0 0 40 40" fill="currentColor" style="color:var(--accent)"><path d="M20 4 L36 30 L4 30 Z" opacity="0.9"/><rect x="17" y="30" width="6" height="6" rx="1"/></svg>
+      Cabañas <span>Los Pinos</span>
+    </div>
+    <nav class="admin-sidebar-menu">
+      <div class="admin-sidebar-section">Principal</div>
+      <a href="/admin/dashboard" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</a>
+      <a href="/admin/reservaciones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/></svg>Reservaciones</a>
+      <a href="/admin/mensajes" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Mensajes</a>
+      <div class="admin-sidebar-section">Contenido</div>
+      <a href="/admin/cabanas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Cabañas</a>
+      <a href="/admin/tarifas" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/></svg>Tarifas</a>
+      <a href="/admin/disponibilidad" class="admin-menu-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Disponibilidad</a>
+      <a href="/admin/galeria" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>Galería</a>
+      <div class="admin-sidebar-section">Usuarios</div>
+      <a href="/admin/usuarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Usuarios / Clientes</a>
+      <div class="admin-sidebar-section">Marketing</div>
+      <a href="/admin/cupones" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>Cupones</a>
+      <a href="/admin/comentarios" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Comentarios</a>
+      <div class="admin-sidebar-section">Configuración</div>
+      <a href="/admin/faqs" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>FAQs</a>
+      <a href="/admin/contacto" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>Contacto</a>
+      <a href="/admin/configuracion" class="admin-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Configuración</a>
+      <div style="padding:1rem 1.25rem;margin-top:auto">
+        <a href="#" id="admin-logout" class="admin-menu-item" style="color:rgba(231,76,60,.8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesión</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="admin-page-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Gestión de Disponibilidad
+      </div>
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <span style="font-size:.875rem;color:#6b7280">👤 <span id="admin-name">Admin</span></span>
+        <button class="btn-admin btn-admin-primary" id="btn-bloquear-fechas">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Bloquear Fechas
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <!-- Leyenda -->
+      <div class="admin-card" style="padding:1rem 1.25rem;margin-bottom:1.25rem">
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center">
+          <span style="font-size:.875rem;font-weight:600">Leyenda:</span>
+          <span style="display:flex;align-items:center;gap:.4rem;font-size:.8rem"><span style="width:14px;height:14px;border-radius:3px;background:#dcfce7;display:inline-block"></span>Disponible</span>
+          <span style="display:flex;align-items:center;gap:.4rem;font-size:.8rem"><span style="width:14px;height:14px;border-radius:3px;background:#fee2e2;display:inline-block"></span>Reservado</span>
+          <span style="display:flex;align-items:center;gap:.4rem;font-size:.8rem"><span style="width:14px;height:14px;border-radius:3px;background:#fef9c3;display:inline-block"></span>Bloqueo manual</span>
+          <span style="display:flex;align-items:center;gap:.4rem;font-size:.8rem"><span style="width:14px;height:14px;border-radius:3px;background:#f3f4f6;display:inline-block"></span>Pasado</span>
+        </div>
+      </div>
+
+      <!-- Selector cabañas y mes -->
+      <div class="admin-card" style="padding:1.25rem;margin-bottom:1.25rem">
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:center">
+          <select class="admin-input" id="sel-cabana" style="width:auto">
+            <option value="">Selecciona una cabaña</option>
+          </select>
+          <button class="btn-admin btn-admin-outline btn-admin-sm" id="btn-mes-anterior">‹ Anterior</button>
+          <strong id="mes-label" style="min-width:160px;text-align:center;font-size:1rem"></strong>
+          <button class="btn-admin btn-admin-outline btn-admin-sm" id="btn-mes-siguiente">Siguiente ›</button>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 380px;gap:1.25rem">
+        <!-- Calendario -->
+        <div class="admin-card">
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:.5rem">
+            <div style="text-align:center;font-size:.7rem;font-weight:700;color:#6b7280">Dom</div>
+            <div style="text-align:center;font-size:.7rem;font-weight:700;color:#6b7280">Lun</div>
+            <div style="text-align:center;font-size:.7rem;font-weight:700;color:#6b7280">Mar</div>
+            <div style="text-align:center;font-size:.7rem;font-weight:700;color:#6b7280">Mié</div>
+            <div style="text-align:center;font-size:.7rem;font-weight:700;color:#6b7280">Jue</div>
+            <div style="text-align:center;font-size:.7rem;font-weight:700;color:#6b7280">Vie</div>
+            <div style="text-align:center;font-size:.7rem;font-weight:700;color:#6b7280">Sáb</div>
+          </div>
+          <div id="cal-grid" class="cal-grid">
+            <div style="grid-column:1/-1;text-align:center;padding:2rem;color:#9ca3af">Selecciona una cabaña para ver el calendario</div>
+          </div>
+        </div>
+
+        <!-- Lista de bloqueos -->
+        <div class="admin-card" style="padding:0">
+          <div style="padding:1rem 1.25rem;border-bottom:1px solid var(--admin-border)">
+            <div class="admin-card-title">Bloqueos activos</div>
+          </div>
+          <div id="bloqueos-list" style="max-height:450px;overflow-y:auto;padding:.75rem">
+            <div style="text-align:center;padding:2rem;color:#9ca3af;font-size:.875rem">Sin bloqueos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Bloqueo -->
+<div class="admin-modal-overlay" id="modal-bloqueo">
+  <div class="admin-modal">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title">Bloquear Fechas</div>
+      <button id="btn-cerrar-modal-bloqueo" style="background:none;border:none;cursor:pointer;font-size:1.5rem;color:#6b7280">×</button>
+    </div>
+    <div class="admin-modal-body">
+      <div class="admin-form-group">
+        <label>Cabaña *</label>
+        <select class="admin-input" id="bloqueo-cabana"></select>
+      </div>
+      <div class="admin-form-2">
+        <div class="admin-form-group">
+          <label>Fecha inicio *</label>
+          <input type="date" class="admin-input" id="bloqueo-desde">
+        </div>
+        <div class="admin-form-group">
+          <label>Fecha fin *</label>
+          <input type="date" class="admin-input" id="bloqueo-hasta">
+        </div>
+      </div>
+      <div class="admin-form-group">
+        <label>Motivo</label>
+        <select class="admin-input" id="bloqueo-motivo">
+          <option value="mantenimiento">Mantenimiento</option>
+          <option value="limpieza">Limpieza</option>
+          <option value="reparacion">Reparación</option>
+          <option value="reserva_interna">Reserva interna</option>
+          <option value="bloqueado">Bloqueo general</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="admin-form-group">
+        <label>Nota adicional</label>
+        <input type="text" class="admin-input" id="bloqueo-nota" placeholder="Observaciones opcionales">
+      </div>
+    </div>
+    <div class="admin-modal-footer">
+      <button class="btn-admin btn-admin-outline" id="btn-cancelar-bloqueo">Cancelar</button>
+      <button class="btn-admin btn-admin-primary" id="btn-confirmar-bloqueo">Confirmar Bloqueo</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast-container" id="toast-container"></div>
+<script src="/js/admin.js"></script>
+<script>
+  let currentYear, currentMonth, cabanas = [], bloqueos = [], reservas = [];
+  const hoy = new Date();
+
+  adminReady(() => {
+    currentYear = hoy.getFullYear();
+    currentMonth = hoy.getMonth();
+    loadCabanas();
+
+    // Selector de cabaña y navegación de mes
+    document.getElementById('sel-cabana').addEventListener('change', renderCalendar);
+    document.getElementById('btn-mes-anterior').addEventListener('click', () => cambiarMes(-1));
+    document.getElementById('btn-mes-siguiente').addEventListener('click', () => cambiarMes(1));
+
+    // Botones estáticos
+    document.getElementById('btn-bloquear-fechas').addEventListener('click', abrirModalBloqueo);
+    document.getElementById('btn-cerrar-modal-bloqueo').addEventListener('click', cerrarModal);
+    document.getElementById('btn-cancelar-bloqueo').addEventListener('click', cerrarModal);
+    document.getElementById('btn-confirmar-bloqueo').addEventListener('click', guardarBloqueo);
+    document.getElementById('modal-bloqueo').addEventListener('click', function(e) {
+      if (e.target === this) cerrarModal();
+    });
+  });
+
+  async function loadCabanas() {
+    const res = await adminFetch('/api/admin/cabanas');
+    cabanas = res.data || [];
+    const opts = cabanas.map(c => `<option value="${c.id}">${c.nombre}</option>`).join('');
+    document.getElementById('sel-cabana').innerHTML = '<option value="">— Selecciona cabaña —</option>' + opts;
+    document.getElementById('bloqueo-cabana').innerHTML = opts;
+    updateMesLabel();
+    // Seleccionar la primera cabaña automáticamente y mostrar el calendario
+    if (cabanas.length) {
+      document.getElementById('sel-cabana').value = cabanas[0].id;
+      renderCalendar();
+    }
+  }
+
+  function updateMesLabel() {
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    document.getElementById('mes-label').textContent = `${meses[currentMonth]} ${currentYear}`;
+  }
+
+  function cambiarMes(delta) {
+    currentMonth += delta;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    if (currentMonth < 0)  { currentMonth = 11; currentYear--; }
+    updateMesLabel();
+    renderCalendar();
+  }
+
+  async function renderCalendar() {
+    const cabanaId = document.getElementById('sel-cabana').value;
+    if (!cabanaId) return;
+
+    // Cargar disponibilidad del mes (reservas + bloqueos juntos)
+    try {
+      const res = await adminFetch(`/api/admin/disponibilidad?cabana_id=${cabanaId}&year=${currentYear}&month=${currentMonth+1}`);
+      const allDisp = res.data || [];
+      // Los registros con reserva_id son reservas; los sin reserva_id son bloqueos manuales
+      reservas = allDisp.filter(d => d.reserva_id !== null && d.reserva_id !== undefined);
+      bloqueos = allDisp.filter(d => !d.reserva_id);
+    } catch(e) {
+      reservas = []; bloqueos = [];
+    }
+
+    renderBloqueos();
+
+    const grid = document.getElementById('cal-grid');
+    const primerDia = new Date(currentYear, currentMonth, 1).getDay();
+    const diasMes = new Date(currentYear, currentMonth + 1, 0).getDate();
+    let html = '';
+
+    // Celdas vacías antes del primer día
+    for (let i = 0; i < primerDia; i++) html += '<div></div>';
+
+    for (let d = 1; d <= diasMes; d++) {
+      const fecha = `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const fechaObj = new Date(currentYear, currentMonth, d);
+      const esPasado = fechaObj < new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+      const esHoy = fechaObj.toDateString() === hoy.toDateString();
+      const esReservado = reservas.some(r => fecha >= r.fecha_inicio && fecha <= r.fecha_fin);
+      const esBloqueado = bloqueos.some(b => fecha >= b.fecha_inicio && fecha <= b.fecha_fin);
+
+      let cls = 'cal-day ';
+      if (esPasado) cls += 'pasado';
+      else if (esReservado) cls += 'reservado';
+      else if (esBloqueado) cls += 'bloqueo';
+      else cls += 'disponible';
+      if (esHoy) cls += ' hoy';
+
+      const titulo = esReservado ? 'Reservado' : esBloqueado ? 'Bloqueado' : esPasado ? 'Pasado' : 'Disponible';
+      html += `<div class="${cls}" title="${titulo}">${d}</div>`;
+    }
+
+    grid.innerHTML = html;
+  }
+
+  function renderBloqueos() {
+    const cont = document.getElementById('bloqueos-list');
+    const activos = bloqueos.filter(b => b.fecha_fin >= hoy.toISOString().split('T')[0]);
+    if (!activos.length) {
+      cont.innerHTML = '<div style="text-align:center;padding:2rem;color:#9ca3af;font-size:.875rem">Sin bloqueos activos</div>';
+      return;
+    }
+    cont.innerHTML = activos.map(b => `
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:.625rem .5rem;border-bottom:1px solid var(--admin-border);gap:.5rem">
+        <div>
+          <div style="font-size:.8rem;font-weight:600">${b.motivo || b.tipo || 'Bloqueo'}</div>
+          <div style="font-size:.75rem;color:#6b7280">${formatDate(b.fecha_inicio)} → ${formatDate(b.fecha_fin)}</div>
+          ${b.notas ? `<div style="font-size:.7rem;color:#9ca3af">${b.notas}</div>` : ''}
+        </div>
+        <button class="btn-admin btn-admin-danger btn-admin-sm" data-action="eliminar" data-id="${b.id}">✕</button>
+      </div>`).join('');
+
+    // Delegación de eventos en la lista de bloqueos
+    cont.onclick = function(e) {
+      const btn = e.target.closest('[data-action="eliminar"]');
+      if (btn) eliminarBloqueo(btn.dataset.id);
+    };
+  }
+
+  function abrirModalBloqueo() {
+    const cabanaId = document.getElementById('sel-cabana').value;
+    if (cabanaId) document.getElementById('bloqueo-cabana').value = cabanaId;
+    const hoyStr = hoy.toISOString().split('T')[0];
+    document.getElementById('bloqueo-desde').value = hoyStr;
+    document.getElementById('bloqueo-hasta').value = hoyStr;
+    document.getElementById('modal-bloqueo').classList.add('show');
+  }
+  function cerrarModal() { document.getElementById('modal-bloqueo').classList.remove('show'); }
+
+  async function guardarBloqueo() {
+    const cabanaId = document.getElementById('bloqueo-cabana').value;
+    const desde = document.getElementById('bloqueo-desde').value;
+    const hasta = document.getElementById('bloqueo-hasta').value;
+    if (!cabanaId) { showToast('Selecciona una cabaña','error'); return; }
+    if (!desde || !hasta) { showToast('Las fechas son obligatorias','error'); return; }
+    if (desde > hasta) { showToast('La fecha fin debe ser posterior al inicio','error'); return; }
+
+    const btn = document.getElementById('btn-confirmar-bloqueo');
+    btn.disabled = true; btn.textContent = 'Guardando...';
+    try {
+      const res = await adminFetch('/api/admin/bloqueos', 'POST', {
+        cabana_id: parseInt(cabanaId),
+        fecha_inicio: desde,
+        fecha_fin: hasta,
+        tipo: document.getElementById('bloqueo-motivo').value,
+        notas: document.getElementById('bloqueo-nota').value.trim() || null,
+      });
+      if (!res || res.success === false) {
+        showToast(res?.message || 'Error al guardar bloqueo', 'error');
+        return;
+      }
+      showToast('Bloqueo registrado correctamente','success');
+      cerrarModal();
+      // Sincronizar el calendario a la cabaña y mes del bloqueo recién creado
+      document.getElementById('sel-cabana').value = cabanaId;
+      const [y, m] = desde.split('-').map(Number);
+      currentYear = y;
+      currentMonth = m - 1;
+      updateMesLabel();
+      renderCalendar();
+    } catch(e) {
+      console.error('guardarBloqueo error:', e);
+      showToast('Error de conexión: ' + (e.message || 'desconocido'), 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Confirmar Bloqueo';
+    }
+  }
+
+  async function eliminarBloqueo(id) {
+    if (!confirm('¿Eliminar este bloqueo?')) return;
+    try {
+      await adminFetch(`/api/admin/bloqueos/${id}`,'DELETE');
+      showToast('Bloqueo eliminado','success');
+      renderCalendar();
+    } catch(e) { showToast('Error al eliminar','error'); }
+  }
+
+  function formatDate(s) {
+    return new Date(s+'T00:00:00').toLocaleDateString('es-CR',{day:'2-digit',month:'short',year:'numeric'});
+  }
+
+</script>
+</body>
+</html>
