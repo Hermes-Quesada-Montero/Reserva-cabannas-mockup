@@ -46,11 +46,6 @@ npm run dev
 
 ### 5. Acceder al sistema
 
-| Recurso | URL |
-|---------|-----|
-| Sitio web público | http://localhost:3000 |
-| Panel administrativo | http://localhost:3000/admin |
-
 **Credenciales del administrador:**
 - Usuario: `admin123`
 - Contraseña: `1234qwer`
@@ -294,7 +289,3 @@ npm start
 # Cambiar el puerto en .env
 PORT=3001
 ```
-
----
-
-*Desarrollado con ❤️ — Cabañas Los Pinos © 2024*
